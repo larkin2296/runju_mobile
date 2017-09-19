@@ -19,7 +19,7 @@ return [
     // 用户名
     'username'       => 'root',
     // 密码
-    'password'       => 'd7b71d169d',
+    'password'       => 'woai0617',
     // 端口
     'hostport'       => '',
     // 连接dsn
