@@ -42,10 +42,10 @@
 			
 				<div id='list_choose'>
 					<ul>
-						<li><div id='h_map' class="m_li">地图</div><img src='__static__/img/p_2.png' /></li>
-						<li><div id='h_type' class="m_li">户型</div><img src='__static__/img/p_2.png' /></li>
-						<li><div id='h_price' class="m_li">租金</div><img src='__static__/img/p_2.png' /></li>
-						<li><div id='h_select' class="m_li">筛选</div><img src='__static__/img/p_2.png' /></li>
+						<li><div id='h_map'>地图</div><img src='__static__/img/p_2.png' /></li>
+						<li><div id='h_type'>户型</div><img src='__static__/img/p_2.png' /></li>
+						<li><div id='h_price'>租金</div><img src='__static__/img/p_2.png' /></li>
+						<li><div id='h_select'>筛选</div><img src='__static__/img/p_2.png' /></li>
 					</ul>
 				</div>
 
@@ -102,14 +102,14 @@
 				
 			</div>
 		</div>
-		<div id='h_price_detail' class="meau_list">
+		<div id='h_price_detail'>
 			<ul>
-				<li><input type="hidden" value="" />不限</li>
-				<li><input type="hidden" value="0,4000" />4000元以下</li>
-				<li><input type="hidden" value="4000,6000" />4000-6000元</li>
-				<li><input type="hidden" value="6000,8000" />6000-8000元</li>
-				<li><input type="hidden" value="8000,10000" />8000-10000元</li>
-				<li><input type="hidden" value="10000,0" />10000元以上</li>
+				<li>不限</li>
+				<li>4000元以下</li>
+				<li>4000-6000元</li>
+				<li>6000-8000元</li>
+				<li>8000-10000元</li>
+				<li>10000元以上</li>
 			</ul>
 			<div class="demo">
 				<input class="range-slider" type="hidden" value="0,10001" />
@@ -117,7 +117,7 @@
 			<input type='button' id='price_reset' value='重置'  /><input type='button' id='price_check' value='确定'  />
 			<div style='padding-bottom:10%'></div>
 		</div>
-		<div id='h_select_detail' class="meau_list">
+		<div id='h_select_detail' >
 			<div style='text-align: center;color: #AAAAAA;'>朝向</div>
 			<input type='button' class='h_select_chao' value='南'>
 			<input type='button' class='h_select_chao' value='北'>
@@ -165,35 +165,4 @@ $('.range-slider').jRange({
 	function gotodetail(id){
 		window.location.href="{:url('detail/index')}?id="+id;		
 	}
-$('#price_check').click(function(){
-    var data;
-    if($('.range-slider').val() !="0,10001"){
-        data = $('.range-slider').val();
-    }else{
-        data = $('.check input[type="hidden"]').val();
-    }
-    console.log(data);
-    $.ajax(
-        {
-            type: "POST",
-            url:"{:url('detail_list/search_price')}",
-            data:{'price':data,'type':$('.t').val()},// 序列化表单值
-            dataType: "json",
-            success: function(data) {
-                //alert('yes');
-                $('#main_list ul').empty();
-                var ob = '';
-                $.each(data,function(i,value){
-                    ob = ob+"<li><div class='list_detail'  onclick='gotodetail("+value.id+")'><div class='list_detail_left'><img src='__pic__/uploads/"+value.pic_1+"'  /></div><div class='list_detail_right'><div class='list_detail_title' ><span>"+value.title.substring(0,30)+"..."+"</span></div><div class='list_detail_content'>"+value.acreage+"m<sup>2</sup>&nbsp;&nbsp;|&nbsp;&nbsp;"+value.house_floor+"层<span style='margin-left:13%;color:orange;'><span style='font-size:150%;'>￥"+value.price+"</span>元/月</span><br /><img src='__static__/img/p_1.png' style='width:8%;vertical-align:middle;'/>"+value.remark.substring(0,30)+"..."+"<br  />";
-                    $.each(value.keyword,function(j,val){
-							ob = ob+ "<div class='key_word'>"+val+"</div>";
-                    })
-					ob = ob+ "</div></div></div></li>";
-                })
-                $('#main_list ul').append(ob);
-                $('#h_price_detail').css('display','none');
-            }
-        }
-    );
-})
 </script>

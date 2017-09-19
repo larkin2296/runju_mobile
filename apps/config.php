@@ -229,9 +229,9 @@ return [
         'list_rows' => 15,
     ],
     'view_replace_str' => [
-        '__static__'=>dirname($_SERVER['SCRIPT_NAME']).'/public/static',
+        '__static__'=>dirname($_SERVER['SCRIPT_NAME']),
         //或者
-        '__static__'=>dirname($_SERVER['SCRIPT_NAME']).'/public/static',
-        '__pic__'=>dirname($_SERVER['SCRIPT_NAME']).'/public',
+        '__static__'=>'/public/static/',
+        '__pic__'=>'/public/',
     ],
 ];

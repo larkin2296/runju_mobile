@@ -46,33 +46,4 @@ class detaillist extends Controller
 		$house = $data->get_house($id,$type);
 		return $house;			
 	}
-	public function search_price(){
-	    if($_POST['price'] == ''){
-	        return false;
-        }
-        if($_POST['type'] == (1 || 2)){
-            $table = 'house_rent_data';
-        }else{
-            $table = 'house_sell_data';
-        }
-	    $p = explode(',',$_POST['price']);
-        $p[0] = intval($p[0]);
-        $p[1] = intval($p[1]);
-        //dump($p);
-        //$condition['price'] = array(array('egt',$p[0]),array('lt',$p[1]));
-	    $data = DB::name($table)
-            ->where('price','between',[$p[0],$p[1]])
-            ->select();
-	    //print_r($data);
-        //echo  Db::table('house_rent_data')->getLastSql();
-        foreach($data as $key=>$val){
-            $data_1 = DB::name('house_type_data')
-                ->field('house_type_name')
-                ->where('t_id',$val['house_type'])
-                ->select();
-            $data[$key]['house_type_name'] = $data_1[0]['house_type_name'];
-            $data[$key]['keyword'] = explode('，',$val['key_word']);
-        }
-        return $data;
-    }
 }
