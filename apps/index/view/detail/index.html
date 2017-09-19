@@ -5,33 +5,26 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<meta name="format-detection" content="telephone=no">
-		<link type="text/css" rel="stylesheet" href="../../../../../public/static/css/galleryview.css" />
-		<link type="text/css" href='../../../../../public/static/css/detail.css' rel="stylesheet"></link>
+		<link type="text/css" rel="stylesheet" href="__static__/css/galleryview.css" />
+		<link type="text/css" href='__static__/css/detail.css' rel="stylesheet"></link>
 	</head>
 	<body>
 		<div id='a'></div>
 		<div id='mob_index'>
-			<div id='top_index'>
-				<div id='top_meau'>
-					<img src='../../../../../public/static/img/menu26.png' />
-				</div>
-				<div id='top_logo'>
-					<img src='../../../../../public/static/img/logo.png' />
-				</div>
-			</div>
+			{include file='index/top' }
 			<div id='detail_list_pic' class="galleryview">
 				{foreach name='pic' id='pic_list' key='key'}
 				  <div class="panel">
-				     <img src="../../../../../public/uploads/{$pic_list}" style='width:100%;height:100%' /> 
+				     <img src="__pic__/uploads/{$pic_list}" style='width:100%;height:100%' />
 				    <div class="panel-overlay">
 				    </div>
 				  </div>
 				{/foreach}
-				  <!--<ul class="filmstrip">
+				  <ul class="filmstrip">
 				{foreach name='pic' id='pic_list_1' key='key'}
     			<li style='width:5%;'><img src="../../../../../public/uploads/{$pic_list_1}" alt="Effet du soleil" title="Effet du soleil" style='width:100%;height:100%'/></li>
-  				{/foreach}  
-				  </ul>-->
+  				{/foreach}
+				  </ul>
 			</div>
 			<div id='detail_main'>
 				<div id='detail_detail_title'>
@@ -76,7 +69,7 @@
 					<div style='color:#B0B0B0;font-size:80%;'>房间配置：具体配置以现场实际情况为准</div>
 					<div style='width:100%;height:15%;padding-top:5%'>
 					{foreach name='furniture' id='furniture'}
-					<div class='allocation_list'><img src='../../../../../public/static/img/gou.png' /><span style='padding-left:5px;font-size:14px;'>{$furniture}</span></div>
+					<div class='allocation_list'><img src='__static__/img/gou.png' /><span style='padding-left:5px;font-size:14px;'>{$furniture}</span></div>
 					{/foreach}						
 					</div>
 				</div>
@@ -99,10 +92,10 @@
 		<input type='hidden' name='latitude' id='latitude' value='{$house.latitude}'  />
 	</body>
 </html>
-<script type='text/javascript' src='../../../../../public/static/js/jquery.min.js'></script>
-<script type="text/javascript" src="../../../../../public/static/js/jquery.easing.1.3.js"></script>
-<script type="text/javascript" src="../../../../../public/static/js/jquery.galleryview-1.1.js"></script>
-<script type="text/javascript" src="../../../../../public/static/js/jquery.timers-1.1.2.js"></script>
+<script type='text/javascript' src='__static__/js/jquery.min.js'></script>
+<script type="text/javascript" src="__static__/js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="__static__/js/jquery.galleryview-1.1.js"></script>
+<script type="text/javascript" src="__static__/js/jquery.timers-1.1.2.js"></script>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=cPMTIrV5Q6gkmpt0ZYsuGhCvHdn2vNFv"></script>
 <script type="text/javascript">
 $(document).ready(function(){

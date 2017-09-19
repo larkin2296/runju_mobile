@@ -108,6 +108,13 @@ class BaseDataModel extends Model
 											->select();
 			$result[$key]['house_type_name'] = $data_1[0]['house_type_name'];
 			$result[$key]['keyword'] = explode('，',$val['key_word']);
+			if($val['house_status'] == 2){
+                $result[$key]['house_status_name'] = '配置中';
+            }else if($val['house_status'] == 1){
+                $result[$key]['house_status_name'] = '已出售';
+            }else{
+                $result[$key]['house_status_name'] = '未出售';
+            }
 		}
 		return $result;		
 	}

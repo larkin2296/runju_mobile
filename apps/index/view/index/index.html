@@ -10,17 +10,7 @@
 	<body>
 		<div id='a'></div>
 		<div id='mob_index'>
-			<div id='top_index'>
-				<div id='top_meau'>
-					<img src='../public/static/img/menu26.png' />
-				</div>
-				<div id='top_logo'>
-					<img src='../public/static/img/logo.png' />
-				</div>
-				<div id='top_email'>
-					<img src='../public/static/img/6666.png' />
-				</div>
-			</div>
+			{include file='index/top' }
 			<div id='main_index'>
 				<div id='main_pic' class='container'>
 					<ul class='roll_ul'>
@@ -79,22 +69,22 @@
 		$('#a').css('display','none');
 	}
 	$('#get_house').click(function(){
-		location.href="index.php/{:url('detail_list/index','a=1')}";
+		location.href="{:url('detail_list/index','a=1')}";
 	})
 	$('#ershou_list').click(function(){
-		$(location).prop('href','index.php/index/detail_list/index/a/3');
+		$(location).prop('href','index/detail_list/index/a/3');
 	})
 	$('#tuoguan_house').click(function(){
-		$(location).prop('href','index.php/index/tuo_guan/');
+		$(location).prop('href','index/tuo_guan/');
 	})
 	$('#map_list').click(function(){
-		$(location).prop('href','index.php/index/map/');
+		$(location).prop('href','index/map/');
 	})
 	$('#duanzu_list').click(function(){
-		$(location).prop('href',"index.php/{:url('detail_list/index','a=0')}");
+		$(location).prop('href',"{:url('detail_list/index','a=0')}");
 	})
 	$('#index_sub').click(function(){
-		$(location).prop('href',"index.php/{:url('detail_list/index')}?a=1"+"&res="+$('#index_text').val());
+		$(location).prop('href',"{:url('detail_list/index')}?a=1"+"&res="+$('#index_text').val());
 //		$(location).prop('href',"{:url('detail_list/index','a=1')}");+$('#index_text').val();	
 	})
 	var HEIGHT = $('body').height();

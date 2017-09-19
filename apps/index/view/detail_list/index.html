@@ -11,22 +11,7 @@
 		<div id='a'></div>
 		<input type='hidden' class='t' value='{$t}'  />
 		<div id='mob_index'>
-			<div id='top_index'>
-				<div id='top_meau'>
-					<img src='__static__/img/menu26.png' />
-				</div>
-				<div id='top_logo'>
-					<img src='__static__/img/logo.png' />
-				</div>
-				<!--<div id='top_select'>
-					<div class='top_select_list' id='duanzu'>
-						短租
-					</div>
-					<div class='top_select_list' id='changzu'>
-						长租
-					</div>
-				</div>-->
-			</div>
+			{include file='index/top' }
 			<div id='top_pic'><img src='__static__/img/Ban_kxaj.jpg' /></div>
 			<div id='main_index'>
 				<div id='list_serach'>
@@ -37,7 +22,7 @@
 					<div id='search'>
 						<input type='text'  id='index_text' placeholder="输入地铁,商圈,小区名字等..."/><input type='image' src='__static__/img/magnifying42.png' id='index_sub' />						
 					</div>
-					<div id='map'>地图</div>
+					<a id='map' href="{:url('map/index')}">地图</a>
 				</div>
 			
 				<div id='list_choose'>
@@ -56,6 +41,7 @@
 							<div class='list_detail'  onclick='gotodetail({$house_list.id})'>
 								<div class='list_detail_left'>
 									<img src='__pic__/uploads/{$house_list.pic_1}'  />
+									<div class="h_status_{$house_list.house_status}">{$house_list.house_status_name}</div>
 								</div>
 								<div class='list_detail_right'>
 									<div class='list_detail_title' >

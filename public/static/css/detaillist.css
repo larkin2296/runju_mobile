@@ -384,3 +384,39 @@ font-size:80%;
 	color: #B2B2B2;
 	background-color: white;
 }
+.h_status_0{
+	position:relative;
+	top:-40px;
+	width:100%;
+	height:41px;
+	line-height:41px;
+	color:white;
+	font-size: 20px;
+	text-align: center;
+	background-color: green;
+	opacity: 0.5;
+}
+.h_status_1{
+	position:relative;
+	top:-40px;
+	width:100%;
+	height:41px;
+	line-height:41px;
+	color:white;
+	font-size: 20px;
+	text-align: center;
+	background-color: blue;
+	opacity: 0.5;
+}
+.h_status_2{
+	position:relative;
+	top:-40px;
+	width:100%;
+	height:41px;
+	line-height:41px;
+	color:white;
+	font-size: 20px;
+	text-align: center;
+	background-color: red;
+	opacity: 0.5;
+}
