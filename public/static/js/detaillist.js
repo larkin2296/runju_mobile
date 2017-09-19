@@ -18,18 +18,28 @@ $('#list_area_detail .area_detail_left li').click(function(){
 
 $('#h_price').click(function(){
 	if($('#h_price_detail').css('display') == 'block'){
+        	$('#h_price_detail').removeClass('chose');
 			$('#h_price_detail').css('display','none');
 			$('#h_price').css('color','black');
 		}else if($('#h_price_detail').css('display') == 'none'){
+        	$('.m_li').css('color','black');
+			$('.meau_list').removeClass('chose');
+        	$('#h_price_detail').addClass('chose');
+			$(".meau_list:not(.chose)").css('display','none');
 			$('#h_price_detail').css('display','block');
 			$('#h_price').css('color','orange');
 		}	
 })
 $('#h_select').click(function(){
 	if($('#h_select_detail').css('display') == 'block'){
+        	$('#h_select_detail').removeClass('chose');
 			$('#h_select_detail').css('display','none');
 			$('#h_select').css('color','black');
 		}else if($('#h_select_detail').css('display') == 'none'){
+			$('.m_li').css('color','black');
+        	$('.meau_list').removeClass('chose');
+			$('#h_select_detail').addClass('chose');
+			$(".meau_list:not(.chose)").css('display','none');
 			$('#h_select_detail').css('display','block');
 			$('#h_select').css('color','orange');
 		}	
@@ -100,6 +110,13 @@ $('#h_select').click(function(){
 					$('.list').css('display','none');					
 	        }  
    		});
+	})
+
+	$('#h_price_detail ul li').click(function(){
+        $('#h_price_detail ul li').css('color','black');
+        $('#h_price_detail ul li').removeClass('check');
+        $(this).addClass('check');
+		$(this).css('color','orange');
 	})
 
 
