@@ -1,0 +1,26 @@
+<div class="nav-navicon admin-main admin-sidebar">
+    <div class="sideMenu am-icon-dashboard" style="color:#aeb2b7; margin: 10px 0 0 0;"> 欢迎系统管理员：清风抚雪</div>
+    <div class="sideMenu">
+      <h3 class="am-icon-flag"><em></em> <a href="#">房屋管理</a></h3>
+      <ul>
+        <li class='am-icon-flag_list'><a href='{:url("backstage/house_list")}'>房屋列表</a></li>
+        <li class='am-icon-flag_list'><a href='{:url("backstage/add")}'>添加新房屋</a></li>
+      </ul>
+      <h3 class="am-icon-cart-plus"><em></em> <a href="#"> 托管信息管理</a></h3>
+      <ul>
+      	 <li class='am-icon-cart-plus_list'><a href='{:url("backstage/tuoguan_list")}'>查看托管信息</a></li>
+      </ul>
+      
+    </div>
+    <script type="text/javascript">
+			jQuery(".sideMenu").slide({
+				titCell: 'h3', //鼠标触发对象
+				targetCell: 'ul', //与titCell一一对应，第n个titCell控制第n个targetCell的显示隐藏
+				effect:"slideDown", //targetCell下拉效果
+				delayTime:300 , //效果时间
+				triggerTime:150, //鼠标延迟触发时间（默认150）
+				defaultPlay:true,//默认是否执行效果（默认true）
+				returnDefault:true //鼠标从.sideMen移走后返回默认状态（默认false）
+				});
+		</script> 
+</div>

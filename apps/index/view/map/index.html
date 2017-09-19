@@ -1,0 +1,123 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+		<link type="text/css" href='../../../public/static/css/map.css' rel="stylesheet"></link>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=cPMTIrV5Q6gkmpt0ZYsuGhCvHdn2vNFv"></script>
+		<title></title>
+	</head>
+	<body>
+		<div id='mob_index'>
+			
+		</div>
+		<div id='search'>
+		<input type='text'  id='index_text' placeholder="输入地铁,商圈,小区名字等..."/><input type='image' src='../../../public/static/img/magnifying42.png' id='index_sub' />						
+		</div>
+		<div class='title'>今日推荐<img src='../../../public/static/img/f102.png' /></div>
+		<div class='tuijian'>			
+			<div id='main_list'>
+					<ul>
+						{foreach name='house' id='house_list'}
+						<li>
+							<div class='list_detail'  onclick='gotodetail({$house_list.id})'>
+								<div class='list_detail_left'>
+									<img src='../../../public/uploads/{$house_list.pic_1}'  />
+								</div>
+								<div class='list_detail_right'>
+									<div class='list_detail_title' >
+										<span>{$house_list.title|truncate_cn=30,'...',0}</span>
+									</div>
+									<div class='list_detail_content'>
+										{$house_list.acreage}m<sup>2</sup>&nbsp;&nbsp;|&nbsp;&nbsp;{$house_list.house_floor}层<span style='margin-left:13%;color:orange;'><span style='font-size:150%;'>￥{$house_list.price}</span>元/月</span><br />
+										<img src='../../../../../public/static/img/p_1.png' style='width:8%;	vertical-align:middle;'/>{$house_list.remark|truncate_cn=30,'...',0}<br  />
+										<?php 
+										foreach($house_list['keyword'] as $val){ ?>
+											<div class='key_word'><?php echo $val;?></div>
+										<?php	
+										}	
+										?>
+									</div>
+									<!--<div class='list_detail_price'>
+										{$house_list.price}
+									</div>-->
+								</div>
+							</div>
+						</li>
+							{/foreach}
+					</ul>
+				</div>
+		</div>
+	</body>
+</html>
+<script src='../../../public/static/js/jquery.min.js'></script>
+<script type='text/javascript'>
+	
+// 百度地图API功能
+	var map = new BMap.Map("mob_index");    // 创建Map实例
+//	map.centerAndZoom(new BMap.Point(121.480524,31.23595), 13);  // 初始化地图,设置中心点坐标和地图级别
+//	map.addControl(new BMap.MapTypeControl());   //添加地图类型控件
+//	map.setCurrentCity("上海");          // 设置地图显示的城市 此项是必须设置的
+//	map.enableScrollWheelZoom(true);
+	map.centerAndZoom(new BMap.Point(121.480524,31.23595), 13);
+	var top_left_control = new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_LEFT});// 左上角，添加比例尺
+	var top_left_navigation = new BMap.NavigationControl();  //左上角，添加默认缩放平移控件
+	var top_right_navigation = new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_RIGHT, type: BMAP_NAVIGATION_CONTROL_SMALL}); 
+	map.addControl(top_left_control);        
+	map.addControl(top_left_navigation);     
+	map.addControl(top_right_navigation);
+	$('#index_sub').click(function(){
+		map.clearOverlays(); 
+		$.ajax({  
+                type: "POST",  
+                url:"../../../index.php/index/map/get_data",
+                data:{'response':$('#index_text').val()},
+                dataType: "json", 
+                success: function(data) {
+					$.each(data,function(i,value){
+						var new_point = new BMap.Point(value.longitude,value.latitude);
+						var marker = new BMap.Marker(new_point);  // 创建标注
+						map.addOverlay(marker);              // 将标注添加到地图中
+						map.panTo(new_point);
+						var opts = {
+								  width : 200,     // 信息窗口宽度
+								  height: 100,     // 信息窗口高度
+								  title : value.title, // 信息窗口标题
+								  enableMessage:true,//设置允许信息窗发送短息
+								  message:""
+								}
+								var infoWindow = new BMap.InfoWindow("<a href='../../index/detail/index/id/"+value.id+"'>"+value.addr+"</a>", opts);
+									marker.addEventListener("click", function(){          
+								map.openInfoWindow(infoWindow,new_point); //开启信息窗口
+						});
+					})
+                }  
+           });
+        setTimeout(function(){
+								map.setZoom(17);   
+							}, 2000);
+	})
+		$('body').on('click','.title',function(){
+
+			$('.title').animate({top:'620px'});
+			$('.tuijian').animate({top:'660px'});
+						$('.title').addClass('hid');
+			$('.title').removeClass('title');
+		})
+		$('body').on('click','.hid',function(){
+			
+			$('.hid').animate({top:'220px'});
+			$('.tuijian').animate({top:'256px'});
+			$('.hid').addClass('title');
+			$('.title').removeClass('hid');
+			
+		})
+		$('#index_sub').click(function(){
+			$('.title').animate({top:'620px'});
+			$('.tuijian').animate({top:'660px'});
+			$('.title').addClass('hid');
+			$('.title').removeClass('title');
+		})
+	function gotodetail(id){
+		window.location.href="../../index/detail/index/id/"+id;	
+	}
+</script>

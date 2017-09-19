@@ -1,0 +1,104 @@
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		<link type="text/css" href='../public/static/css/index.css' rel="stylesheet"></link>
+	</head>
+	<body>
+		<div id='a'></div>
+		<div id='mob_index'>
+			<div id='top_index'>
+				<div id='top_meau'>
+					<img src='../public/static/img/menu26.png' />
+				</div>
+				<div id='top_logo'>
+					<img src='../public/static/img/logo.png' />
+				</div>
+				<div id='top_email'>
+					<img src='../public/static/img/6666.png' />
+				</div>
+			</div>
+			<div id='main_index'>
+				<div id='main_pic' class='container'>
+					<ul class='roll_ul'>
+					<li><img src='../public/static/img/homeban01.jpg' /></li>
+					<li><img src='../public/static/img/homeban02.jpg' /></li>
+					<li><img src='../public/static/img/homeban03.jpg' /></li>						
+					</ul>
+				</div>
+				<div id='main_serach'>
+					<div id='search'>
+						<input type='text'  id='index_text' placeholder="输入地铁,商圈,小区名字等..."/><input type='image' src='../public/static/img/magnifying42.png' id='index_sub' />						
+					</div>
+
+				</div>
+				<div id='main_meau'>
+					<div id='get_house' class='meau_list' style='background-color: #00B2EE;'>
+						<p style='font-size:100%;margin-top:10%'>我要租房</p>
+						<div style='width:35%;height:40%;background-color:#0C83AD;border-radius: 40%;margin-left:55%'><img  src='../public/static/img/1111.png' style='padding-top:8%;'/></div>
+						<p style='font-size:90%;font-weight: 600;'>我们承诺<br/>房源真实开心安家</p>
+					</div>
+					<div class='meau_list' style=''>
+						<div class='meau_list_list' style='background-color: #E58E0D;' id='map_list'>
+							<p style='font-size:95%;margin-top:20%'>地图找房</p>
+							<div style='width:55%;height:30%;background-color:#D07F09;border-radius: 40%;margin-left:20%;margin-top:40%'><img  src='../public/static/img/2222.png'/></div>
+						</div>
+						<div class='meau_list_list' style='background-color: #EB7186;margin-left:8%;' id='duanzu_list'>
+							<p style='font-size:95%;margin-top:20%'>贴心短租</p>
+							<div style='width:55%;height:30%;background-color:#DC677B;border-radius: 40%;margin-left:20%;margin-top:40%'><img  src='../public/static/img/3333.png'/></div>							
+						</div>
+					</div>
+					<div id='tuoguan_house' class='meau_list' style='background-color: #FE9901;'>
+						<p style='font-size:100%;margin-top:10%'>房屋托管</p>
+						<div style='width:35%;height:40%;background-color:#C07404;border-radius: 40%;margin-left:55%'><img  src='../public/static/img/4444.png' style='padding-top:5%;'/></div>
+						<p style='font-size:90%;font-weight: 600;'>我们托管<br/>省心放心安心增值</p>
+					</div>
+					<div class='meau_list' style='background-color: #0879D5;' id='ershou_list'>
+						<p style='font-size:100%;margin-top:10%'>我要买房</p>
+						<div style='width:35%;height:40%;background-color:#0A67B4;border-radius: 40%;margin-left:55%'><img src='../public/static/img/5555.png' style='padding-top:10%;'></div>
+					</div>
+				</div>
+			</div>
+
+		</div>		
+		{include file='index/left' }
+	</body>
+</html>
+<script type='text/javascript' src='../public/static/js/jquery.min.js'></script>
+<script type='text/javascript' src='../public/static/js/lunbo.js'></script>
+<script>
+	$('#top_meau').click(function(){
+		$('#a').css('display','block');
+		$('#index_left').animate({"left":"0%"},500);
+	})
+	function meau_back(){
+		$('#index_left').animate({"left":"-70%"},500);
+		$('#a').css('display','none');
+	}
+	$('#get_house').click(function(){
+		location.href="index.php/{:url('detail_list/index','a=1')}";
+	})
+	$('#ershou_list').click(function(){
+		$(location).prop('href','index.php/index/detail_list/index/a/3');
+	})
+	$('#tuoguan_house').click(function(){
+		$(location).prop('href','index.php/index/tuo_guan/');
+	})
+	$('#map_list').click(function(){
+		$(location).prop('href','index.php/index/map/');
+	})
+	$('#duanzu_list').click(function(){
+		$(location).prop('href',"index.php/{:url('detail_list/index','a=0')}");
+	})
+	$('#index_sub').click(function(){
+		$(location).prop('href',"index.php/{:url('detail_list/index')}?a=1"+"&res="+$('#index_text').val());
+//		$(location).prop('href',"{:url('detail_list/index','a=1')}");+$('#index_text').val();	
+	})
+	var HEIGHT = $('body').height();
+        $(window).resize(function() {
+            $('.main').height(HEIGHT);
+        });
+</script>

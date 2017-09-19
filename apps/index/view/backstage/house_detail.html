@@ -1,0 +1,227 @@
+
+{include file='backstage/index'}
+<head>
+<link rel="stylesheet" href="../../../public/static/css/zyupload-1.0.0.min.css " type="text/css">
+</head>
+<body>
+
+
+   
+
+<div class=" admin-content">
+	
+		<div class="daohang">
+			<ul>
+				<li><button type="button" class="am-btn am-btn-default am-radius am-btn-xs"> 首页 </li>
+				<li><button type="button" class="am-btn am-btn-default am-radius am-btn-xs">帮助中心<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close="">×</a></button></li>
+				<li><button type="button" class="am-btn am-btn-default am-radius am-btn-xs">奖金管理<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close="">×</a></button></li>
+				<li><button type="button" class="am-btn am-btn-default am-radius am-btn-xs">产品管理<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close="">×</a></button></li>
+				
+				
+			</ul>
+
+       
+
+	
+</div>
+	
+	
+
+
+<div class="admin-biaogelist">
+	
+    <div class="listbiaoti am-cf">
+      <ul class="am-icon-flag on"> 添加新房屋</ul>
+      
+      <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="#">新增房屋</a></dl>
+
+      
+      
+    </div>
+	
+    <div class="fbneirong">
+			<form class="am-form" method="post" action='../../index/backstage/modify_form_data/id={$data.id}'>
+        <div class="am-form-group am-cf">
+          <div class="zuo">标题：</div>
+          <div class="you">
+            <input type="text" class="am-input-sm" name='house_title' id="house_title" value="{$data.title}">
+          </div>
+        </div>
+        <div class="am-form-group am-cf">
+          <div class="zuo">关键词：</div>
+          <div class="you">
+            <input type="text" class="am-input-sm" name='key_word' id="key_word" value="{$data.key_word}">
+          </div>
+        </div>
+        
+        <div class="am-form-group am-cf">
+          <div class="zuo">出租类型：</div>
+          <div class="you">
+          	<label class="am-checkbox-inline">
+            <input type="radio" name='rent_type' value="1" {if condition='$data.rent_type eq 1'}checked{/if}>
+            	长租</label>
+          <label class="am-checkbox-inline">
+            <input type="radio" name='rent_type' value="0" {if condition='$data.rent_type eq 0'}checked{/if}>
+            	短租 </label>
+          </div>
+        </div>
+               
+        <div class="am-form-group am-cf">
+          <div class="zuo">价格：</div>
+          <div class="you">
+          	<input type='text' name='price' class='am-input-sm' style='width:10%' id='price' value="{$data.price}" />
+          </div>
+        </div>
+        
+        <div class="am-form-group am-cf">
+          <div class="zuo">地区：</div>
+          <div class="you">
+          	<select class='am-input-sm' name='area' style='width:15%;float:left;' id='district' value=''>
+          		{foreach name='location' id='loc'}
+          		<option value='{$loc.l_id}' {if condition='$data.district eq $loc.l_id'}selected{/if}>{$loc.location_name}</option>
+          		{/foreach}
+          	</select>
+          	<select class='am-input-sm' name='street' style='width:15%;float:left;margin-left:1%;margin-right: 1%;' id='street' >
+          		<option value=''>不限</option>
+          	</select>
+          	<input type='text' class='am-input-sm' name='village' style='width:10%;float:left;margin-right: 1%;' id='village' value='{$data.address}' />
+          	<input type='text' class='am-input-sm' name='addr' style='width:30%;float:left;' id='addr' value='{$data.addr}' />
+          </div>
+        </div>
+        
+        <div class="am-form-group am-cf">
+          <div class="zuo">地铁：</div>
+          <div class="you">
+          	<select class='am-input-sm' name='underground' style='width:15%;float:left;' id='line' value=''>
+          		{foreach name='line' id='line_list'}
+          		<option value='{$line_list.u_id}' {if condition='$data.district eq $line_list.u_id'}selected{/if}>{$line_list.underground_name}</option>
+          		{/foreach}
+          	</select>
+          	<select class='am-input-sm' name='station' style='width:15%;float:left;margin-left:1%;margin-right: 1%;' id='station' value=''>
+          		<option value=''>不限</option>
+          	</select>
+          </div>
+        </div>        
+        
+        <div class="am-form-group am-cf">
+          <div class="zuo">户型：</div>
+          <div class="you">
+          	<select class='am-input-sm' style='width:10%;' id='house_type' name='house_type'>
+          		{foreach name='house_type' id='type_list'}
+          			<option value='{$type_list.t_id}' {if condition='$data.house_type eq $type_list.t_id'}selected{/if}>{$type_list.house_type_name}</option>
+          		{/foreach}
+          	</select>
+          </div>
+        </div>
+        
+        <div class="am-form-group am-cf">
+          <div class="zuo">面积：</div>
+          <div class="you">
+          <input type='text' class='am-input-sm' name='acreage' style='width:10%' id='acreage' value="{$data.acreage}" />
+          </div>
+        </div>
+        
+        <div class="am-form-group am-cf">
+          <div class="zuo">层高：</div>
+          <div class="you">
+          <input type='text' class='am-input-sm' name='floor' style='width:10%' id='floor' value="{$data.house_floor}" />
+          </div>
+        </div>
+        
+        
+        <div class="am-form-group am-cf">
+          <div class="zuo">设施：</div>
+          <div class="you">
+          	{foreach name='furniture' id='furniture_list' key='key'}
+          	<label class="am-checkbox-inline">
+            <input type="checkbox" name='furniture[]' value="{$furniture_list.t_id}" {if condition='$data.fur_list[$key] eq $furniture_list.t_id'}checked{/if}>
+            	{$furniture_list.furniture_name}
+          	</label>
+          	{/foreach}
+          </div>
+        </div>
+        
+        <div class="am-form-group am-cf">
+          <div class="zuo">经度：</div>
+          <div class="you">
+          <input type='text' name='longitude' class='am-input-sm' style='width:10%' id='longitude' value="{$data.longitude}" />
+          </div>
+        </div>
+        
+        <div class="am-form-group am-cf">
+          <div class="zuo">纬度：</div>
+          <div class="you">
+          <input type='text' name='latitude' class='am-input-sm' style='width:10%' id='latitude' value="{$data.latitude}" />
+          </div>
+        </div>
+        
+        <div class="am-form-group am-cf">
+          <div class="zuo">描述：</div>
+          <div class="you">
+            <textarea class="" rows="2" id="remark" name='remarks'>{$data.remark}</textarea>
+          </div>
+        </div>
+        
+        <div class="am-form-group am-cf">
+          <div class="zuo">产品图片：</div>
+          <div class="you" style="height: 50%;">
+          	<div id="zyupload" style='float:left;' class="zyupload"></div>
+          	<input type='hidden' name='pic_addr' id='pic_addr' value=''  />
+          </div>
+        </div>
+        
+        <div class="am-form-group am-cf">
+        <div class="zuo">房东：</div>
+        <div class="you" style="margin-top: 5px;">
+     		<input type='text' name='landlord' class='am-input-sm' style='width:15%' id='landlord' value="{$data.landlord}" />
+            </div>
+        </div>
+        <div class="am-form-group am-cf">
+          <div class="you" style="margin-left: 11%;">
+              <button type='submit' id='house_sub' class="am-btn am-btn-success am-radius">修改房屋信息</button>
+          </div>
+        </div>
+      </form>
+    </div>
+</div>
+</div>
+</div>
+
+<script src="../../../public/static/js/backstage/amazeui.min.js"></script>
+<script src="../../../public/static/js/zyupload.basic-1.0.0.min.js"></script>
+</body>
+</html>
+<script type='text/javascript'>
+$('#district').change(function(){
+		$.ajax({  
+                type: "POST",  
+                url:"../../../index.php/index/backstage/get_street",
+                data:{'id':$('#district').val()},
+                dataType: "json", 
+                success: function(data) {
+                			//$('#street').empty();
+                			var ob='';
+											$.each(data,function(i,value){
+												ob = ob + '<option value="'+value.l_id+'">'+value.location_name+'</option>';
+											})
+									$('#street').html(ob);
+                }  
+           }); 
+	})
+	$('#line').change(function(){
+		$.ajax({  
+                type: "POST",  
+                url:"../../../index.php/index/backstage/get_station",
+                data:{'id':$('#line').val()},
+                dataType: "json", 
+                success: function(data) {
+                			//$('#street').empty();
+                			var ob='';
+											$.each(data,function(i,value){
+												ob = ob + '<option value="'+value.u_id+'">'+value.underground_name+'</option>';
+											})
+									$('#station').html(ob);
+                }  
+           }); 
+	})
+</script>

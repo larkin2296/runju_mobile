@@ -1,0 +1,330 @@
+
+{include file='backstage/index'}
+<head>
+<link rel="stylesheet" href="../../../public/static/css/zyupload-1.0.0.min.css " type="text/css">
+</head>
+<body>
+
+
+   
+
+<div class=" admin-content">
+	
+		<div class="daohang">
+			<ul>
+				<li><button type="button" class="am-btn am-btn-default am-radius am-btn-xs"> 首页 </li>
+				<li><button type="button" class="am-btn am-btn-default am-radius am-btn-xs">帮助中心<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close="">×</a></button></li>
+				<li><button type="button" class="am-btn am-btn-default am-radius am-btn-xs">奖金管理<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close="">×</a></button></li>
+				<li><button type="button" class="am-btn am-btn-default am-radius am-btn-xs">产品管理<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close="">×</a></button></li>
+				
+				
+			</ul>
+
+       
+
+	
+</div>
+	
+	
+
+
+<div class="admin-biaogelist">
+	
+    <div class="listbiaoti am-cf">
+      <ul class="am-icon-flag on"> 添加新房屋</ul>
+      
+      <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="#">新增房屋</a></dl>
+
+      
+      
+    </div>
+	
+    <div class="fbneirong">
+			<form class="am-form" method="post" action='../../index/backstage/get_form_data'>
+        <div class="am-form-group am-cf">
+          <div class="zuo">标题：</div>
+          <div class="you">
+            <input type="text" class="am-input-sm" name='house_title' id="house_title" placeholder="请输入标题">
+          </div>
+        </div>
+        <div class="am-form-group am-cf">
+          <div class="zuo">关键词：</div>
+          <div class="you">
+            <input type="text" class="am-input-sm" name='key_word' id="key_word" placeholder="请输入关键词">
+          </div>
+        </div>
+        
+        <div class="am-form-group am-cf">
+          <div class="zuo">出租类型：</div>
+          <div class="you">
+          	<label class="am-checkbox-inline">
+            <input type="radio" name='rent_type' value="1">
+            	长租</label>
+          <label class="am-checkbox-inline">
+            <input type="radio" name='rent_type' value="0">
+            	短租 </label>
+          </div>
+        </div>
+        
+        <div class="am-form-group am-cf">
+          <div class="zuo">房屋状况：</div>
+          <div class="you" style='width:15%'>
+          <select class='am-input-sm' name='house_state' style='float:left;' id='house_state' value=''>
+          		<option value=''>正常</option>
+          	</select>
+          </div>
+          <div class="zuo" >租房近况：</div>
+          <div class="you" style='width:10%'>
+          	<input type='text' name='house_state_remark' class='am-input-sm'  id='house_state_remark' placeholder="请输入最近房屋动向" />
+          </div>
+        </div>
+        
+        <div class="am-form-group am-cf">
+          <div class="zuo">价格：</div>
+          <div class="you" style='width:10%'>
+          	<input type='text' name='price' class='am-input-sm'  id='price' placeholder="请输入价格" />
+          </div>
+          <div class="zuo" >折扣：</div>
+          <div class="you" style='width:5%'>
+          	<input type='text' name='discount' class='am-input-sm'  id='discount' value='1' />
+          </div>
+          <div class="zuo" >付款类型：</div>
+          <div class="you" style='width:10%'>
+          	<input type='text' name='pay_type' class='am-input-sm'  id='pay_type' placeholder="请输入付款类型" />
+          </div>
+        </div>
+        
+        <div class="am-form-group am-cf">
+          <div class="zuo">地区：</div>
+          <div class="you">
+          	<select class='am-input-sm' name='area' style='width:15%;float:left;' id='district' value=''>
+          		{foreach name='location' id='loc'}
+          		<option value='{$loc.l_id}'>{$loc.location_name}</option>
+          		{/foreach}
+          	</select>
+          	<select class='am-input-sm' name='street' style='width:15%;float:left;margin-left:1%;margin-right: 1%;' id='street' >
+          		<option value=''>不限</option>
+          	</select>
+          	<input type='text' class='am-input-sm' name='village' style='width:10%;float:left;margin-right: 1%;' id='village' placeholder="小区名字" />
+          	<input type='text' class='am-input-sm' name='addr' style='width:30%;float:left;' id='addr' placeholder="输入详细地址" />
+          </div>
+        </div>
+        
+        <div class="am-form-group am-cf">
+          <div class="zuo">地铁：</div>
+          <div class="you">
+          	<select class='am-input-sm' name='underground' style='width:15%;float:left;' id='line' value=''>
+          		{foreach name='line' id='line_list'}
+          		<option value='{$line_list.u_id}'>{$line_list.underground_name}</option>
+          		{/foreach}
+          	</select>
+          	<select class='am-input-sm' name='station' style='width:15%;float:left;margin-left:1%;margin-right: 1%;' id='station' value=''>
+          		<option value=''>不限</option>
+          	</select>
+          </div>
+        </div>        
+        
+        <div class="am-form-group am-cf">
+          <div class="zuo">户型：</div>
+          <div class="you">
+          	<select class='am-input-sm' style='width:10%;' id='house_type' name='house_type'>
+          		{foreach name='house_type' id='type_list'}
+          			<option value='{$type_list.t_id}'>{$type_list.house_type_name}</option>
+          		{/foreach}
+          	</select>
+          </div>
+        </div>
+        
+        <div class="am-form-group am-cf">
+          <div class="zuo">面积：</div>
+          <div class="you" style='width:10%'>
+          <input type='text' class='am-input-sm' name='acreage'  id='acreage' placeholder="请输入面积" />
+          </div>
+          <div class="zuo">朝向：</div>
+          <div class="you" style='width:10%'>
+          <input type='text' class='am-input-sm' name='orientation'  id='orientation' placeholder="请输入朝向" />
+          </div>
+        </div>
+        
+        <div class="am-form-group am-cf">
+          <div class="zuo">层高：</div>
+          <div class="you">
+          <input type='text' class='am-input-sm' name='floor' style='width:10%' id='floor' placeholder="请输入层高" />
+          </div>
+        </div>
+        
+        
+        <div class="am-form-group am-cf">
+          <div class="zuo">设施：</div>
+          <div class="you">
+          	{foreach name='furniture' id='furniture_list'}
+          	<label class="am-checkbox-inline">
+            <input type="checkbox" name='furniture[]' value="{$furniture_list.t_id}">
+            	{$furniture_list.furniture_name}
+          	</label>
+          	{/foreach}
+          </div>
+        </div>
+        
+        <div class="am-form-group am-cf">
+          <div class="zuo">经度：</div>
+          <div class="you">
+          <input type='text' name='longitude' class='am-input-sm' style='width:10%' id='longitude' placeholder="输入经度" />
+          </div>
+        </div>
+        
+        <div class="am-form-group am-cf">
+          <div class="zuo">纬度：</div>
+          <div class="you">
+          <input type='text' name='latitude' class='am-input-sm' style='width:10%' id='latitude' placeholder="输入纬度" />
+          </div>
+        </div>
+        
+        <div class="am-form-group am-cf">
+          <div class="zuo">附近购物：</div>
+          <div class="you" style='width:15%'>
+          <input type='text' name='shopping_nearby' class='am-input-sm' id='shopping_nearby' placeholder="输入购物商城名" />
+          </div>
+          <div class="zuo">附近休闲：</div>
+          <div class="you" style='width:15%'>
+          <input type='text' name='rest_nearby' class='am-input-sm' id='rest_nearby' placeholder="输入休闲场所名" />
+          </div>
+          <div class="zuo">附近医院：</div>
+          <div class="you" style='width:15%'>
+          <input type='text' name='hospital_nearby' class='am-input-sm' id='hospital_nearby' placeholder="输入医院名" />
+          </div>
+        </div>
+        
+        <div class="am-form-group am-cf">
+          <div class="zuo">附近交通：</div>
+          <div class="you" style='width:15%'>
+          <input type='text' name='translate_nearby' class='am-input-sm' id='translate_nearby' placeholder="输入附近地铁或车站名" />
+          </div>
+        </div>
+        
+        <div class="am-form-group am-cf">
+          <div class="zuo">描述：</div>
+          <div class="you">
+            <textarea class="" rows="2" id="remark" name='remarks'></textarea>
+          </div>
+        </div>
+        
+        <div class="am-form-group am-cf">
+          <div class="zuo">产品图片：</div>
+          <div class="you" style="height: 50%;">
+          	<div id="zyupload" style='float:left;' class="zyupload"></div>
+          	<input type='hidden' name='pic_addr' id='pic_addr' value=''  />
+          </div>
+        </div>
+        
+        <div class="am-form-group am-cf">
+        <div class="zuo">房东：</div>
+        <div class="you" style="margin-top: 5px;">
+     		<input type='text' name='landlord' class='am-input-sm' style='width:15%' id='landlord' placeholder="输入房东姓名" />
+            </div>
+        </div>
+        <div class="am-form-group am-cf">
+          <div class="you" style="margin-left: 11%;">
+              <button type='submit' id='house_sub' class="am-btn am-btn-success am-radius">发布房屋信息</button>
+          </div>
+        </div>
+      </form>
+    </div>
+</div>
+</div>
+</div>
+
+<script src="../../../public/static/js/backstage/amazeui.min.js"></script>
+<script src="../../../public/static/js/zyupload.basic-1.0.0.min.js"></script>
+</body>
+</html>
+<script type='text/javascript'>
+	var pic_arr = new Array();
+	$(function(){
+				$('#pic_addr').val('');
+				// 初始化插件
+				$("#zyupload").zyUpload({
+					width            :   "100%",                 // 宽度
+					height					 :   "200px",
+					itemWidth        :   "140px",                 // 文件项的宽度
+					itemHeight       :   "115px",                 // 文件项的高度
+					url              :   "./up",              // 上传文件的路径
+					fileType         :   ["jpg","png"],// 上传文件的类型
+					fileSize         :   51200000,                // 上传文件的大小
+					multiple         :   true,                    // 是否可以多个文件上传
+					dragDrop         :   false,                   // 是否可以拖动上传文件
+					tailor           :   false,                   // 是否可以裁剪图片
+					del              :   true,                    // 是否可以删除文件
+					finishDel        :   false,  				  // 是否在上传文件完成后删除预览
+					/* 外部获得的回调接口 */
+					onSelect: function(selectFiles, allFiles){    // 选择文件的回调方法  selectFile:当前选中的文件  allFiles:还没上传的全部文件
+						console.info("当前选择了以下文件：");
+						console.info(selectFiles);
+					},
+					onDelete: function(file, files){              // 删除一个文件的回调方法 file:当前删除的文件  files:删除之后的文件
+						console.info("当前删除了此文件：");
+						console.info(file.name);
+					},
+					onSuccess: function(file, response){ // 文件上传成功的回调方法
+						pic_arr.push(file.name);
+						$('#pic_addr').val(pic_arr);
+					},
+					onFailure: function(file, response){          // 文件上传失败的回调方法
+						console.info("此文件上传失败：");
+						console.info(response);
+					},
+					onComplete: function(response){           	  // 上传完成的回调方法
+						console.info("文件上传完成");
+						console.info(response);
+					}
+				});
+				
+		});
+	$('#district').change(function(){
+		$.ajax({  
+                type: "POST",  
+                url:"../../../index.php/index/backstage/get_street",
+                data:{'id':$('#district').val()},
+                dataType: "json", 
+                success: function(data) {
+                			//$('#street').empty();
+                			var ob='';
+											$.each(data,function(i,value){
+												ob = ob + '<option value="'+value.l_id+'">'+value.location_name+'</option>';
+											})
+									$('#street').html(ob);
+                }  
+           }); 
+	})
+	$('#line').change(function(){
+		$.ajax({  
+                type: "POST",  
+                url:"../../../index.php/index/backstage/get_station",
+                data:{'id':$('#line').val()},
+                dataType: "json", 
+                success: function(data) {
+                			//$('#street').empty();
+                			var ob='';
+											$.each(data,function(i,value){
+												ob = ob + '<option value="'+value.u_id+'">'+value.underground_name+'</option>';
+											})
+									$('#station').html(ob);
+                }  
+           }); 
+	})
+//	$('#house_sub').click(function(){
+//		if($('.am-form input').val() === ''){
+//			alert('请填写完整');
+//			return false;
+//		}
+//		$.ajax({  
+//              type: "POST",  
+//              url:"../../../index/backstage/get_form_data",  
+//              data:$(".am-form").serialize(),'pic_addr':pic_arr,// 序列化表单值  
+//              dataType: "json", 
+//              success: function(data) {
+//					
+//              }  
+//         }); 
+//	})
+</script>

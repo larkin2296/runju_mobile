@@ -1,0 +1,116 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+		<meta name="viewport" content="maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		<link type="text/css" href='../../../public/static/css/animate.min.css' rel="stylesheet"></link>
+			<link type="text/css" href='../../../public/static/css/tuoguan.css' rel="stylesheet"></link>
+		<title>		
+		</title>
+	</head>
+	<body>
+		<div id='a'></div>
+		<div id='mob_index'>
+			<div id='top_index'>
+				<div id='top_meau'>
+					<img src='../../../public/static/img/menu26.png' />
+				</div>
+				<div id='top_logo'>
+					<img src='../../../public/static/img/logo.png' />
+				</div>				
+			</div>
+			<div id='main_index'>
+				<div id='main_collect'><img src='../../../public/static/img/top_1.png' /></div>
+				<div id='main_detail'>
+						<div class='detail_select_sell'>出售</div>
+						<div style='height:10%;float: left;color: gray;border-bottom: 1px solid gray;line-height: 200%;margin-top:10%;'>|</div>
+						<div class='detail_select_rent'>出租</div>
+						<div class='detail_form_sell active'>
+							<form id='sell_form'>							
+							<div class='detail_form_list'>
+								<span>姓名</span><input type='text' class='detail_form_input' name='sell_name' placeholder="请输入姓名"/>
+							</div>
+							<div class='detail_form_list'>
+								<span>联系方式</span><input type='text' class='detail_form_input' name='sell_tel' placeholder="请输入手机号"/>
+							</div>
+							<div class='detail_form_list'>
+								<span>小区名</span><input type='text' class='detail_form_input' name='sell_village' placeholder="输入小区名"/>
+							</div>
+							<div class='detail_form_list'>
+								<span>住宅地址</span><input type='text' class='detail_form_input' name='sell_addr' placeholder="输入街道门牌"/>
+							</div>
+							<div class='detail_form_list'>
+								<span>售价</span><input type='text' class='detail_form_input' name='sell_price' placeholder="输入价格"/>								
+							</div>
+							<input type='button' class='detail_form_submit' id='sell_sub' value='提交'>
+							</form>
+						</div>
+						<div class='detail_form_rent'>
+							<form id='rent_form'>
+							<div class='detail_form_list'>
+								<span>姓名</span><input type='text' class='detail_form_input' name='rent_name' placeholder="请输入姓名"/>
+							</div>
+							<div class='detail_form_list'>
+								<span>联系方式</span><input type='text' class='detail_form_input' name='rent_tel' placeholder="请输入手机号"/>
+							</div>
+							<div class='detail_form_list'>
+								<span>小区名</span><input type='text' class='detail_form_input' name='rent_village' placeholder="输入小区名"/>
+							</div>
+							<div class='detail_form_list'>
+								<span>住宅地址</span><input type='text' class='detail_form_input' name='rent_addr' placeholder="输入街道门牌"/>
+							</div>
+							<div class='detail_form_list'>
+								<span>租金</span><input type='text' class='detail_form_input' name='rent_price' placeholder="输入价格"/>								
+							</div>
+							<input type='button' class='detail_form_submit' id='rent_sub' value='提交'>															
+							</form>
+						</div>
+				</div>
+			</div>
+		</div>
+
+	</body>
+</html>
+<script src='../../../public/static/js/jquery.min.js'></script>
+<script type='text/javascript'>
+$(document).ready(function () {
+ 　　$('body').height($('body')[0].clientHeight);
+ });
+	$('.detail_select_sell').click(function(){
+		$('.detail_select_rent').css('color','black');
+		$('.detail_select_sell').css('color','orange');
+		$('.detail_form_rent').removeClass('active');
+		$('.detail_form_sell').addClass('active');
+	})
+	$('.detail_select_rent').click(function(){
+		$('.detail_select_sell').css('color','black');
+		$('.detail_select_rent').css('color','orange');
+		$('.detail_form_sell').removeClass('active');
+		$('.detail_form_rent').addClass('active');
+	})
+	$('#sell_sub').click(function(){
+		$.ajax({  
+                type: "POST",  
+                url:"../../../index.php/index/tuo_guan/save_sell",  
+                data:$("#sell_form").serialize(),// 序列化表单值  
+                dataType: "json", 
+                success: function(data) {
+					alert('提交成功');
+                }  
+           });
+	})
+	$('#rent_sub').click(function(){
+		$.ajax({  
+                type: "POST",  
+                url:"../../../index.php/index/tuo_guan/save_rent",  
+                data:$("#rent_form").serialize(),// 序列化表单值  
+                dataType: "json", 
+                success: function(data) {
+					alert('提交成功');
+                }  
+           });
+	})
+</script>

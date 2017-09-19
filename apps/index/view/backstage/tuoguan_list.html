@@ -1,0 +1,127 @@
+{include file='backstage/index'}
+<html class="no-js">
+<head>
+	<link rel="stylesheet" href="../../../public/static/css/animate.min.css " type="text/css">
+</head>
+<body>
+
+</head>
+
+<body>
+<div class="admin-biaogelist">
+	
+    <div class="listbiaoti am-cf">
+      <ul class="am-icon-flag on"> 栏目名称</ul>
+      
+      <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="#">商品列表</a></dl>
+      
+      <dl>
+        <button type="button" class="am-btn am-btn-danger am-round am-btn-xs am-icon-plus"> 添加产品</button>
+      </dl>
+      
+      
+    </div>
+	
+	<div class="am-btn-toolbars am-btn-toolbar am-kg am-cf">
+  <ul>
+    <li>
+      <div class="am-btn-group am-btn-group-xs">
+        <select data-am-selected="{btnWidth: 90, btnSize: 'sm', btnStyle: 'default'}">
+          <option value="b">产品分类</option>
+          <option value="o">下架</option>
+        </select>
+      </div>
+    </li>
+    <li>
+      <div class="am-btn-group am-btn-group-xs">
+      <select data-am-selected="{btnWidth: 90, btnSize: 'sm', btnStyle: 'default'}">
+        <option value="b">产品分类</option>
+        <option value="o">下架</option>
+      </select>
+      </div>
+    </li>
+    <li style="margin-right: 0;">
+    	<span class="tubiao am-icon-calendar"></span>
+      <input type="text" class="am-form-field am-input-sm am-input-zm  am-icon-calendar" placeholder="开始日期" data-am-datepicker="{theme: 'success',}"  readonly/>
+    </li>
+       <li style="margin-left: -4px;">
+    	<span class="tubiao am-icon-calendar"></span>
+      <input type="text" class="am-form-field am-input-sm am-input-zm  am-icon-calendar" placeholder="开始日期" data-am-datepicker="{theme: 'success',}"  readonly/>
+    </li>
+    
+        <li style="margin-left: -10px;">
+      <div class="am-btn-group am-btn-group-xs">
+      <select data-am-selected="{btnWidth: 90, btnSize: 'sm', btnStyle: 'default'}">
+        <option value="b">产品分类</option>
+        <option value="o">下架</option>
+      </select>
+      </div>
+    </li>
+    <li><input type="text" class="am-form-field am-input-sm am-input-xm" placeholder="关键词搜索" /></li>
+    <li><button type="button" class="am-btn am-radius am-btn-xs am-btn-success" style="margin-top: -1px;">搜索</button></li>
+  </ul>
+</div>
+
+
+    <form class="am-form am-g">
+          <table width="100%" class="am-table am-table-bordered am-table-radius am-table-striped">
+            <thead>
+              <tr class="am-success">
+<!--                <th class="table-check"><input type="checkbox" /></th>-->
+                <th class="table-id">ID</th>
+                <th class="table-title">姓名</th>
+                <th class="table-type">电话</th>
+                <th class="table-type">小区名字</th>
+                <th class="table-type">具体地址</th>
+                <th class="table-type">价格</th>
+                <th class="table-type">类型</th>
+                <th class="table-date am-hide-sm-only">修改日期</th>
+                <th width="163px" class="table-set">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+            	{foreach name='tuguan' id='t_data'}
+              <tr>
+<!--                <td><input type="checkbox" /></td>-->
+				<td><a href="tuoguan_detail.html?id={$t_data.id}">{$t_data.id}</a></td>                
+                <td>{$t_data.name}</td>               
+                <td>{$t_data.tel}</td>
+                <td>{$t_data.village}</td>
+                <td>{$t_data.address}</td>
+                <td>{$t_data.price}</td>
+                <td>{$t_data.type}</td>
+                <td class="am-hide-sm-only">2014年9月4日 7:28:47</td>
+                <td><div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                      <button class="am-btn am-btn-default am-btn-xs am-text-success am-round"><span class="am-icon-search"></span> </button>
+                      <button class="am-btn am-btn-default am-btn-xs am-text-secondary am-round"><span class="am-icon-pencil-square-o"></span></button>
+                      <button class="am-btn am-btn-default am-btn-xs am-text-warning  am-round"><span class="am-icon-copy"></span></button>
+                      <button class="am-btn am-btn-default am-btn-xs am-text-danger am-round"><span class="am-icon-trash-o"></span></button>
+                    </div>
+                  </div></td>
+              </tr>
+              {/foreach}
+            </tbody>
+          </table>
+          
+                 <div class="am-btn-group am-btn-group-xs">
+<!--              <button type="button" class="am-btn am-btn-default"><span class="am-icon-trash-o"></span> 删除</button>-->
+            </div>
+		
+          
+          
+          
+      
+          <hr />
+          <p>注：.....</p>
+       </form>
+</div>
+</div>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+		$(document).ready(function(){
+				$('.daohang ul').append('<li><button type="button" class="am-btn am-btn-default am-radius am-btn-xs">帮助中心<a href="javascript: get_prev()" class="am-close am-close-spin" data-am-modal-close="">×</a></button></li>');			
+		})
+</script>

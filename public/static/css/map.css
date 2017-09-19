@@ -1,0 +1,136 @@
+body{
+	width:100%;
+	height:640px;
+	overflow-y: hidden;
+}
+#mob_index{
+	width:100%;
+	height:640px;
+}
+#search{
+	position:relative;
+	left:0%;
+	top:-576px;
+	width:65%;
+	height:32px;
+	margin: auto;
+	background: no-repeat;
+	border: 2px solid gainsboro;
+	border-radius: 10px;
+}
+#index_sub{
+	width:16%;
+	height:32px;
+	border: none;
+	background-color: white;
+	border-radius: 0px 10px 10px 0px;
+	vertical-align:middle;
+}
+#index_text{
+	padding-bottom:0%;
+	width:84%;
+	height:31px;
+	border: none;
+	border-radius: 10px 0px 0px 10px;
+	vertical-align:middle;
+	font-size: 100%;			
+}
+.tuijian{
+	width:100%;height:396.7px;position:absolute;top:256px;background-color: white;overflow: scroll;
+}
+.tuijian ul{
+	width:100%;
+	height:396.7px;
+	list-style: none;
+	padding: 0;
+	margin:0;
+}
+.list_detail{
+	width:100%;
+	height:150.7px;
+	border-bottom: 1px solid #E3E3E3;
+}
+.list_detail_left img{
+	width:100%;
+	height:120.6px;
+	margin-top:10%;
+}
+.list_detail_left{
+	float:left;
+	width:40%;
+	height:150.7px;
+}
+.list_detail_right{
+	padding-left:2%;
+	float:left;
+	width:58%;
+	height:150.7px;
+
+}
+.list_detail_title{
+	width:100%;
+	height:37.6px;
+	font-size: 90%;
+	padding-top:16.7px;
+}
+.list_detail_content{
+	float:left;
+	width:100%;
+	height:110px;
+	font-size:70%;
+	color: #ACACAC;
+}
+.list_detail_price{
+	float:left;
+	width:38%;
+	height:73%;
+	font-size: 120%;
+	padding-top:9%;
+	font-weight: bold;
+	color: orange;
+}
+.key_word{
+	font-size:70%;
+	float:left;
+	border:1px solid #54A7CF;
+	border-radius: 10%;
+	padding:1%;
+	color:#54A7CF;
+	margin-right:2%;
+	margin-top:4px;
+
+}
+#h_price_detail{
+	background-color: white;
+	display:none;
+    position: absolute;
+    left:0px;
+    top:53%;
+    width:100%;
+}
+#h_price_detail ul{
+	list-style: none;
+	margin:0;
+	padding:0;
+	text-align: center;
+	padding-bottom: 10%;
+}
+#h_price_detail ul li{
+	line-height:300%;
+	font-size: 80%;
+}
+.title,.hid{
+	position:absolute;top:220px;
+	width:100%;
+	background-color: white;
+	height:32px;
+	border-bottom: 1px solid #E3E3E3;
+	text-align: center;
+	font-size: 17px;
+	color: orange;
+}
+.title img,.hid img{
+	width:20px;
+	margin-left:2px;
+	vertical-align: middle;
+}

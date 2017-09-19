@@ -1,0 +1,168 @@
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		<link type="text/css" href='__static__/css/detaillist.css' rel="stylesheet"></link>
+		<script src='__static__/js/jquery.min.js'></script>
+	</head>
+	<body>
+		<div id='a'></div>
+		<input type='hidden' class='t' value='{$t}'  />
+		<div id='mob_index'>
+			<div id='top_index'>
+				<div id='top_meau'>
+					<img src='__static__/img/menu26.png' />
+				</div>
+				<div id='top_logo'>
+					<img src='__static__/img/logo.png' />
+				</div>
+				<!--<div id='top_select'>
+					<div class='top_select_list' id='duanzu'>
+						短租
+					</div>
+					<div class='top_select_list' id='changzu'>
+						长租
+					</div>
+				</div>-->
+			</div>
+			<div id='top_pic'><img src='__static__/img/Ban_kxaj.jpg' /></div>
+			<div id='main_index'>
+				<div id='list_serach'>
+					<div id='list_area' >
+						<span>不限</span>
+						<input type='hidden' value='' />
+					</div>
+					<div id='search'>
+						<input type='text'  id='index_text' placeholder="输入地铁,商圈,小区名字等..."/><input type='image' src='__static__/img/magnifying42.png' id='index_sub' />						
+					</div>
+					<div id='map'>地图</div>
+				</div>
+			
+				<div id='list_choose'>
+					<ul>
+						<li><div id='h_map'>地图</div><img src='__static__/img/p_2.png' /></li>
+						<li><div id='h_type'>户型</div><img src='__static__/img/p_2.png' /></li>
+						<li><div id='h_price'>租金</div><img src='__static__/img/p_2.png' /></li>
+						<li><div id='h_select'>筛选</div><img src='__static__/img/p_2.png' /></li>
+					</ul>
+				</div>
+
+				<div id='main_list'>
+					<ul>
+						{foreach name='house' id='house_list'}
+						<li>
+							<div class='list_detail'  onclick='gotodetail({$house_list.id})'>
+								<div class='list_detail_left'>
+									<img src='__pic__/uploads/{$house_list.pic_1}'  />
+								</div>
+								<div class='list_detail_right'>
+									<div class='list_detail_title' >
+										<span>{$house_list.title|truncate_cn=30,'...',0}</span>
+									</div>
+									<div class='list_detail_content'>
+										{$house_list.acreage}m<sup>2</sup>&nbsp;&nbsp;|&nbsp;&nbsp;{$house_list.house_floor}层<span style='margin-left:13%;color:orange;'><span style='font-size:150%;'>￥{$house_list.price}</span>元/月</span><br />
+										<img src='__static__/img/p_1.png' style='width:8%;	vertical-align:middle;'/>{$house_list.remark|truncate_cn=30,'...',0}<br  />
+										<?php 
+										foreach($house_list['keyword'] as $val){ ?>
+											<div class='key_word'><?php echo $val;?></div>
+										<?php	
+										}	
+										?>
+									</div>
+									<!--<div class='list_detail_price'>
+										{$house_list.price}
+									</div>-->
+								</div>
+							</div>
+						</li>
+							{/foreach}
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div id='list_area_detail' class='list'>
+			<div class='area_detail_left'>
+				{foreach name='location' id='loc_list'}
+				<li value='{$loc_list.l_id}'>{$loc_list.location_name}</li>
+				{/foreach}
+			</div>
+			<div class='area_detail_right'>
+				
+			</div>
+		</div>
+		<div id='line_area_detail' class='list'>
+			<div class='area_detail_left'>
+				{foreach name='line' id='line_list'}
+				<li value='{$line_list.u_id}'>{$line_list.underground_name}</li>
+				{/foreach}
+			</div>
+			<div class='area_detail_right'>
+				
+			</div>
+		</div>
+		<div id='h_price_detail'>
+			<ul>
+				<li>不限</li>
+				<li>4000元以下</li>
+				<li>4000-6000元</li>
+				<li>6000-8000元</li>
+				<li>8000-10000元</li>
+				<li>10000元以上</li>
+			</ul>
+			<div class="demo">
+				<input class="range-slider" type="hidden" value="0,10001" />
+			</div>
+			<input type='button' id='price_reset' value='重置'  /><input type='button' id='price_check' value='确定'  />
+			<div style='padding-bottom:10%'></div>
+		</div>
+		<div id='h_select_detail' >
+			<div style='text-align: center;color: #AAAAAA;'>朝向</div>
+			<input type='button' class='h_select_chao' value='南'>
+			<input type='button' class='h_select_chao' value='北'>
+			<input type='button' class='h_select_chao' value='东'>
+			<input type='button' class='h_select_chao' value='西'>
+			<input type='button' class='h_select_chao' value='南北'>	
+			<div style='text-align: center;padding-top:5%;color: #AAAAAA;'>房屋特色</div>
+			<input type='button' class='h_select_tese' value='首次出租' />
+			<input type='button' class='h_select_tese' value='独立卫生间' />
+			<input type='button' class='h_select_tese' value='独立阳台' />
+			<input type='button' class='h_select_tese' value='集体供暖' />
+			<input type='button' class='h_select_tese' value='独立供暖' />
+			<input type='button' class='h_select_tese' value='中央供暖' />
+			<input type='button' class='h_select_tese' value='智能锁' />
+			<input type='button' class='h_select_tese' value='有电梯' />
+			<div style='text-align: center;padding-top:10%;color: #AAAAAA;'>房源周边</div>
+			<input type='button' class='h_select_zhou' value='离地铁近' />
+			<input type='button' class='h_select_zhou' value='绿化率高' />
+			<br />
+			<br />
+			<br />
+			<input type='button' id='price_reset' value='重置'  /><input type='button' id='price_check' value='确定'  />
+			<div style='padding-bottom:10%'></div>
+		</div>
+	</body>
+</html>
+<script src='__static__/js/detaillist.js'></script>
+<link rel="stylesheet" href="__static__/css/jquery.range.css" />
+<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="__static__/js/jquery.range.js"></script>
+<script type='text/javascript'>
+$('.range-slider').jRange({
+		from: 0,
+		to: 10000,
+		step: 1,
+		scale: [0,2000,4000,6000,8000,'不限'],
+		format: '%s',
+		width: 300,
+		showLabels: true,
+		isRange: true
+	});
+	$('#index_sub').click(function(){
+		$(location).prop('href',"{:url('index')}?a="+$('.t').val()+"&res="+$('#index_text').val());
+	})
+	function gotodetail(id){
+		window.location.href="{:url('detail/index')}?id="+id;		
+	}
+</script>

@@ -1,0 +1,186 @@
+body{
+	width:100%;
+	margin:0;
+	padding:0;
+	background-color: #EDEDED;
+}
+/*div{
+	border:1px solid black;
+}*/
+
+#mob_index{
+	width:100%;
+	margin: auto;
+}
+#top_index{
+	background-color:white;
+	width:100%;
+}
+#index_left{
+	width:70%;
+	height:100%;
+	background-color: white;
+	position: absolute;
+	left:-70%;
+	top:0%;
+	z-index: 200;
+}
+#left_top{
+	height:5%;
+	padding-top: 20%;
+	padding-bottom: 10%;
+}
+#left_top input{
+	width:15%;
+	padding-left:25%;
+	vertical-align:middle;
+}
+#left_top img{
+	margin-left: 5%;
+	padding-right: 5%;
+	width:20%;
+	vertical-align:middle;
+}
+#left_top span{
+	color: orange;
+	font-size: 20px;
+	vertical-align:middle;
+}
+#left_main{
+	width:80%;
+	height:80%;
+}
+#left_main ul{
+	width:100%;
+	height:100%;				
+}
+#left_main li{
+	color: orange;
+	font-size: 17px;
+	list-style: none;
+	line-height:300%;
+}
+#a{
+	position:absolute;
+	width:100%;
+	height:100%;
+	display: none;
+	background-color: black;
+	z-index: 100;
+	margin:0px;
+	opacity:0.7;
+	}
+
+#top_index{
+	width:95%;
+	height:10%;
+	margin: auto;
+}
+#top_meau{
+	width:10%;
+	padding-top:4%;
+	padding-left:3%;
+	float:left;
+}
+#top_meau img{
+	width:100%;
+}
+#top_logo{
+	padding-top:2%;
+	padding-left:20%;
+	width:30%;
+	float:left;
+}
+#top_logo img{
+	width:100%;
+}
+#detail_main{
+	width:100%;
+	margin: auto;
+}
+#detail_list_pic{
+	width:100%;
+	height:30%;
+}
+
+#detail_detail_title{
+	width:100%;
+	height:20%;
+	background-color: white;	
+}
+.detail_title_title{
+	width:100%;
+	height:auto;
+	float:left;
+	font-size: 20px;	
+}
+.detail_title_list{
+	width:90%;
+	height:50%;
+	float:left;
+	font-size: 12px;
+	color:#B7B7B7;
+	margin-left:5%;
+}
+.title_list_right{
+	text-align: right;
+	color:orange;
+}
+.price_bow{
+	font-size:23px;
+}
+.detail_title_list a{
+	color:#B7B7B7;
+}
+#price{
+	font-size: 20px;
+	text-align: right;
+	line-height: 300%;
+	color: orange;
+}
+#detail_detail_detail{
+	margin-top:1%;
+	padding-left:5%;
+	background-color: white;
+	width:100%;
+	height:10%;
+}
+#detail_detail_detail td{
+	width:50%;
+	height:50%;
+	font-size: 80%;
+}
+#detail_detail_landlord{
+	margin-top:5%;
+	background-color: white;
+	width:100%;
+	height:10%;
+	color: orange;		
+}
+#detail_detail_allocation{
+	padding-top:5%;
+	background-color: white;
+	width:100%;
+}
+#detail_detail_allocation img{
+	width:20%;
+}
+#detail_detail_allocation .allocation_list{
+	float:left;
+	width:20%;
+	height:40px;
+}
+#detail_map{
+	width:100%;
+	height:30%;
+}
+#detail_comment{
+	width:100%;
+}
+#map_title{
+	margin-top:1%;
+	height:10%;
+	background-color: white;
+	line-height:400%;
+	padding-left:5%;
+}
