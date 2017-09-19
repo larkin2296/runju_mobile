@@ -1,1 +1,0 @@
-# runju_mobile
