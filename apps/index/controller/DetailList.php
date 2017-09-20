@@ -20,6 +20,7 @@ class detaillist extends Controller
 		$this->assign('location',$location);
 		$this->assign('line',$line);
 		$this->assign('t',$a);
+		$this->assign('r',$res);
 		$this->assign('type',$house_type);
 		$this->assign('house',$house_data);
         return $this->fetch();		
@@ -74,5 +75,14 @@ class detaillist extends Controller
             $data[$key]['keyword'] = explode('，',$val['key_word']);
         }
         return $data;
+    }
+    public function more_list(){
+        $data = new BaseDataModel;
+        if($_POST['r'] == ''){
+            $house_data = $data->get_house($_POST['t'],'',$_POST['a']);
+        }else{
+            $house_data = $data->get_house($_POST['t'],$_POST['r'],$_POST['a']);
+        }
+        return $house_data;
     }
 }

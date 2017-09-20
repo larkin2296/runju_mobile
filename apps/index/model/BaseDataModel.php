@@ -47,60 +47,54 @@ class BaseDataModel extends Model
 				->select();
 		return $data;
 	}
-	public function get_house($type = '',$response = ''){
-//		$sql = 'select r1.* from house_rent_data r1 ';
-//		if($response == 'tuijian'){
-//			$sql_join = '';
-//			$where = " where r1.house_level = 1 ";
-//		}else if($response == '' && $type == ''){
-//			$sql_join = '';
-//			$where = '';
-//		}else if($response != '' && $type == 1){
-//			$sql_join = '';
-//			$where = " where r1.street='$response' ";			
-//		}else if($response != '' && $type == 2){
-//			$sql_join = ' inner join underground_data r2 on r1.underground=r2.underground_name ';
-//			$where = " where r2.u_id='$response' ";			
-//		}else if($response != '' && $type == ''){
-//			$sql_join = ' inner join location_data r2 on r1.street=r2.l_id ';
-//			$where = " where r2.location_name like '%$response%' or r1.address like '%$response%' or r1.underground like '%$response%' ";
-//		}
-		$sql = '';
-		$sql_join = '';
-		$where = '';
-		if($type =='1'){			
-			if($response == 'tuijian'){
-				$sql_join = '';
-				$where = "and r1.house_level = 1 ";
-			}else if($response != ''){
-				$sql_join = 'inner join location_data r2 on r1.street=r2.l_id ';
-				$where = "and r2.location_name like '%$response%' or r1.address like '%$response%' or r1.underground like '%$response%' ";				
-			}
-			$sql = 'select r1.* from house_rent_data r1 '.$sql_join.'where r1.rent_type = 1 ';
-		}else if($type == '0'){
-			
-			if($response == 'tuijian'){
-				$sql_join = '';
-				$where = " and r1.house_level = 1 and ";
-			}else if($response != ''){
-				$sql_join = 'inner join location_data r2 on r1.street=r2.l_id ';
-				$where = "and r2.location_name like '%$response%' or r1.address like '%$response%' or r1.underground like '%$response%' ";				
-			}
-			$sql = 'select r1.* from house_rent_data r1 '.$sql_join.' where r1.rent_type = 0';			
-		}else if($type == '3'){
-			$sql = 'select r1.* from house_sell_data r1 where 1 ';
-			if($response == 'tuijian'){
-				$sql_join = '';
-				$where = " and r1.house_level = 1 ";
-			}else if($response != ''){
-				$sql_join = '';
-				$where = " and r1.street='$response' ";				
-			}					
-		}
-		$limit = ' limit 10';
-		$sql = $sql.$where.$limit;
-//		print_r($sql);
-		$result = DB::query($sql);
+	public function get_house($type = '',$response = '',$a=0){
+
+		$where = array();
+		$table = '';
+        /*******************************************************************************************/
+        /*方法重写*/
+        if($type =='1'){
+            $table = 'house_rent_data';
+            if($response == 'tuijian'){
+                $where['house_level'] = array('=','1');
+                $where['rent_type'] = array('=','1');
+            }else if($response != ''){
+                $where['location_data.location_name|house_rent_data.address|house_rent_data.underground'] = array('like','%'.$response.'%');
+                //$where['rent_type'] = array('=','1');
+            }else{
+                $where['rent_type'] = array('=','1');
+            }
+        }else if($type == '0'){
+            $table = 'house_rent_data';
+            if($response == 'tuijian'){
+                $where['house_level'] = array('=','1');
+                $where['rent_type'] = array('=','0');
+            }else if($response != ''){
+                $where['location_data.location_name|house_rent_data.address|house_rent_data.underground'] = array('like','%'.$response.'%');
+                $where['house_rent_data.rent_type'] = array('=','0');
+            }else{
+                $where['house_rent_data.rent_type'] = array('=','0');
+            }
+        }else if($type == '3'){
+            $table = 'house_sell_data';
+            if($response == 'tuijian'){
+                $where['house_level'] = array('=','1');
+            }else if($response != ''){
+                $where['location_data.location_name|house_rent_data.address|house_rent_data.underground'] = array('like','%'.$response.'%');
+            }
+        }
+        if($response != ''){
+            $result = DB::view($table,'*')
+                ->view('location_data',['location_name'],'location_data.l_id=house_rent_data.street')
+                ->where($where)
+                ->limit($a,5)
+                ->select();
+        }else{
+            $result = DB::name($table)
+                ->where($where)
+                ->limit($a,5)
+                ->select();
+        }
 		foreach($result as $key=>$val){
 			$data_1 = DB::name('house_type_data')
 											->field('house_type_name')
@@ -116,7 +110,7 @@ class BaseDataModel extends Model
                 $result[$key]['house_status_name'] = '未出售';
             }
 		}
-		return $result;		
+		return $result;
 	}
 	public function get_house_detail($id){
 		$data = DB::name('house_rent_data')
