@@ -37,11 +37,11 @@
 				<div id='main_list'>
 					<ul>
 						{foreach name='house' id='house_list'}
-						<li>
-							<div class='list_detail'  onclick='gotodetail({$house_list.id})'>
+						<li value="{$house_list.id}">
+							<div class='list_detail'  >
 								<div class='list_detail_left'>
 									<img src='__pic__/uploads/{$house_list.pic_1}'  />
-									<div class="h_status_{$house_list.house_status}">{$house_list.house_status_name}</div>
+									<div class="sta h_status_{$house_list.house_status}">{$house_list.house_status_name}</div>
 								</div>
 								<div class='list_detail_right'>
 									<div class='list_detail_title' >
@@ -149,7 +149,7 @@ $('.range-slider').jRange({
 		$(location).prop('href',"{:url('index')}?a="+$('.t').val()+"&res="+$('#index_text').val());
 	})
 	function gotodetail(id){
-		window.location.href="{:url('detail/index')}?id="+id;		
+		window.location.href="{:url('detail/index')}?id="+id;
 	}
 $('#price_check').click(function(){
     var data;
@@ -182,4 +182,12 @@ $('#price_check').click(function(){
         }
     );
 })
+	$('.main_list li').on('touchstart',function(){
+	    $(this).find('.sta').css('display','block');
+	})
+	$('.main_list li').on('touchend',function(){
+        $(this).find('.sta').css('display','none');
+		gotodetail($(this).val());
+	})
+
 </script>
