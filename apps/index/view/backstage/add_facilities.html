@@ -1,0 +1,74 @@
+
+{include file='backstage/index'}
+<head>
+    <link rel="stylesheet" href="../../../public/static/css/zyupload-1.0.0.min.css " type="text/css">
+</head>
+<body>
+<div class=" admin-content">
+
+    <div class="daohang">
+        <ul>
+            <li><button type="button" class="am-btn am-btn-default am-radius am-btn-xs"> 首页 </li>
+            <li><button type="button" class="am-btn am-btn-default am-radius am-btn-xs">帮助中心<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close="">×</a></button></li>
+            <li><button type="button" class="am-btn am-btn-default am-radius am-btn-xs">奖金管理<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close="">×</a></button></li>
+            <li><button type="button" class="am-btn am-btn-default am-radius am-btn-xs">产品管理<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close="">×</a></button></li>
+
+
+        </ul>
+
+
+
+
+    </div>
+
+
+
+
+    <div class="admin-biaogelist">
+
+        <div class="listbiaoti am-cf">
+            <ul class="am-icon-flag on"> 添加新房屋设施</ul>
+
+            <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="#">新增房屋设施</a></dl>
+
+
+
+        </div>
+
+        <div class="fbneirong">
+        <table>
+                <tr>
+                    <td>已有设施名称</td>
+                </tr>
+                {foreach name='facil' id='f'}
+                <tr>
+                    <td style="color:blue">{$f['furniture_name']}</td>
+                </tr>
+                {/foreach}
+        </table>
+        <form>
+            <span>新增设施名称</span><input type="text" value="" class="f_name" />
+            <input type="button" class="sub" value="提交" />
+        </form>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    $('.sub').click(function(){
+        $.ajax({
+            type: "POST",
+            url:"{:url('backstage/add_facil')}",
+            data:{'name':$('.f_name').val()},
+            dataType: "json",
+            success: function(data) {
+//$('#street').empty();
+                var ob='';
+                $.each(data,function(i,value){
+                    ob = ob + '<option value="'+value.l_id+'">'+value.location_name+'</option>';
+                })
+                $('#street').html(ob);
+            }
+        });
+    })
+</script>

@@ -111,4 +111,13 @@ class backstage extends Controller
 		$this->assign('tuguan',$tuguan);
 		return $this->fetch();
 	}
+	public function add_facilities(){
+	    $arr = DB::name('furniture_data')->select();
+	    //print_r($arr);
+        $this->assign('facil',$arr);
+	    return $this->fetch();
+    }
+    public function add_facil(){
+	    
+    }
 }
