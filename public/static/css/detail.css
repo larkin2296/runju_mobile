@@ -184,3 +184,22 @@ body{
 	line-height:400%;
 	padding-left:5%;
 }
+.detail_word{
+	width:100%;
+	height:auto;
+	background-color: white;
+}
+.detail_word li{
+	list-style: none;
+	height:60px;
+}
+.detail_word li img{
+	width:50px;
+	vertical-align: middle;
+	padding-right:10px;
+}
+.detail_word li span{
+	font-size:12px;
+	color:cornflowerblue;
+	padding-right:50px;
+}

@@ -36,20 +36,20 @@
         </div>
 
         <div class="fbneirong">
-        <table>
+            <table>
                 <tr>
-                    <td>已有设施名称</td>
+                    <td>已有关键字名称</td>
                 </tr>
                 {foreach name='facil' id='f'}
                 <tr>
-                    <td style="color:blue">{$f['furniture_name']}</td>
+                    <td style="color:blue">{$f['key_word_name']}</td>
                 </tr>
                 {/foreach}
-        </table>
-        <form>
-            <span>新增设施名称</span><input type="text" value="" class="f_name" />
-            <input type="button" class="sub" value="提交" />
-        </form>
+            </table>
+            <form>
+                <span>新增关键字</span><input type="text" value="" class="f_name" />
+                <input type="button" class="sub" value="提交" />
+            </form>
         </div>
     </div>
 </div>
@@ -58,11 +58,11 @@
     $('.sub').click(function(){
         $.ajax({
             type: "POST",
-            url:"{:url('backstage/add_facil')}",
-            data:{'facil':$('.f_name').val()},
+            url:"{:url('backstage/add_key_fun')}",
+            data:{'key':$('.f_name').val()},
             dataType: "json",
             success: function(data) {
-                    alert('添加成功');
+                alert('添加成功');
                 window.location.reload();
             }
         });

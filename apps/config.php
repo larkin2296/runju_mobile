@@ -231,7 +231,8 @@ return [
     'view_replace_str' => [
         '__static__'=>dirname($_SERVER['SCRIPT_NAME']),
         //或者
-        '__static__'=>'/public/static/',
-        '__pic__'=>'/public/',
+        '__static__'=>'http://localhost/runju_mo/public/static',
+        '__pic__'=>'http://localhost/runju_mo/public/',
+        '__back__' =>'http://localhost/runju_mo',
     ],
 ];

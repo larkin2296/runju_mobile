@@ -35,7 +35,7 @@
 					<div id='main_list'>
 					<ul>
 						{foreach name='house' id='house_list'}
-						<li value="{$house_list.id}" >
+						<li onclick="gotodetail({$house_list.id})" >
 							<div class='list_detail'  >
 								<div class='list_detail_left'>
 									<img src='__pic__/uploads/{$house_list.pic_1}'  />
@@ -148,6 +148,7 @@ $('.range-slider').jRange({
 		$(location).prop('href',"{:url('index')}?a="+$('.t').val()+"&res="+$('#index_text').val());
 	})
 	function gotodetail(id){
+        //$(location).prop('href','__back__/index.php/index/detail/index/id/'+id);
 		window.location.href="{:url('detail/index')}?id="+id;
 	}
 $('#price_check').click(function(){
@@ -181,13 +182,13 @@ $('#price_check').click(function(){
         }
     );
 })
-	$('.main_list li').on('touchstart',function(){
-	    $(this).find('.sta').css('display','block');
-	})
-	$('.main_list li').on('touchend',function(){
-        $(this).find('.sta').css('display','none');
-		gotodetail($(this).val());
-	})
+//	$('.main_list li').on('touchstart',function(){
+//	    $(this).find('.sta').css('display','block');
+//	})
+//	$('.main_list li').click(function(){
+////        $(this).find('.sta').css('display','none');
+//		gotodetail($(this).val());
+//	})
 $('.read_more').click(function(){
     $.ajax({
         type: "POST",

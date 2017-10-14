@@ -160,4 +160,9 @@ class BaseDataModel extends Model
 			$sub = DB::execute("insert into trusteeship(`name`,`tel`,`village`,`address`,`price`,`trust_type`) values('$sell_name','$sell_tel','$sell_village','$sell_addr','$sell_price',$type)");
 			return $sub;
 	}
+	public function get_key_word(){
+        $data = DB::name('key_word')
+            ->select();
+        return $data;
+    }
 }

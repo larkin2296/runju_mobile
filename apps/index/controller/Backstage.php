@@ -29,10 +29,13 @@ class backstage extends Controller
 		$line = $data->get_line_data();
 		$house_type = $data->house_type_data();
 		$furniture_data = $data->furniture_data();
+		$key_word = $data->get_key_word();
+        $this->assign('key_word',$key_word);
 		$this->assign('location',$location);
 		$this->assign('line',$line);
 		$this->assign('furniture',$furniture_data);
 		$this->assign('house_type',$house_type);
+
 		return $this->fetch();
 	}
 	public function get_street(){
@@ -118,6 +121,19 @@ class backstage extends Controller
 	    return $this->fetch();
     }
     public function add_facil(){
-	    
+	    $a = $_POST['facil'];
+	    $res = DB::execute("insert into furniture_data (`furniture_name`,`furniture_pic`) values('{$a}','')");
+	    return 1;
+    }
+    public function add_key(){
+        $arr = DB::name('key_word')->select();
+        //print_r($arr);
+        $this->assign('facil',$arr);
+        return $this->fetch();
+    }
+    public function add_key_fun(){
+        $a = $_POST['key'];
+        $res = DB::execute("insert into key_word (`key_word_name`) values('{$a}')");
+        return 1;
     }
 }

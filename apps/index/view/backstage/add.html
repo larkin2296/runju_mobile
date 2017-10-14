@@ -50,7 +50,12 @@
         <div class="am-form-group am-cf">
           <div class="zuo">关键词：</div>
           <div class="you">
-            <input type="text" class="am-input-sm" name='key_word' id="key_word" placeholder="请输入关键词">
+              {foreach name='key_word' id='key_list'}
+              <label class="am-checkbox-inline">
+                  <input type="checkbox" name='key_word[]' value="{$key_list.k_id}">
+                  {$key_list.key_word_name}
+              </label>
+              {/foreach}
           </div>
         </div>
         
