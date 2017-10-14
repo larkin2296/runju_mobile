@@ -64,6 +64,9 @@ class detaillist extends Controller
 	    $data = DB::name($table)
             ->where('price','between',[$p[0],$p[1]])
             ->select();
+        if(empty($data)){
+            return false;
+        }
 	    //print_r($data);
         //echo  Db::table('house_rent_data')->getLastSql();
         foreach($data as $key=>$val){
@@ -74,6 +77,7 @@ class detaillist extends Controller
             $data[$key]['house_type_name'] = $data_1[0]['house_type_name'];
             $data[$key]['keyword'] = explode('，',$val['key_word']);
         }
+
         return $data;
     }
     public function more_list(){

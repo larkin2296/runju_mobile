@@ -61,7 +61,7 @@ $('#h_select').click(function(){
                 }  
            }); 
 	});
-	$('#list_area').click(function(){
+	$('#h_map').click(function(){
 		if($('#list_area_detail').css('display') == 'block'){
 			$('#list_area_detail').css('display','none');			
 		}else if($('#list_area_detail').css('display') == 'none'){

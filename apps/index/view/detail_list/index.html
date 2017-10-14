@@ -178,7 +178,10 @@ $('#price_check').click(function(){
                 })
                 $('#main_list ul').append(ob);
                 $('#h_price_detail').css('display','none');
-            }
+            },
+            error:function(){
+                alert('没有结果');
+			}
         }
     );
 })
