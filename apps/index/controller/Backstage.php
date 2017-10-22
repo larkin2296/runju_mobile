@@ -137,4 +137,14 @@ class backstage extends Controller
         $res = DB::execute("insert into key_word (`key_word_name`) values('{$a}')");
         return 1;
     }
+    public function del_facil(){
+        $f = $_POST['facil'];
+        $res = DB::execute("delete from furniture_data where t_id=$f");
+        return 1;
+    }
+    public function del_key(){
+        $f = $_POST['key'];
+        $res = DB::execute("delete from key_word where k_id=$f");
+        return 1;
+    }
 }

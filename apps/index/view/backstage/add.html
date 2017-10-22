@@ -218,7 +218,7 @@
         
         <div class="am-form-group am-cf">
           <div class="zuo">产品图片：</div>
-          <div class="you" style="height: 50%;">
+          <div class="you" style="height: auto;">
           	<div id="zyupload" style='float:left;' class="zyupload"></div>
           	<input type='hidden' name='pic_addr' id='pic_addr' value=''  />
           </div>
@@ -228,7 +228,8 @@
         <div class="zuo">房东：</div>
         <div class="you" style="margin-top: 5px;">
      		<input type='text' name='landlord' class='am-input-sm' style='width:15%' id='landlord' placeholder="输入房东姓名" />
-            </div>
+            <input type='text' name='landlord_tel' class='am-input-sm' style='width:15%' id='landlord_tel' placeholder="输入房东电话" />
+        </div>
         </div>
         <div class="am-form-group am-cf">
           <div class="you" style="margin-left: 11%;">
@@ -252,7 +253,7 @@
 				// 初始化插件
 				$("#zyupload").zyUpload({
 					width            :   "100%",                 // 宽度
-					height					 :   "200px",
+					height					 :   "auto",
 					itemWidth        :   "140px",                 // 文件项的宽度
 					itemHeight       :   "115px",                 // 文件项的高度
 					url              :   "./up",              // 上传文件的路径

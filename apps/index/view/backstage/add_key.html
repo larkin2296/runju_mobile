@@ -42,7 +42,7 @@
                 </tr>
                 {foreach name='facil' id='f'}
                 <tr>
-                    <td style="color:blue">{$f['key_word_name']}</td>
+                    <td style="color:blue">{$f['key_word_name']}<span style='padding-left:50px;color:red;cursor: pointer' onclick='del_delete({$f["k_id"]})'>删除</span></td>
                 </tr>
                 {/foreach}
             </table>
@@ -67,4 +67,16 @@
             }
         });
     })
+    function del_delete(id){
+        $.ajax({
+            type: "POST",
+            url:"{:url('backstage/del_key')}",
+            data:{'key':id},
+            dataType: "json",
+            success: function(data) {
+                alert('删除成功');
+                window.location.reload();
+            }
+        });
+    }
 </script>
