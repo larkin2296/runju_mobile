@@ -10,12 +10,6 @@
 // +----------------------------------------------------------------------
 
 return [
-    '__pattern__' => [
-        'name' => '\w+',
-    ],
-    '[hello]'     => [
-        ':id'   => ['index/hello', ['method' => 'get'], ['id' => '\d+']],
-        ':name' => ['index/hello', ['method' => 'post']],
-    ],
-	//'\' = "http://121.196.199.170:2000/index.php/",
+
+	'houtai' => "index/backstage/index",
 ];
