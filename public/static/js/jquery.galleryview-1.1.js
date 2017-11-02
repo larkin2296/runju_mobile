@@ -297,7 +297,7 @@
 				'position':'absolute',
 				'top':(opts.filmstrip_position=='top'?'0px':opts.panel_height+'px'),
 				'left':0+'px',
-				'width':wrapper_width*1.75+'px',
+				'width':wrapper_width*1+'px',
 				'height':(opts.frame_height+frame_margin_top+(opts.show_captions?frame_caption_size:frame_margin_top))+'px',
 				'overflow':'hidden'
 			});
