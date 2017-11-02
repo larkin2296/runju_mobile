@@ -107,9 +107,9 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$('#detail_list_pic').galleryView({
-		panel_width: 375,
-		panel_height: 250,
-		frame_width: 100,
+		panel_width:$(window).width(),
+		panel_height: $(window).height()/4,
+		frame_width: $(window).width()/5,
 		frame_height: 80
 	});
 	var map = new BMap.Map("detail_map");
