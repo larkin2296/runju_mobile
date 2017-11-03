@@ -83,7 +83,7 @@ body{
 	float:left;
 }
 #top_meau img{
-	width:100%;
+	width: 73%;
 }
 #top_logo{
 	padding-top:2%;
@@ -92,7 +92,7 @@ body{
 	float:left;
 }
 #top_logo img{
-	width:100%;
+	width: 80%;
 }
 #detail_main{
 	width:100%;
@@ -158,9 +158,10 @@ body{
 	color: orange;		
 }
 #detail_detail_allocation{
-	padding-top:5%;
+	padding-top: 5%;
 	background-color: white;
-	width:100%;
+	width: 95%;
+	padding-left: 5%;
 }
 #detail_detail_allocation img{
 	width:20%;

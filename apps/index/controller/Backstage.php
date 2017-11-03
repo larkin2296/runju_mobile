@@ -76,16 +76,23 @@ class backstage extends Controller
 	}
 	public function house_detail($id){
 		$data = new BaseDataModel;
+		$pic = array();
 		$location = $data->get_location_data();
 		$line = $data->get_line_data();
 		$house_type = $data->house_type_data();
 		$furniture_data = $data->furniture_data();
 		$house_data = DB::name('house_rent_data')
 				->where('id',$id)
-				->select();
+                ->select();
 		$house_data[0]['fur_list'] = explode(',',$house_data[0]['furniture']);
-
+        $pic[0] = $house_data[0]['pic_1'];
+        $pic[1] = $house_data[0]['pic_2'];
+        $pic[2] = $house_data[0]['pic_3'];
+        $pic[3] = $house_data[0]['pic_4'];
+        $pic[4] = $house_data[0]['pic_5'];
+        $pic[5] = $house_data[0]['pic_6'];
 		$this->assign('data',$house_data[0]);
+        $this->assign('pic',$pic);
 		$this->assign('location',$location);
 		$this->assign('line',$line);
 		$this->assign('furniture',$furniture_data);
