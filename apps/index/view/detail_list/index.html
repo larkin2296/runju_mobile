@@ -48,7 +48,7 @@
 									<div class='list_detail_content'>
 
 										{$house_list.acreage}m<sup>2</sup>&nbsp;&nbsp;|&nbsp;&nbsp;{$house_list.house_floor}层<span style='margin-left:13%;color:orange;'><span style='font-size:150%;'>￥{$house_list.price}</span>元/月</span><br />
-										<img src='__static__/img/p_1.png' style='width:8%;	vertical-align:middle;'/>{$house_list.address}<br  />
+										<img src='__static__/img/p_1.png' style='width:8%;	vertical-align:middle;'/>{$house_list.underground}<br  />
 
 										<?php 
 										foreach($house_list['key_word_list'] as $val){ ?>
@@ -68,6 +68,11 @@
 				</div>
 			</div>
 			<input type="button" value="加载更多" class="read_more"/>
+		</div>
+		<div id='house_type_list' class='meau_list'>
+				{foreach name='type' id='type'}
+				<li class='h_select_tese' value='{$type.t_id}'>{$type.house_type_name}</li>
+				{/foreach}
 		</div>
 		<div id='list_area_detail' class='list'>
 			<div class='area_detail_left'>

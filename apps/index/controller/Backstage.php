@@ -159,4 +159,20 @@ class backstage extends Controller
         $res = DB::execute("delete from key_word where k_id=$f");
         return 1;
     }
+    public function add_house_type(){
+        $arr = DB::name('house_type_data')->select();
+
+        $this->assign('type',$arr);
+        return $this->fetch();
+    }
+    public function add_house_fun(){
+        $a = $_POST['type'];
+        $res = DB::execute("insert into house_type_data (`house_type_name`) values('{$a}')");
+        return 1;
+    }
+    public function del_house_type(){
+        $f = $_POST['type'];
+        $res = DB::execute("delete from house_type_data where t_id=$f");
+        return 1;
+    }
 }
