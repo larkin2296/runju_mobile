@@ -100,6 +100,8 @@ class BaseDataModel extends Model
 											->field('house_type_name')
 											->where('t_id',$val['house_type'])
 											->select();
+			$key_list = $this->get_key_data($val['key_word']);
+            $result[$key]['key_word_list'] = $key_list;
 			$result[$key]['house_type_name'] = $data_1[0]['house_type_name'];
 			$result[$key]['keyword'] = explode('，',$val['key_word']);
 			if($val['house_status'] == 2){
@@ -164,5 +166,17 @@ class BaseDataModel extends Model
         $data = DB::name('key_word')
             ->select();
         return $data;
+    }
+    public function get_key_data($key){
+	    $key_response = array();
+        $key_list = array();
+        $key_response = explode(',',$key);
+	    foreach($key_response as $val){
+           $data  = DB::name('key_word')
+                ->where('k_id',$val)
+                ->column('key_word_name');
+            $key_list[] = $data[0];
+        }
+        return $key_list;
     }
 }
