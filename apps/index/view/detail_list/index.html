@@ -204,7 +204,7 @@ $('.read_more').click(function(){
             var ob = '';
             $.each(data,function(i,value){
                 ob = ob+"<li><div class='list_detail'  onclick='gotodetail("+value.id+")'><div class='list_detail_left'><img src='__pic__/uploads/"+value.pic_1+"'  /></div><div class='list_detail_right'><div class='list_detail_title' ><span>"+value.title.substring(0,30)+"..."+"</span></div><div class='list_detail_content'>"+value.acreage+"m<sup>2</sup>&nbsp;&nbsp;|&nbsp;&nbsp;"+value.house_floor+"层<span style='margin-left:13%;color:orange;'><span style='font-size:150%;'>￥"+value.price+"</span>元/月</span><br /><img src='__static__/img/p_1.png' style='width:8%;vertical-align:middle;'/>"+value.remark.substring(0,30)+"..."+"<br  />";
-                $.each(value.keyword,function(j,val){
+                $.each(value.key_word_list,function(j,val){
                     ob = ob+ "<div class='key_word'>"+val+"</div>";
                 })
                 ob = ob+ "</div></div></div></li>";
