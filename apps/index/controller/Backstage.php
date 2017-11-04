@@ -84,13 +84,17 @@ class backstage extends Controller
 		$house_data = DB::name('house_rent_data')
 				->where('id',$id)
                 ->select();
+        $key_word = $data->get_key_word();
+
 		$house_data[0]['fur_list'] = explode(',',$house_data[0]['furniture']);
+        $house_data[0]['key_list'] = explode(',',$house_data[0]['key_word']);
         $pic[0] = $house_data[0]['pic_1'];
         $pic[1] = $house_data[0]['pic_2'];
         $pic[2] = $house_data[0]['pic_3'];
         $pic[3] = $house_data[0]['pic_4'];
         $pic[4] = $house_data[0]['pic_5'];
         $pic[5] = $house_data[0]['pic_6'];
+        $this->assign('key_word',$key_word);
 		$this->assign('data',$house_data[0]);
         $this->assign('pic',$pic);
 		$this->assign('location',$location);
@@ -102,7 +106,8 @@ class backstage extends Controller
 	}
 	public function modify_from_data($id){
 		$data = new BackstageModel;
-		$result = $data->modify_form_data($_POST,$id);		
+		$result = $data->modify_form_data($_POST,$id);
+        return $this->fetch();
 	}
 	public function delete_house($a){
 		$arr = Db::execute("delete from house_rent_data where id={$a}");

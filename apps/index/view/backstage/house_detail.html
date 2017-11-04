@@ -45,19 +45,24 @@
     </div>
 	
     <div class="fbneirong">
-			<form class="am-form" method="post" action='../../index/backstage/modify_form_data/id={$data.id}'>
+			<form class="am-form" method="post" action='../../index/backstage/modify_from_data/id/{$data.id}'>
         <div class="am-form-group am-cf">
           <div class="zuo">标题：</div>
           <div class="you">
             <input type="text" class="am-input-sm" name='house_title' id="house_title" value="{$data.title}">
           </div>
         </div>
-        <div class="am-form-group am-cf">
-          <div class="zuo">关键词：</div>
-          <div class="you">
-            <input type="text" class="am-input-sm" name='key_word' id="key_word" value="{$data.key_word}">
-          </div>
-        </div>
+                <div class="am-form-group am-cf">
+                    <div class="zuo">关键词：</div>
+                    <div class="you">
+                        {foreach name='key_word' id='key_list' key='key'}
+                        <label class="am-checkbox-inline">
+                            <input type="checkbox" name='key_word[]' value="{$key_list.k_id}"  {if condition='(empty($data.key_list[$key]) neq true) and ($key_list.k_id eq $data.key_list[$key])'}checked{/if}/>
+                            {$key_list.key_word_name}
+                        </label>
+                        {/foreach}
+                    </div>
+                </div>
         
         <div class="am-form-group am-cf">
           <div class="zuo">出租类型：</div>
@@ -70,12 +75,42 @@
             	短租 </label>
           </div>
         </div>
-               
+        <div class="am-form-group am-cf">
+            <div class="zuo">推荐：</div>
+            <div class="you">
+                <label class="am-checkbox-inline">
+                    <input type="radio" name='house_level' value="1" {if condition='$data.house_level eq 1'}checked{/if}>
+                    今日推荐</label>
+            </div>
+        </div>
+        <div class="am-form-group am-cf">
+            <div class="zuo">房屋状况：</div>
+            <div class="you" style='width:15%'>
+                <select class='am-input-sm' name='house_status' style='float:left;' id='house_state' value=''>
+                    <option value='0'>未售</option>
+                    <option value='1'>已售</option>
+                    <option value='2'>配置中</option>
+                    <option value='3'>出租</option>
+                </select>
+            </div>
+            <div class="zuo" >租房近况：</div>
+            <div class="you" style='width:10%'>
+                <input type='text' name='house_state_remark' class='am-input-sm'  id='house_state_remark' value="{$data.house_state_remark}" />
+            </div>
+        </div>
         <div class="am-form-group am-cf">
           <div class="zuo">价格：</div>
-          <div class="you">
-          	<input type='text' name='price' class='am-input-sm' style='width:10%' id='price' value="{$data.price}" />
+          <div class="you" style="width:10%">
+          	<input type='text' name='price' class='am-input-sm' id='price' value="{$data.price}" />
           </div>
+        <div class="zuo" >折扣：</div>
+        <div class="you" style='width:5%'>
+            <input type='text' name='discount' class='am-input-sm'  id='discount' value='1' />
+        </div>
+        <div class="zuo" >付款类型：</div>
+        <div class="you" style='width:10%'>
+            <input type='text' name='pay_type' class='am-input-sm'  id='pay_type' value="{$data.pay_type}" />
+        </div>
         </div>
         
         <div class="am-form-group am-cf">
@@ -121,9 +156,13 @@
         
         <div class="am-form-group am-cf">
           <div class="zuo">面积：</div>
-          <div class="you">
-          <input type='text' class='am-input-sm' name='acreage' style='width:10%' id='acreage' value="{$data.acreage}" />
+          <div class="you" style="width:10%">
+          <input type='text' class='am-input-sm' name='acreage'  id='acreage' value="{$data.acreage}" />
           </div>
+            <div class="zuo">朝向：</div>
+            <div class="you" style='width:10%'>
+                <input type='text' class='am-input-sm' name='orientation'  id='orientation' value="{$data.orientation}"/>
+            </div>
         </div>
         
         <div class="am-form-group am-cf">
@@ -139,7 +178,7 @@
           <div class="you">
           	{foreach name='furniture' id='furniture_list' key='key'}
           	<label class="am-checkbox-inline">
-            <input type="checkbox" name='furniture[]' value="{$furniture_list.t_id}" {if condition='$data.fur_list[$key] eq $furniture_list.t_id'}checked{/if}>
+            <input type="checkbox" name='furniture[]' value="{$furniture_list.t_id}" {if condition='(empty($data.fur_list[$key]) neq true) and ($data.fur_list[$key] eq $furniture_list.t_id)'}checked{/if}>
             	{$furniture_list.furniture_name}
           	</label>
           	{/foreach}
@@ -159,7 +198,29 @@
           <input type='text' name='latitude' class='am-input-sm' style='width:10%' id='latitude' value="{$data.latitude}" />
           </div>
         </div>
-        
+
+        <div class="am-form-group am-cf">
+            <div class="zuo">附近购物：</div>
+            <div class="you" style='width:15%'>
+                <input type='text' name='shopping_nearby' class='am-input-sm' id='shopping_nearby' value="{$data.shopping_nearby}" />
+            </div>
+            <div class="zuo">附近休闲：</div>
+            <div class="you" style='width:15%'>
+                <input type='text' name='rest_nearby' class='am-input-sm' id='rest_nearby' value="{$data.rest_nearby}" />
+            </div>
+            <div class="zuo">附近医院：</div>
+            <div class="you" style='width:15%'>
+                <input type='text' name='hospital_nearby' class='am-input-sm' id='hospital_nearby' value="{$data.hospital_nearby}" />
+            </div>
+        </div>
+
+        <div class="am-form-group am-cf">
+            <div class="zuo">附近交通：</div>
+            <div class="you" style='width:15%'>
+                <input type='text' name='translate_nearby' class='am-input-sm' id='translate_nearby' value="{$data.translate_nearby}" />
+            </div>
+        </div>
+
         <div class="am-form-group am-cf">
           <div class="zuo">描述：</div>
           <div class="you">
@@ -172,7 +233,7 @@
           <div class="you" style="height: 50%;">
           	<div id="show_pic" style='float:left;' class="zyupload">
                 {foreach name='pic' id='pic'}
-                <img src="__pic__/uploads/{$pic}" style="width:30%;margin-bottom:5%;"/>
+                <img src="__pic__/uploads/{$pic}" style="width:340px;height:226px;margin-bottom:5%;"/>
                 {/foreach}
             </div>
               <div id="zyupload" style='float:left;' class="zyupload"></div>
@@ -186,7 +247,8 @@
         <div class="zuo">房东：</div>
         <div class="you" style="margin-top: 5px;">
      		<input type='text' name='landlord' class='am-input-sm' style='width:15%' id='landlord' value="{$data.landlord}" />
-            </div>
+            <input type='text' name='landlord_tel' class='am-input-sm' style='width:15%' id='landlord_tel' value="{$data.landlord_tel}" />
+        </div>
         </div>
         <div class="am-form-group am-cf">
           <div class="you" style="margin-left: 11%;">
