@@ -175,4 +175,13 @@ class backstage extends Controller
         $res = DB::execute("delete from house_type_data where t_id=$f");
         return 1;
     }
+    public function shop_set(){
+        $arr = DB::name('shopping_set')->where('s_p_id','=',0)->select();
+        foreach($arr as &$val){
+            $arr_1 = DB::name('shopping_set')->where('s_p_id','=',$val['s_id'])->column('s_name');
+            $val['shopping'] = implode(',',$arr_1);
+        }
+        $this->assign('shop',$arr);
+        return $this->fetch();
+    }
 }

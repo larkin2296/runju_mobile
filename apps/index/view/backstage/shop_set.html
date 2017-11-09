@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商圈管理</title>
+</head>
+<body>
+{include file='backstage/index'}
+<div class=" admin-content">
+
+    <div class="daohang">
+        <ul>
+            <li><button type="button" class="am-btn am-btn-default am-radius am-btn-xs"> 首页 </li>
+            <li><button type="button" class="am-btn am-btn-default am-radius am-btn-xs">商圈管理<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close="">×</a></button></li>
+
+
+        </ul>
+
+
+
+
+    </div>
+
+
+
+
+    <div class="admin-biaogelist">
+
+        <div class="listbiaoti am-cf">
+            <ul class="am-icon-flag on"> 管理商圈</ul>
+
+            <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="#">管理商圈</a></dl>
+
+
+
+        </div>
+
+        <div class="fbneirong">
+                <input type="text" name="shop_name" /><input type="button" name="add_shop" class="add_shop" value="添加商圈"/>
+            <table style="width:80%;height:60%;margin:0 auto;">
+                <tr>
+                    <td>商圈名字</td>
+                    <td>商圈包含商场</td>
+                    <td>操作</td>
+                </tr>
+                {foreach name='shop' id='shop'}
+                <tr>
+                    <td>{$shop.s_name}</td>
+                    <td>
+                        {$shop.shopping}
+                    </td>
+                    <td><input type="text" name="shopping_name" /><input type="button" value="添加商场" class="add_shopping"/></td>
+                </tr>
+                {/foreach}
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

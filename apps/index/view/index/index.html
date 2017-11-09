@@ -85,7 +85,7 @@
         $(location).prop('href','index.php/index/detail_list/index/a/0');
 	})
 	$('#index_sub').click(function(){
-		$(location).prop('href',"{:url('detail_list/index')}?a=1"+"&res="+$('#index_text').val());
+		$(location).prop('href',"index.php/index/detail_list/index?a=1"+"&res="+$('#index_text').val());
 //		$(location).prop('href',"{:url('detail_list/index','a=1')}");+$('#index_text').val();	
 	})
 	var HEIGHT = $('body').height();

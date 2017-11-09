@@ -55,26 +55,10 @@ class BaseDataModel extends Model
         /*方法重写*/
         if($type =='1'){
             $table = 'house_rent_data';
-            if($response == 'tuijian'){
-                $where['house_level'] = array('=','1');
-                $where['rent_type'] = array('=','1');
-            }else if($response != ''){
-                $where['location_data.location_name|house_rent_data.address|house_rent_data.underground'] = array('like','%'.$response.'%');
-                //$where['rent_type'] = array('=','1');
-            }else{
-                $where['rent_type'] = array('=','1');
-            }
+            $where = $this->house_search($table,$response,'1');
         }else if($type == '0'){
             $table = 'house_rent_data';
-            if($response == 'tuijian'){
-                $where['house_level'] = array('=','1');
-                $where['rent_type'] = array('=','0');
-            }else if($response != ''){
-                $where['location_data.location_name|house_rent_data.address|house_rent_data.underground'] = array('like','%'.$response.'%');
-                $where['house_rent_data.rent_type'] = array('=','0');
-            }else{
-                $where['house_rent_data.rent_type'] = array('=','0');
-            }
+            $where = $this->house_search($table,$response,'0');
         }else if($type == '3'){
             $table = 'house_sell_data';
             if($response == 'tuijian'){
@@ -178,5 +162,25 @@ class BaseDataModel extends Model
             $key_list[] = $data[0];
         }
         return $key_list;
+    }
+    private function house_search($table,$response,$type){
+        $where = array();
+        if($response == 'tuijian'){
+            $where['house_level'] = array('=','1');
+            $where['rent_type'] = array('=',$type);
+        }else if($response != ''){
+            $key = DB::name('key_word')
+                    ->where('key_word_name','=',$response)
+                    ->select();
+            if(!empty($key)){
+                $key_word = $key[0]['k_id'];
+                $where[] = ['exp',"FIND_IN_SET($key_word,key_word)"];
+                return $where;
+            }
+            $where['location_data.location_name|house_rent_data.address|house_rent_data.underground'] = array('like','%'.$response.'%');
+        }else{
+            $where['rent_type'] = array('=','1');
+        }
+        return $where;
     }
 }

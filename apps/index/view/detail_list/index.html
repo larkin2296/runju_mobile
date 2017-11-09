@@ -117,17 +117,9 @@
 			<input type='button' class='h_select_chao' value='西'>
 			<input type='button' class='h_select_chao' value='南北'>	
 			<div style='text-align: center;padding-top:5%;color: #AAAAAA;'>房屋特色</div>
-			<input type='button' class='h_select_tese' value='首次出租' />
-			<input type='button' class='h_select_tese' value='独立卫生间' />
-			<input type='button' class='h_select_tese' value='独立阳台' />
-			<input type='button' class='h_select_tese' value='集体供暖' />
-			<input type='button' class='h_select_tese' value='独立供暖' />
-			<input type='button' class='h_select_tese' value='中央供暖' />
-			<input type='button' class='h_select_tese' value='智能锁' />
-			<input type='button' class='h_select_tese' value='有电梯' />
-			<div style='text-align: center;padding-top:10%;color: #AAAAAA;'>房源周边</div>
-			<input type='button' class='h_select_zhou' value='离地铁近' />
-			<input type='button' class='h_select_zhou' value='绿化率高' />
+			{foreach name='key_word' id='keyy'}
+			<input type='button' class='h_select_tese' value='{$keyy.key_word_name}' />
+			{/foreach}
 			<br />
 			<br />
 			<br />

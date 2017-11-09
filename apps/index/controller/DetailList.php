@@ -17,6 +17,8 @@ class detaillist extends Controller
 		$location = $data->get_location_data();
 		$line = $data->get_line_data();
 		$house_type = $data->house_type_data();
+        $key_list = $data->get_key_word();
+        $this->assign('key_word',$key_list);
 		$this->assign('location',$location);
 		$this->assign('line',$line);
 		$this->assign('t',$a);
