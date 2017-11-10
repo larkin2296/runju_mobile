@@ -79,7 +79,7 @@
         $.ajax({
             type: "POST",
             url:"{:url('backstage/add_shop')}",
-            data:{'shop_name':$('.shopping_name').val(),'type':1,'shop_id':$('.shop_id').val()},
+            data:{'shop_name':$(this).prev().val(),'type':1,'shop_id':$(this).prev().prev().val()},
             dataType: "json",
             success: function(data) {
                 alert('添加成功');

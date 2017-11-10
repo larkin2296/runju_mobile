@@ -179,6 +179,22 @@ class BaseDataModel extends Model
                 $where[] = ['exp',"FIND_IN_SET($key_word,key_word)"];
                 return $where;
             }
+            $shop = DB::name('shopping_set')
+                ->where([
+                    's_name'=>['=',$response],
+                    's_p_id'=>['=',0],
+                ])
+                ->select();
+
+            if(!empty($shop)){
+                $get_shopping = DB::name('shopping_set')
+                    ->where('s_p_id','=',$shop[0]['s_id'])
+                    ->select();
+                foreach($get_shopping as $val){
+                    $where[] = ['exp',"FIND_IN_SET('{$val['s_name']}',shopping_nearby)"];
+                }
+                return $where;
+            }
             $where['location_data.location_name|house_rent_data.address|house_rent_data.underground'] = array('like','%'.$response.'%');
         }else{
             $where['rent_type'] = array('=','1');
