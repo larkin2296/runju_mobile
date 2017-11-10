@@ -92,6 +92,8 @@ class BaseDataModel extends Model
                 $result[$key]['house_status_name'] = '配置中';
             }else if($val['house_status'] == 1){
                 $result[$key]['house_status_name'] = '已出售';
+            }else if($val['house_status'] == 3){
+                $result[$key]['house_status_name'] = '未出租';
             }else{
                 $result[$key]['house_status_name'] = '未出售';
             }
