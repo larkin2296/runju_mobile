@@ -184,4 +184,15 @@ class backstage extends Controller
         $this->assign('shop',$arr);
         return $this->fetch();
     }
+    public function add_shop(){
+        $type = $_POST['type'];
+        $name = $_POST['shop_name'];
+        if($type == 0){
+            $res = DB::query("insert into shopping_set(`s_p_id`,`s_name`) values(0,'$name')");
+        }else{
+            $shop_id = $_POST['shop_id'];
+            $res = DB::query("insert into shopping_set(`s_p_id`,`s_name`) values($shop_id,'$name')");
+        }
+        return $res;
+    }
 }
