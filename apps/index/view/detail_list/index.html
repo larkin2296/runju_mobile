@@ -157,7 +157,6 @@ $('#price_check').click(function(){
     }else{
         data = $('.check input[type="hidden"]').val();
     }
-    console.log(data);
     $.ajax(
         {
             type: "POST",
@@ -236,6 +235,11 @@ $('#char_check').click(function(){
         tese[z] =  $(this).val();
         z++;
     });
+	if(z == 0){
+	    tese = '';
+	}else if(k == 0){
+	    chao = '';
+	}
     $.ajax(
         {
             type: "POST",
