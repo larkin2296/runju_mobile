@@ -345,7 +345,7 @@ font-size:80%;
 	margin:auto;
 	padding-bottom: 20%;
 }
-#price_reset{
+#price_reset,#char_reset{
 	width:25%;
 	height:40px;
 	border: none;
@@ -355,7 +355,7 @@ font-size:80%;
 	font-size: 100%;
 	margin-left:3%;
 }
-#price_check{
+#price_check,#char_check{
 	width:65%;
 	height:40px;
 	border: none;
@@ -383,6 +383,10 @@ font-size:80%;
 	border-radius: 5px;
 	color: #B2B2B2;
 	background-color: white;
+}
+.select_check{
+	border:1px solid orange;
+	color:orange;
 }
 .h_status_0{
 	display:none;

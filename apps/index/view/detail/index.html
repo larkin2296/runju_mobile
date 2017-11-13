@@ -78,11 +78,9 @@
 							<td class='title_list_right'>会员价：<span class='price_bow'>{$house.price}</span>元/月起</td>
 						</tr>
 						<tr >
-							<td>{foreach name='keyword' id='word'}
-								<a href=''>{$word}</a>
-								{/foreach}
-
-								-->
+							<td><?php foreach($house['key_word_list'] as $val){ ?>
+								<a href=''><?php echo $val;?></a>
+								<?php }?>
 							</td>
 							<td class='title_list_right'><sppn>预计9月1日可租</sppn><span>押一付一</span></td>
 						</tr>						

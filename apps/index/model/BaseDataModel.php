@@ -104,6 +104,9 @@ class BaseDataModel extends Model
 		$data = DB::name('house_rent_data')
 				->where('id',$id)
 				->select();
+            $key_list = $this->get_key_data($data[0]['key_word']);
+            $data[0]['key_word_list'] = $key_list;
+            $data[0]['keyword'] = explode('，',$data[0]['key_word']);
 		return $data[0];
 	}
 	public function get_area_name($id){
@@ -200,5 +203,8 @@ class BaseDataModel extends Model
             $where['rent_type'] = array('=','1');
         }
         return $where;
+    }
+    private function get_underground(){
+
     }
 }

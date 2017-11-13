@@ -50,6 +50,7 @@ class detaillist extends Controller
 		return $house;			
 	}
 	public function search_price(){
+        $model = new BaseDataModel;
 	    if($_POST['price'] == ''){
 	        return false;
         }
@@ -78,6 +79,8 @@ class detaillist extends Controller
                 ->select();
             $data[$key]['house_type_name'] = $data_1[0]['house_type_name'];
             $data[$key]['keyword'] = explode('，',$val['key_word']);
+            $key_list = $model->get_key_data($val['key_word']);
+            $data[$key]['key_word_list'] = $key_list;
         }
 
         return $data;
@@ -90,5 +93,51 @@ class detaillist extends Controller
             $house_data = $data->get_house($_POST['t'],$_POST['r'],$_POST['a']);
         }
         return $house_data;
+    }
+    public function search_char(){
+        $model = new BaseDataModel;
+        if($_POST['tese'] == '' && $_POST['chao'] == ''){
+            return false;
+        }
+        if($_POST['type'] == (1 || 2)){
+            $table = 'house_rent_data';
+        }else{
+            $table = 'house_sell_data';
+        }
+        $chao = $_POST['chao'];
+        $tese = $_POST['tese'];
+        if(!empty($chao)){
+            foreach($chao as $value){
+                $where['orientation'] = array('like','%'.$value.'%');
+            }
+        }
+        if(!empty($tese)){
+            foreach($tese as $va){
+                $key = DB::name('key_word')
+                    ->where('key_word_name','=',$va)
+                    ->select();
+                if(!empty($key)){
+                    $key_word = $key[0]['k_id'];
+                    $where[] = ['exp',"FIND_IN_SET($key_word,key_word)"];
+                }
+            }
+        }
+        $data = DB::name($table)
+            ->where($where)
+            ->select();
+        if(empty($data)){
+            return false;
+        }
+        foreach($data as $key=>$val){
+            $data_1 = DB::name('house_type_data')
+                ->field('house_type_name')
+                ->where('t_id',$val['house_type'])
+                ->select();
+            $data[$key]['house_type_name'] = $data_1[0]['house_type_name'];
+            $data[$key]['keyword'] = explode(',',$val['key_word']);
+            $key_list = $model->get_key_data($val['key_word']);
+            $data[$key]['key_word_list'] = $key_list;
+        }
+        return $data;
     }
 }
