@@ -87,10 +87,10 @@
             <div class="zuo">房屋状况：</div>
             <div class="you" style='width:15%'>
                 <select class='am-input-sm' name='house_status' style='float:left;' id='house_state' value=''>
-                    <option value='0'>未售</option>
-                    <option value='1'>已售</option>
-                    <option value='2'>配置中</option>
-                    <option value='3'>出租</option>
+                    <option value='0' {if condition='$data.house_status eq 0'}selected{/if}>未售</option>
+                    <option value='1' {if condition='$data.house_status eq 1'}selected{/if}>已售</option>
+                    <option value='2' {if condition='$data.house_status eq 2'}selected{/if}>配置中</option>
+                    <option value='3' {if condition='$data.house_status eq 3'}selected{/if}>出租</option>
                 </select>
             </div>
             <div class="zuo" >租房近况：</div>

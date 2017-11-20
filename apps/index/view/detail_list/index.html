@@ -67,7 +67,7 @@
 					</ul>
 				</div>
 			</div>
-			<input type="button" value="加载更多" class="read_more"/>
+			<!--<input type="button" value="加载更多" class="read_more"/>-->
 		</div>
 		<div id='house_type_list' class='meau_list'>
 				{foreach name='type' id='type'}
@@ -211,24 +211,28 @@ $('.h_select_chao,.h_select_tese').click(function(){
 $('#char_reset').click(function(){
     $('.h_select_chao,.h_select_tese').removeClass('select_check');
 })
-$('.read_more').click(function(){
-    $.ajax({
-        type: "POST",
-        url:"{:url('detail_list/more_list')}",
-        data:{'a':$('#main_list li').length,'t':$('.t').val(),'r':$('.r').val()},// 序列化表单值
-        dataType: "json",
-        success: function(data) {
-            var ob = '';
-            $.each(data,function(i,value){
-                ob = ob+"<li><div class='list_detail'  onclick='gotodetail("+value.id+")'><div class='list_detail_left'><img src='__pic__/uploads/"+value.pic_1+"'  /></div><div class='list_detail_right'><div class='list_detail_title' ><span>"+value.title.substring(0,30)+"..."+"</span></div><div class='list_detail_content'>"+value.acreage+"m<sup>2</sup>&nbsp;&nbsp;|&nbsp;&nbsp;"+value.house_floor+"层<span style='margin-left:6%;color:orange;'><span style='font-size:150%;'>￥"+value.price+"</span>元/月</span><br /><img src='__static__/img/p_1.png' style='width:8%;vertical-align:middle;'/>"+value.underground+"..."+"<span style='padding-left: 34%;'>"+value.address+"</span><br  />";
-                $.each(value.key_word_list,function(j,val){
-                    ob = ob+ "<div class='key_word'>"+val+"</div>";
+$(function(){
+    var totalHeight= parseFloat($(window).height()) + parseFloat($(window).scrollTop());
+    if($(document).height() <= totalHeight){
+        $.ajax({
+            type: "POST",
+            url:"{:url('detail_list/more_list')}",
+            data:{'a':$('#main_list li').length,'t':$('.t').val(),'r':$('.r').val()},// 序列化表单值
+            dataType: "json",
+            success: function(data) {
+                var ob = '';
+                $.each(data,function(i,value){
+                    ob = ob+"<li><div class='list_detail'  onclick='gotodetail("+value.id+")'><div class='list_detail_left'><img src='__pic__/uploads/"+value.pic_1+"'  /></div><div class='list_detail_right'><div class='list_detail_title' ><span>"+value.title.substring(0,30)+"..."+"</span></div><div class='list_detail_content'>"+value.acreage+"m<sup>2</sup>&nbsp;&nbsp;|&nbsp;&nbsp;"+value.house_floor+"层<span style='margin-left:6%;color:orange;'><span style='font-size:150%;'>￥"+value.price+"</span>元/月</span><br /><img src='__static__/img/p_1.png' style='width:8%;vertical-align:middle;'/>"+value.underground+"..."+"<span style='padding-left: 34%;'>"+value.address+"</span><br  />";
+                    $.each(value.key_word_list,function(j,val){
+                        ob = ob+ "<div class='key_word'>"+val+"</div>";
+                    })
+                    ob = ob+ "</div></div></div></li>";
                 })
-                ob = ob+ "</div></div></div></li>";
-            })
-            $('#main_list ul').append(ob);
-        }
-    });
+                $('#main_list ul').append(ob);
+            }
+        });
+	}
+
 })
 $('#char_check').click(function(){
     var chao = new Array();
