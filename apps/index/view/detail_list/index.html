@@ -73,6 +73,9 @@
 				{foreach name='type' id='type'}
 				<li class='h_select_tese' value='{$type.t_id}'>{$type.house_type_name}</li>
 				{/foreach}
+			<br />
+			<br />
+			<br /><input type='button' id='type_check' value='确定' style="margin:0 auto;" />
 		</div>
 		<div id='list_area_detail' class='list'>
 			<div class='area_detail_left'>
@@ -133,6 +136,11 @@
 <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
 <script type="text/javascript" src="__static__/js/jquery.range.js"></script>
 <script type='text/javascript'>
+	$(function(){
+	    if($('.t').val() == 3){
+	        $('#h_price').html('售价');
+		}
+	})
 $('.range-slider').jRange({
 		from: 0,
 		to: 10000,
@@ -265,4 +273,40 @@ $('#char_check').click(function(){
         }
     );
 })
+    $('#type_check').click(function(){
+        var tp = new Array();
+        var k = 0;
+        $(".h_select_tese.select_check").each(function(){
+            tp[k] =  $(this).val();
+            k++;
+        });
+		if(k == 0){
+            tp = '';
+        }
+        $.ajax(
+            {
+                type: "POST",
+                url:"{:url('detail_list/search_type')}",
+                data:{'h_tp':tp,'type':$('.t').val()},// 序列化表单值
+                dataType: "json",
+                success: function(data) {
+                    $('#main_list ul').empty();
+                    var ob = '';
+                    $.each(data,function(i,value){
+                        ob = ob+"<li><div class='list_detail'  onclick='gotodetail("+value.id+")'><div class='list_detail_left'><img src='__pic__/uploads/"+value.pic_1+"'  /></div><div class='list_detail_right'><div class='list_detail_title' ><span>"+value.title.substring(0,30)+"..."+"</span></div><div class='list_detail_content'>"+value.acreage+"m<sup>2</sup>&nbsp;&nbsp;|&nbsp;&nbsp;"+value.house_floor+"层<span style='margin-left:6%;color:orange;'><span style='font-size:150%;'>￥"+value.price+"</span>元/月</span><br /><img src='__static__/img/p_1.png' style='width:8%;vertical-align:middle;'/>"+value.underground+"..."+"<span style='padding-left: 34%;'>"+value.address+"</span><br  />";
+                        $.each(value.key_word_list,function(j,val){
+                            ob = ob+ "<div class='key_word'>"+val+"</div>";
+                        })
+                        ob = ob+ "</div></div></div></li>";
+                    })
+                    $('#main_list ul').append(ob);
+                    $('#h_select_detail').css('display','none');
+                },
+                error:function(){
+                    alert('没有结果');
+                }
+            }
+        );
+    })
+
 </script>

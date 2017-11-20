@@ -122,7 +122,9 @@
           		{/foreach}
           	</select>
           	<select class='am-input-sm' name='street' style='width:15%;float:left;margin-left:1%;margin-right: 1%;' id='street' >
-          		<option value=''>不限</option>
+                {foreach name='street' id='stre'}
+                <option value='{$stre.l_id}' {if condition='$data.street eq $stre.l_id'}selected{/if}>{$stre.location_name}</option>
+                {/foreach}
           	</select>
           	<input type='text' class='am-input-sm' name='village' style='width:10%;float:left;margin-right: 1%;' id='village' value='{$data.address}' />
           	<input type='text' class='am-input-sm' name='addr' style='width:30%;float:left;' id='addr' value='{$data.addr}' />
@@ -134,11 +136,13 @@
           <div class="you">
           	<select class='am-input-sm' name='underground' style='width:15%;float:left;' id='line' value=''>
           		{foreach name='line' id='line_list'}
-          		<option value='{$line_list.u_id}' {if condition='$data.district eq $line_list.u_id'}selected{/if}>{$line_list.underground_name}</option>
+          		<option value='{$line_list.u_id}' {if condition='$data.line eq ($line_list.u_id-1)'}selected{/if}>{$line_list.underground_name}</option>
           		{/foreach}
           	</select>
           	<select class='am-input-sm' name='station' style='width:15%;float:left;margin-left:1%;margin-right: 1%;' id='station' value=''>
-          		<option value=''>不限</option>
+                {foreach name='station' id='station_list'}
+                <option value='{$line_list.u_id}' {if condition='$data.under_station eq $station_list.u_id'}selected{/if}>{$station_list.underground_name}</option>
+                {/foreach}
           	</select>
           </div>
         </div>        

@@ -204,7 +204,16 @@ class BaseDataModel extends Model
         }
         return $where;
     }
-    private function get_underground(){
-
+    public function get_station_data($a){
+        $data = DB::name('underground_data')
+            ->where('parent_id',$a)
+            ->select();
+        return $data;
+    }
+    public function get_street_data($a){
+        $data = DB::name('location_data')
+            ->where('parent_id',$a)
+            ->select();
+        return $data;
     }
 }

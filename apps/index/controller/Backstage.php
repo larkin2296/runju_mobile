@@ -79,13 +79,15 @@ class backstage extends Controller
 		$pic = array();
 		$location = $data->get_location_data();
 		$line = $data->get_line_data();
+
 		$house_type = $data->house_type_data();
 		$furniture_data = $data->furniture_data();
 		$house_data = DB::name('house_rent_data')
 				->where('id',$id)
                 ->select();
         $key_word = $data->get_key_word();
-
+        $station = $data->get_station_data($house_data[0]['line']+1);
+        $street = $data->get_street_data($house_data[0]['district']);
 		$house_data[0]['fur_list'] = explode(',',$house_data[0]['furniture']);
         $house_data[0]['key_list'] = explode(',',$house_data[0]['key_word']);
         $pic[0] = $house_data[0]['pic_1'];
@@ -96,9 +98,14 @@ class backstage extends Controller
         $pic[5] = $house_data[0]['pic_6'];
         $this->assign('key_word',$key_word);
 		$this->assign('data',$house_data[0]);
+		//print_r($house_data[0]);
         $this->assign('pic',$pic);
+        $this->assign('station',$station);
 		$this->assign('location',$location);
 		$this->assign('line',$line);
+        $this->assign('street',$street);
+//        print_r($street);
+//		print_r($line);
 		$this->assign('furniture',$furniture_data);
 		$this->assign('house_type',$house_type);
 

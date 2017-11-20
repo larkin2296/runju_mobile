@@ -16,7 +16,10 @@ class BackstageModel extends Model
 		$station = 	DB::name('underground_data')
 					->where('u_id','=',$response['station'])
 					->select();
-						
+		if(empty($response['key_word']) ){
+            $response['key_word'] == '0';
+        }
+
 		$result = Db::execute("INSERT INTO `house_rent_data` (`title`, `key_word`, `price`, `rent_type`, `house_type`, `house_floor`, `underground`, `acreage`, `furniture`, `remark`, `longitude`, `latitude`, `pic_1`, `pic_2`, `pic_3`, `pic_4`, `pic_5`, `pic_6`, `house_level`, `district`, `street`, `addr`, `address`, `landlord`,`discount`,`orientation`,`pay_type`,`house_state_remark`,`shopping_nearby`,`rest_nearby`,`hospital_nearby`,`translate_nearby`,`house_status`,`landlord_tel`) VALUES ('{$response['house_title']}','{$key_word}','{$response['price']}',{$response['rent_type']},'{$response['house_type']}','{$response['floor']}','{$station[0]['underground_name']}','{$response['acreage']}','{$furniture}','{$response['remarks']}','{$response['longitude']}','{$response['latitude']}','$pic[0]','$pic[1]','$pic[2]','$pic[3]','$pic[4]','$pic[5]','0','{$response['area']}','{$response['street']}','{$response['addr']}','{$response['village']}','{$response['landlord']}','{$response['discount']}','{$response['orientation']}','{$response['pay_type']}','{$response['house_state_remark']}','{$response['shopping_nearby']}','{$response['rest_nearby']}','{$response['hospital_nearby']}','{$response['translate_nearby']}','{$response['house_status']}','{$response['landlord_tel']}');");
 	}
 	public function modify_form_data($response,$id){

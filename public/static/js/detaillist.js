@@ -44,6 +44,20 @@ $('#h_select').click(function(){
 			$('#h_select').css('color','orange');
 		}	
 })
+$('#h_type').click(function(){
+    if($('#house_type_list').css('display') == 'block'){
+        $('#house_type_list').removeClass('chose');
+        $('#house_type_list').css('display','none');
+        $('#h_type').css('color','black');
+    }else if($('#house_type_list').css('display') == 'none'){
+        $('.m_li').css('color','black');
+        $('.meau_list').removeClass('chose');
+        $('#house_type_list').addClass('chose');
+        $(".meau_list:not(.chose)").css('display','none');
+        $('#house_type_list').css('display','block');
+        $('#h_type').css('color','orange');
+    }
+})
 	$('#line_area_detail .area_detail_left li').click(function(){
 		$('#line_area_detail .area_detail_left li').removeClass('active');
 		$(this).addClass('active');

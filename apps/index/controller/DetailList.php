@@ -140,4 +140,38 @@ class detaillist extends Controller
         }
         return $data;
     }
+    public function search_type(){
+        $model = new BaseDataModel;
+        if($_POST['h_tp'] == ''){
+            return false;
+        }
+        if($_POST['type'] == (1 || 2)){
+            $table = 'house_rent_data';
+        }else{
+            $table = 'house_sell_data';
+        }
+        $h_tp = $_POST['h_tp'];
+        if(!empty($h_tp)){
+            foreach($h_tp as $value){
+                $where['house_type'] = array('=',$value);
+            }
+        }
+        $data = DB::name($table)
+            ->where($where)
+            ->select();
+        if(empty($data)){
+            return false;
+        }
+        foreach($data as $key=>$val){
+            $data_1 = DB::name('house_type_data')
+                ->field('house_type_name')
+                ->where('t_id',$val['house_type'])
+                ->select();
+            $data[$key]['house_type_name'] = $data_1[0]['house_type_name'];
+            $data[$key]['keyword'] = explode(',',$val['key_word']);
+            $key_list = $model->get_key_data($val['key_word']);
+            $data[$key]['key_word_list'] = $key_list;
+        }
+        return $data;
+    }
 }

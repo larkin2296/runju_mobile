@@ -345,7 +345,7 @@ font-size:80%;
 	margin:auto;
 	padding-bottom: 20%;
 }
-#price_reset,#char_reset{
+#price_reset,#char_reset,#type_reset{
 	width:25%;
 	height:40px;
 	border: none;
@@ -355,7 +355,7 @@ font-size:80%;
 	font-size: 100%;
 	margin-left:3%;
 }
-#price_check,#char_check{
+#price_check,#char_check,#type_check{
 	width:65%;
 	height:40px;
 	border: none;
@@ -459,7 +459,7 @@ font-size:80%;
 	height:auto;
 	float:left;
 	background-color: white;
-	border-bottom: 1px solid darkseagreen;
+	text-align: center;
 }
 #house_type_list li{
 	float:left;
