@@ -48,7 +48,6 @@ class BaseDataModel extends Model
 		return $data;
 	}
 	public function get_house($type = '',$response = '',$a=0){
-
 		$where = array();
 		$table = '';
         /*******************************************************************************************/
@@ -78,6 +77,9 @@ class BaseDataModel extends Model
                 ->where($where)
                 ->limit($a,5)
                 ->select();
+        }
+        if(empty($result)){
+            return false;
         }
 		foreach($result as $key=>$val){
 			$data_1 = DB::name('house_type_data')
