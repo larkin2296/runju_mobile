@@ -86,7 +86,7 @@ class backstage extends Controller
 				->where('id',$id)
                 ->select();
         $key_word = $data->get_key_word();
-        $station = $data->get_station_data($house_data[0]['line']+1);
+        $station = $data->get_station_data($house_data[0]['line']);
         $street = $data->get_street_data($house_data[0]['district']);
 		$house_data[0]['fur_list'] = explode(',',$house_data[0]['furniture']);
         $house_data[0]['key_list'] = explode(',',$house_data[0]['key_word']);
