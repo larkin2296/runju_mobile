@@ -143,7 +143,7 @@
         })
     $(window).scroll(
         function() {
-            var scrollTop = $(this).scrollTop();
+            var scrollTop = $(this).scrollTop() || $(this).pageYOffset;
             var scrollHeight = $(document).height();
             var windowHeight = $(window).height();
             //console.log($('#main_list li').length);
@@ -321,5 +321,4 @@ $('#char_check').click(function(){
             }
         );
     })
-
 </script>
