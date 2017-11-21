@@ -89,7 +89,15 @@ class backstage extends Controller
         $station = $data->get_station_data($house_data[0]['line']);
         $street = $data->get_street_data($house_data[0]['district']);
 		$house_data[0]['fur_list'] = explode(',',$house_data[0]['furniture']);
-        $house_data[0]['key_list'] = explode(',',$house_data[0]['key_word']);
+        $key_list = explode(',',$house_data[0]['key_word']);
+        foreach($key_list as $value){
+            foreach($key_word as &$val){
+                $val['state'] = 0;
+                if($value == $val['k_id']){
+                    $val['state'] = 1;
+                }
+            }
+        }
         $pic[0] = $house_data[0]['pic_1'];
         $pic[1] = $house_data[0]['pic_2'];
         $pic[2] = $house_data[0]['pic_3'];
@@ -108,7 +116,7 @@ class backstage extends Controller
 //		print_r($line);
 		$this->assign('furniture',$furniture_data);
 		$this->assign('house_type',$house_type);
-
+//        print_r($key_word);
 		return $this->fetch();
 	}
 	public function modify_from_data($id){

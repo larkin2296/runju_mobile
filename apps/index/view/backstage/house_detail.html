@@ -57,7 +57,7 @@
                     <div class="you">
                         {foreach name='key_word' id='key_list' key='key'}
                         <label class="am-checkbox-inline">
-                            <input type="checkbox" name='key_word[]' value="{$key_list.k_id}"  {if condition='(empty($data.key_list[$key]) neq true) and ($key_list.k_id eq $data.key_list[$key])'}checked{/if}/>
+                            <input type="checkbox" name='key_word[]' value="{$key_list.k_id}"  {if condition='$key_list.state eq 1'}checked{/if}/>
                             {$key_list.key_word_name}
                         </label>
                         {/foreach}
@@ -141,7 +141,7 @@
           	</select>
           	<select class='am-input-sm' name='station' style='width:15%;float:left;margin-left:1%;margin-right: 1%;' id='station' value=''>
                 {foreach name='station' id='station_list'}
-                <option value='{$line_list.u_id}' {if condition='$data.under_station eq $station_list.u_id'}selected{/if}>{$station_list.underground_name}</option>
+                <option value='{$station_list.u_id}' {if condition='$data.under_station eq $station_list.u_id'}selected{/if}>{$station_list.underground_name}</option>
                 {/foreach}
           	</select>
           </div>
