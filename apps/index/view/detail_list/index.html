@@ -70,6 +70,7 @@
 			<!--<input type="button" value="加载更多" class="read_more"/>-->
 		</div>
 		<div id='house_type_list' class='meau_list'>
+			<p>选择房型</p>
 				{foreach name='type' id='type'}
 				<li class='h_select_tese' value='{$type.t_id}'>{$type.house_type_name}</li>
 				{/foreach}
@@ -77,7 +78,8 @@
 			<br />
 			<br /><input type='button' id='type_check' value='确定' style="margin:0 auto;" />
 		</div>
-		<div id='list_area_detail' class='list'>
+		<div id='list_area_detail' class='list meau_list'>
+			<p>选择地区</p>
 			<div class='area_detail_left'>
 				{foreach name='location' id='loc_list'}
 				<li value='{$loc_list.l_id}'>{$loc_list.location_name}</li>
@@ -98,6 +100,7 @@
 			</div>
 		</div>
 		<div id='h_price_detail' class="meau_list">
+			<p>选择价格</p>
 			<ul>
 				<li><input type="hidden" value="" />不限</li>
 				<li><input type="hidden" value="0,4000" />4000元以下</li>
@@ -113,6 +116,7 @@
 			<div style='padding-bottom:10%'></div>
 		</div>
 		<div id='h_select_detail' class="meau_list">
+			<p>更多选择</p>
 			<div style='text-align: center;color: #AAAAAA;'>朝向</div>
 			<input type='button' class='h_select_chao' value='南'>
 			<input type='button' class='h_select_chao' value='北'>
@@ -147,7 +151,7 @@
             var scrollHeight = $(document).height();
             var windowHeight = $(window).innerHeight();
             //console.log($('#main_list li').length);
-           console.log(scrollTop + '+' + windowHeight + '=' + scrollHeight);
+//           console.log(scrollTop + '+' + windowHeight + '=' + scrollHeight);
             if (scrollTop + windowHeight == scrollHeight) {
                console.log(1111);
                 $.ajax({
@@ -215,7 +219,7 @@ $('#price_check').click(function(){
 					ob = ob+ "</div></div></div></li>";
                 })
                 $('#main_list ul').append(ob);
-                $('#h_price_detail').css('display','none');
+                $('#h_price_detail').css('left','-100%');
             },
             error:function(){
                 alert('没有结果');
@@ -279,7 +283,7 @@ $('#char_check').click(function(){
                     ob = ob+ "</div></div></div></li>";
                 })
                 $('#main_list ul').append(ob);
-                $('#h_select_detail').css('display','none');
+                $('#h_select_detail').css('left','-100%');
             },
             error:function(){
                 alert('没有结果');
@@ -314,7 +318,7 @@ $('#char_check').click(function(){
                         ob = ob+ "</div></div></div></li>";
                     })
                     $('#main_list ul').append(ob);
-                    $('#house_type_list').css('display','none');
+                    $('#house_type_list').css('left','-100%');
                 },
                 error:function(){
                     alert('没有结果');

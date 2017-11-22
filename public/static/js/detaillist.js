@@ -17,46 +17,13 @@ $('#list_area_detail .area_detail_left li').click(function(){
 	});
 
 $('#h_price').click(function(){
-	if($('#h_price_detail').css('display') == 'block'){
-        	$('#h_price_detail').removeClass('chose');
-			$('#h_price_detail').css('display','none');
-			$('#h_price').css('color','black');
-		}else if($('#h_price_detail').css('display') == 'none'){
-        	$('.m_li').css('color','black');
-			$('.meau_list').removeClass('chose');
-        	$('#h_price_detail').addClass('chose');
-			$(".meau_list:not(.chose)").css('display','none');
-			$('#h_price_detail').css('display','block');
-			$('#h_price').css('color','orange');
-		}	
+    $('#h_price_detail').animate({position:'absolute',left:'0px'},1000);
 })
 $('#h_select').click(function(){
-	if($('#h_select_detail').css('display') == 'block'){
-        	$('#h_select_detail').removeClass('chose');
-			$('#h_select_detail').css('display','none');
-			$('#h_select').css('color','black');
-		}else if($('#h_select_detail').css('display') == 'none'){
-			$('.m_li').css('color','black');
-        	$('.meau_list').removeClass('chose');
-			$('#h_select_detail').addClass('chose');
-			$(".meau_list:not(.chose)").css('display','none');
-			$('#h_select_detail').css('display','block');
-			$('#h_select').css('color','orange');
-		}	
+    $('#h_select_detail').animate({position:'absolute',left:'0px'},1000);
 })
 $('#h_type').click(function(){
-    if($('#house_type_list').css('display') == 'block'){
-        $('#house_type_list').removeClass('chose');
-        $('#house_type_list').css('display','none');
-        $('#h_type').css('color','black');
-    }else if($('#house_type_list').css('display') == 'none'){
-        $('.m_li').css('color','black');
-        $('.meau_list').removeClass('chose');
-        $('#house_type_list').addClass('chose');
-        $(".meau_list:not(.chose)").css('display','none');
-        $('#house_type_list').css('display','block');
-        $('#h_type').css('color','orange');
-    }
+    $('#house_type_list').animate({position:'absolute',left:'0px'},1000);
 })
 	$('#line_area_detail .area_detail_left li').click(function(){
 		$('#line_area_detail .area_detail_left li').removeClass('active');
@@ -76,11 +43,7 @@ $('#h_type').click(function(){
            }); 
 	});
 	$('#h_map').click(function(){
-		if($('#list_area_detail').css('display') == 'block'){
-			$('#list_area_detail').css('display','none');			
-		}else if($('#list_area_detail').css('display') == 'none'){
-			$('#list_area_detail').css('display','block');			
-		}
+        $('#list_area_detail').animate({position:'absolute',left:'0px'},1000);
 
 	})
 	$('#list_underground').click(function(){
@@ -104,7 +67,7 @@ $('#h_type').click(function(){
 	        		ob = ob+"<li><div class='list_detail'  onclick='gotodetail("+value.id+")'><div class='list_detail_left'><img src='../../../../../public/uploads/"+value.pic_1+"'  /></div><div class='list_detail_right'><div class='list_detail_title' ><span>"+value.title.substring(0,30)+"..."+"</span></div><div class='list_detail_content'>"+value.house_type_name+"<br />"+value.address+"</div><div class='list_detail_price'>"+value.price+"</div></div></div></li>"	
 	        		})
 	        		$('#main_list ul').append(ob);
-					$('.list').css('display','none');
+					$('.list').css('left','-100%');
 	        }  
    		});
 	})

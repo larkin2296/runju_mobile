@@ -166,14 +166,14 @@ select{
 	line-height:250%;   
 }
 #list_area_detail{
-    display:none;
 	position: absolute;
-	left: 0px;
-	top: 324px;
-	width:100%;
-	height:40%;
-	border-bottom:1px solid #DEDEDE;
-	border-top:1px solid #DEDEDE;
+	left: -100%;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	border-bottom: 1px solid #DEDEDE;
+	border-top: 1px solid #DEDEDE;
+	background-color: white;
 }
 .active{
     background-color:white;
@@ -188,7 +188,7 @@ font-size:80%;
     width:50%;
     height:100%;
     float:left;
-    background-color: #DEDEDE;
+	background-color: orange;
 }
 .area_detail_right{
 text-align:center;
@@ -332,11 +332,11 @@ font-size:80%;
 }
 #h_price_detail{
 	background-color: white;
-	display:none;
     position: absolute;
-    left:0px;
-    top:324px;
+    left:-100%;
+    top:0px;
     width:100%;
+	height:100%;
 }
 #h_price_detail ul{
 	list-style: none;
@@ -376,11 +376,11 @@ font-size:80%;
 }
 #h_select_detail{
 	background-color: white;
-	display:none;
-    position: absolute;
-    left:0px;
-    top:324px;
-    width:100%;
+	position: absolute;
+	left: -100%;
+	top: 0px;
+	width: 100%;
+	height: 100%;
 }
 .h_select_chao,.h_select_tese,.h_select_zhou{
 	width:21%;
@@ -460,19 +460,26 @@ font-size:80%;
 }
 
 #house_type_list{
-	display: none;
+	/* display: none; */
 	position: absolute;
-	left: 0px;
-	top: 324px;
-	width:100%;
-	height:auto;
-	float:left;
+	left: -100%;
+	top: 0px;
+	width: 100%;
+	float: left;
 	background-color: white;
 	text-align: center;
+	height: 100%;
 }
 #house_type_list li{
 	float:left;
 	list-style: none;
 	margin-bottom: 5%;
 	width:26%;
+}
+.meau_list{
+	text-align: center;
+}
+.meau_list p{
+	font-size:140%;
+	color:orange;
 }
