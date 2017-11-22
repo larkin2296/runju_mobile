@@ -17,13 +17,13 @@ $('#list_area_detail .area_detail_left li').click(function(){
 	});
 
 $('#h_price').click(function(){
-    $('#h_price_detail').animate({position:'absolute',left:'0px'},1000);
+    $('#h_price_detail').animate({position:'absolute',left:'0px'},500);
 })
 $('#h_select').click(function(){
-    $('#h_select_detail').animate({position:'absolute',left:'0px'},1000);
+    $('#h_select_detail').animate({position:'absolute',left:'0px'},500);
 })
 $('#h_type').click(function(){
-    $('#house_type_list').animate({position:'absolute',left:'0px'},1000);
+    $('#house_type_list').animate({position:'absolute',left:'0px'},500);
 })
 	$('#line_area_detail .area_detail_left li').click(function(){
 		$('#line_area_detail .area_detail_left li').removeClass('active');
@@ -95,6 +95,5 @@ $('#h_type').click(function(){
         $(this).addClass('check');
 		$(this).css('color','orange');
 	})
-
 
 	
