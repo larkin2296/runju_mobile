@@ -151,12 +151,22 @@
 //滑动处理
         var startX, startY, moveEndX, moveEndY, X, Y;
         mybody.addEventListener('touchstart', function(e) {
-            e.preventDefault();
+            if (e.cancelable) {
+                // 判断默认行为是否已经被禁用
+                if (!e.defaultPrevented) {
+                    e.preventDefault();
+                }
+            }
             startX = e.touches[0].pageX;
             startY = e.touches[0].pageY;
         }, false);
         mybody.addEventListener('touchmove', function(e) {
-            e.preventDefault();
+            if (e.cancelable) {
+                // 判断默认行为是否已经被禁用
+                if (!e.defaultPrevented) {
+                    e.preventDefault();
+                }
+            }
             moveEndX = e.changedTouches[0].pageX;
             moveEndY = e.changedTouches[0].pageY;
             X = moveEndX - startX;
