@@ -7,7 +7,13 @@
 		<meta name="format-detection" content="telephone=no">
 		<link rel="stylesheet" href="__static__/css/swiper.min.css">
 		<link type="text/css" href='__static__/css/detail.css' rel="stylesheet"></link>
+		<link rel='stylesheet prefetch' href='__static__/css/photoswipe.css'>
+		<link rel='stylesheet prefetch' href='__static__/css/default-skin/default-skin.css'>
 		<style>
+			.my-gallery {width: 100%;float: left;}
+			.my-gallery img {width: 100%;height: auto;}
+			.my-gallery figure {display: block;float: left; margin: 0 5px 5px 0;width: 150px;}
+			.my-gallery figcaption {display: none;}
 			.swiper-container {
 				width: 100%;
 				height: 35%;
@@ -37,10 +43,10 @@
 		<div id='a'></div>
 		<div id='mob_index'>
 			{include file='index/top' }
-			<div class="swiper-container">
-				<div class="swiper-wrapper">
+			<div class="swiper-container" alt="Image description">
+				<div class="my-gallery swiper-wrapper">
 					{foreach name='pic' id='pic_list' key='key'}
-					<div class="swiper-slide"><img src="__pic__/uploads/{$pic_list}" style='width:100%;height:100%' /></div>
+					<div class="swiper-slide"><a href="__pic__/uploads/{$pic_list}"  data-size="1024x1024"><img src="__pic__/uploads/{$pic_list}" style='width:100%;height:100%' /></a></div>
 					{/foreach}
 				</div>
 				<!-- Add Pagination -->
@@ -132,8 +138,65 @@
 		<input type='hidden' name='longitude' id='longitude' value='{$house.longitude}'  />
 		<input type='hidden' name='latitude' id='latitude' value='{$house.latitude}'  />
 		{include file='index/bottom' }
+		<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+			<div class="pswp__bg"></div>
+
+			<div class="pswp__scroll-wrap">
+
+
+				<div class="pswp__container">
+					<div class="pswp__item"></div>
+					<div class="pswp__item"></div>
+					<div class="pswp__item"></div>
+				</div>
+
+
+				<div class="pswp__ui pswp__ui--hidden">
+
+					<div class="pswp__top-bar">
+
+						<div class="pswp__counter"></div>
+
+						<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+						<button class="pswp__button pswp__button--share" title="Share"></button>
+
+						<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+						<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+						<div class="pswp__preloader">
+							<div class="pswp__preloader__icn">
+								<div class="pswp__preloader__cut">
+									<div class="pswp__preloader__donut"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+						<div class="pswp__share-tooltip"></div>
+					</div>
+
+					<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"> </button>
+					<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"> </button>
+
+					<div class="pswp__caption">
+						<div class="pswp__caption__center"></div>
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
 	</body>
 </html>
+<script src='__static__/js/big_img.js'></script>
+<script src='__static__/js/photoswipe.min.js'></script>
+<script src='__static__/js/photoswipe-ui-default.min.js'></script>
+<script src="__static__/js/bigImg.js"></script>
 <script type='text/javascript' src='__static__/js/jquery.min.js'></script>
 <script type="text/javascript" src="__static__/js/jquery.easing.1.3.js"></script>
 <script src="__static__/js/swiper.min.js"></script>
