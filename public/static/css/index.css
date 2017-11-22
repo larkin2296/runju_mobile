@@ -1,8 +1,16 @@
+@font-face {
+	font-family: PingFangSC-Light;
+	src: url('font/PingFang Light.ttf');
+}
+@font-face {
+	font-family:  PingFangSC-Regular;
+	src: url('font/PingFang-SC-Regular.otf');
+}
 body{
 				width:100%;
 				height:640px;
 				margin:0px;
-				font-family: 'Microsoft Yahei', Arial, Helvetica, "黑体", sans-serif;
+				font-family: PingFangSC-Regular;
 			}
 			#a{
 				position:absolute;
@@ -139,6 +147,7 @@ body{
 				margin-top:10px;
 				margin-left:3%;
 				border-radius: 7px;
+				cursor: pointer;
 			}
 			.meau_list p{
 				margin:0;
@@ -150,8 +159,9 @@ body{
 				line-height: 100%;
 			}
 			.meau_list img{
-				width:80%;
-				margin-left:13%;
+				width: 80%;
+				margin-left: 12%;
+				padding-top: 9%;
 			}
 			.meau_list_list{
 				width:45%;

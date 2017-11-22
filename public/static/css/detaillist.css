@@ -1,8 +1,16 @@
-﻿body{
+﻿@font-face {
+	font-family: PingFangSC-Light;
+	src: url('font/PingFang Light.ttf');
+}
+@font-face {
+	font-family:  PingFangSC-Regular;
+	src: url('font/PingFang-SC-Regular.otf');
+}
+body{
 		width:100%;
 		min-height:640px;
 		margin:0px;
-		font-family: 'Microsoft Yahei', Arial, Helvetica, "黑体", sans-serif;
+		font-family: PingFangSC-Regular;
 	height: 100%;
 	}
 
@@ -269,18 +277,18 @@ font-size:80%;
 }
 .list_detail{
 	width:100%;
-	height:140px;
+	height: 9.4em;
 	border-bottom: 1px solid #E3E3E3;
 }
 .list_detail_left img{
-	width:100%;
-	height:110px;
-	margin-top:10%;
+	width: 100%;
+	height: 78%;
+	margin-top: 14%;
 }
 .list_detail_left{
 	float: left;
 	width: 38%;
-	height: 140px;
+	height: 100%;
 }
 .list_detail_right{
 	padding-left: 2%;
@@ -297,7 +305,7 @@ font-size:80%;
 }
 .list_detail_content{
 	float:left;
-	width:100%;
+	width:107%;
 	height:100px;
 	font-size:70%;
 	color: #ACACAC;

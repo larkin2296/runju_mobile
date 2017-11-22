@@ -79,8 +79,11 @@
             <div class="zuo">推荐：</div>
             <div class="you">
                 <label class="am-checkbox-inline">
-                    <input type="radio" name='house_level' value="1" {if condition='$data.house_level eq 1'}checked{/if}>
+                    <input type="radio" name='house_level' {if condition='$data.house_level eq 1'}checked{/if} value="1">
                     今日推荐</label>
+                <label class="am-checkbox-inline">
+                    <input type="radio" name='house_level' {if condition='$data.house_level eq 0'}checked{/if} value="0">
+                    取消推荐</label>
             </div>
         </div>
         <div class="am-form-group am-cf">

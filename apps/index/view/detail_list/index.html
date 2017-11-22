@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+		<meta name="viewport" content="width=device-width,height=device-height,maximum-scale=1.0">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<meta name="format-detection" content="telephone=no">
@@ -20,7 +20,7 @@
 					<div id='search'>
 						<input type='text'  id='index_text' placeholder="输入地铁,商圈,小区名字等..."/><input type='image' src='__static__/img/magnifying42.png' id='index_sub' />						
 					</div>
-					<a id='map' href="{:url('map/index')}">地图</a>
+					<a id='map' href="{:url('map/index')}" style="margin-top: 4%;"><img src="__static__/img/map.png" /></a>
 				</div>
 			
 				<div id='list_choose'>
@@ -143,12 +143,13 @@
         })
     $(window).scroll(
         function() {
-            var scrollTop = $(this).scrollTop() || $(this).pageYOffset;
+            var scrollTop = $(this).scrollTop() || window.pageYOffset;
             var scrollHeight = $(document).height();
-            var windowHeight = $(window).height();
+            var windowHeight = $(window).innerHeight();
             //console.log($('#main_list li').length);
-           console.log(scrollTop + '+' + windowHeight + '=' + scrollHeight)
+           console.log(scrollTop + '+' + windowHeight + '=' + scrollHeight);
             if (scrollTop + windowHeight == scrollHeight) {
+               console.log(1111);
                 $.ajax({
                     type: "POST",
                     url: "{:url('detail_list/more_list')}",
