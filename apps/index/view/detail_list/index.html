@@ -12,13 +12,14 @@
 		<div id='a'></div>
 		<input type='hidden' class='t' value='{$t}'  />
 		<input type='hidden' class='r' value='{$r}'  />
+		<input type='hidden' class='condition' value=''  />
 		<div id='mob_index'>
 			{include file='index/top' }
 			<div id='top_pic'><img src='__static__/img/Ban_kxaj.jpg' /></div>
 			<div id='main_index'>
 				<div id='list_serach'>
 					<div id='search'>
-						<input type='text'  id='index_text' placeholder="输入地铁,商圈,小区名字等..."/><input type='image' src='__static__/img/magnifying42.png' id='index_sub' />						
+						<input type='text'  id='index_text' placeholder="输入地铁,商圈,小区名字等..." value="{$r}"/><input type='image' src='__static__/img/magnifying42.png' id='index_sub' />
 					</div>
 					<a id='map' href="{:url('map/index')}" style="margin-top: 4%;"><img src="__static__/img/map.png" /></a>
 				</div>
@@ -32,10 +33,9 @@
 					</ul>
 				</div>
 
-					<div id='main_list'>
-					<ul>
+					<div id='container' class="main_list" >
 						{foreach name='house' id='house_list'}
-						<li onclick="gotodetail({$house_list.id})" >
+						<div class="item" onclick="gotodetail({$house_list.id})" >
 							<div class='list_detail'  >
 								<div class='list_detail_left'>
 									<img src='__pic__/uploads/{$house_list.pic_1}'  />
@@ -62,9 +62,9 @@
 									</div>-->
 								</div>
 							</div>
-						</li>
+						</div>
 							{/foreach}
-					</ul>
+
 				</div>
 			</div>
 			<!--<input type="button" value="加载更多" class="read_more"/>-->
@@ -137,9 +137,9 @@
 </html>
 <script src='__static__/js/detaillist.js'></script>
 <link rel="stylesheet" href="__static__/css/jquery.range.css" />
-<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
 <script type="text/javascript" src="__static__/js/jquery.range.js"></script>
 <script type='text/javascript'>
+	var condition_arr = new Array();
     $(function() {
         if($('.t').val() == 3){
             $('#h_price').html('售价');
@@ -170,33 +170,32 @@
 	})
     $(window).scroll(
         function() {
-            var scrollTop = $(this).scrollTop() || window.pageYOffset;
+            var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
             var scrollHeight = $(document).height();
             var windowHeight = $(window).innerHeight();
             //console.log($('#main_list li').length);
-//           console.log(scrollTop + '+' + windowHeight + '=' + scrollHeight);
+           console.log(scrollTop + '+' + windowHeight + '=' + scrollHeight);
             if (scrollTop + windowHeight == scrollHeight) {
-               console.log(1111);
                 $.ajax({
                     type: "POST",
                     url: "{:url('detail_list/more_list')}",
-                    data: {'a': $('#main_list li').length, 't': $('.t').val(), 'r': $('.r').val()},// 序列化表单值
+                    data: {'a': $('.main_list .item').length, 't': $('.t').val(), 'r': $('.r').val()},// 序列化表单值
                     dataType: "json",
                     success: function (data) {
 
                         var ob = '';
                         $.each(data, function (i, value) {
-                            ob = ob + "<li><div class='list_detail'  onclick='gotodetail(" + value.id + ")'><div class='list_detail_left'><img src='__pic__/uploads/" + value.pic_1 + "'  /></div><div class='list_detail_right'><div class='list_detail_title' ><span>" + value.title.substring(0, 30) + "..." + "</span></div><div class='list_detail_content'>" + value.acreage + "m<sup>2</sup>&nbsp;&nbsp;|&nbsp;&nbsp;" + value.house_floor + "层<span style='margin-left:6%;color:orange;'><span style='font-size:150%;'>￥" + value.price + "</span>元/月</span><br /><img src='__static__/img/p_1.png' style='width:8%;vertical-align:middle;'/>" + value.underground + "..." + "<span style='padding-left: 34%;'>" + value.address + "</span><br  />";
+                            ob = ob + "<div class='item'  onclick='gotodetail(" + value.id + ")'><div class='list_detail'><div class='list_detail_left'><img src='__pic__/uploads/" + value.pic_1 + "'  /></div><div class='list_detail_right'><div class='list_detail_title' ><span>" + value.title.substring(0, 30) + "..." + "</span></div><div class='list_detail_content'>" + value.acreage + "m<sup>2</sup>&nbsp;&nbsp;|&nbsp;&nbsp;" + value.house_floor + "层<span style='margin-left:6%;color:orange;'><span style='font-size:150%;'>￥" + value.price + "</span>元/月</span><br /><img src='__static__/img/p_1.png' style='width:8%;vertical-align:middle;'/>" + value.underground + "..." + "<span style='padding-left: 34%;'>" + value.address + "</span><br  />";
                             $.each(value.key_word_list, function (j, val) {
                                 ob = ob + "<div class='key_word'>" + val + "</div>";
                             })
-                            ob = ob + "</div></div></div></li>";
+                            ob = ob + "</div></div></div></div>";
                         })
-                        $('#main_list ul').append(ob);
+                        $('.main_list').append(ob);
                     },
                     error:function(){
-                      alert('没有更多了');
-					}
+                        alert('没有更多了');
+                    }
                 });
             }
         });
@@ -211,7 +210,11 @@ $('.range-slider').jRange({
 		isRange: true
 	});
 	$('#index_sub').click(function(){
-		$(location).prop('href',"{:url('index')}?a="+$('.t').val()+"&res="+$('#index_text').val());
+	    if($('#index_text').val() == ''){
+            $(location).prop('href',"{:url('index')}?a="+$('.t').val());
+		}else{
+            $(location).prop('href',"{:url('index')}?a="+$('.t').val()+"&res="+$('#index_text').val());
+		}
 	})
 	function gotodetail(id){
         //$(location).prop('href','__back__/index.php/index/detail/index/id/'+id);
@@ -224,6 +227,7 @@ $('#price_check').click(function(){
     }else{
         data = $('.check input[type="hidden"]').val();
     }
+    condition_arr['price'] = data;
     $.ajax(
         {
             type: "POST",
@@ -232,7 +236,7 @@ $('#price_check').click(function(){
             dataType: "json",
             success: function(data) {
                 //alert('yes');
-                $('#main_list ul').empty();
+                $('.main_list ul').empty();
                 var ob = '';
                 $.each(data,function(i,value){
                     ob = ob+"<li><div class='list_detail'  onclick='gotodetail("+value.id+")'><div class='list_detail_left'><img src='__pic__/uploads/"+value.pic_1+"'  /></div><div class='list_detail_right'><div class='list_detail_title' ><span>"+value.title.substring(0,30)+"..."+"</span></div><div class='list_detail_content'>"+value.acreage+"m<sup>2</sup>&nbsp;&nbsp;|&nbsp;&nbsp;"+value.house_floor+"层<span style='margin-left:6%;color:orange;'><span style='font-size:150%;'>￥"+value.price+"</span>元/月</span><br /><img src='__static__/img/p_1.png' style='width:8%;vertical-align:middle;'/>"+value.underground+"..."+"<span style='padding-left: 34%;'>"+value.address+"</span><br  />";
@@ -241,7 +245,9 @@ $('#price_check').click(function(){
                     })
 					ob = ob+ "</div></div></div></li>";
                 })
-                $('#main_list ul').append(ob);
+                $('.main_list ul').append(ob);
+                $('.condition').val(condition_arr);
+                condition_arr = [];
                 $('#h_price_detail').css('left','-100%');
             },
             error:function(){
@@ -289,6 +295,8 @@ $('#char_check').click(function(){
 	}else if(k == 0){
 	    chao = '';
 	}
+	condition_arr['chao'] = chao;
+	condition_arr['tese'] = tese;
     $.ajax(
         {
             type: "POST",
@@ -296,7 +304,7 @@ $('#char_check').click(function(){
             data:{'chao':chao,'tese':tese,'type':$('.t').val()},// 序列化表单值
             dataType: "json",
             success: function(data) {
-                $('#main_list ul').empty();
+                $('.main_list ul').empty();
                 var ob = '';
                 $.each(data,function(i,value){
                     ob = ob+"<li><div class='list_detail'  onclick='gotodetail("+value.id+")'><div class='list_detail_left'><img src='__pic__/uploads/"+value.pic_1+"'  /></div><div class='list_detail_right'><div class='list_detail_title' ><span>"+value.title.substring(0,30)+"..."+"</span></div><div class='list_detail_content'>"+value.acreage+"m<sup>2</sup>&nbsp;&nbsp;|&nbsp;&nbsp;"+value.house_floor+"层<span style='margin-left:6%;color:orange;'><span style='font-size:150%;'>￥"+value.price+"</span>元/月</span><br /><img src='__static__/img/p_1.png' style='width:8%;vertical-align:middle;'/>"+value.underground+"..."+"<span style='padding-left: 34%;'>"+value.address+"</span><br  />";
@@ -305,7 +313,9 @@ $('#char_check').click(function(){
                     })
                     ob = ob+ "</div></div></div></li>";
                 })
-                $('#main_list ul').append(ob);
+                $('.main_list ul').append(ob);
+                $('.condition').val(condition_arr);
+                condition_arr = [];
                 $('#h_select_detail').css('left','-100%');
             },
             error:function(){
@@ -324,6 +334,7 @@ $('#char_check').click(function(){
 		if(k == 0){
             tp = '';
         }
+        condition_arr['h_tp'] = tp;
         $.ajax(
             {
                 type: "POST",
@@ -331,7 +342,7 @@ $('#char_check').click(function(){
                 data:{'h_tp':tp,'type':$('.t').val()},// 序列化表单值
                 dataType: "json",
                 success: function(data) {
-                    $('#main_list ul').empty();
+                    $('.main_list ul').empty();
                     var ob = '';
                     $.each(data,function(i,value){
                         ob = ob+"<li><div class='list_detail'  onclick='gotodetail("+value.id+")'><div class='list_detail_left'><img src='__pic__/uploads/"+value.pic_1+"'  /></div><div class='list_detail_right'><div class='list_detail_title' ><span>"+value.title.substring(0,30)+"..."+"</span></div><div class='list_detail_content'>"+value.acreage+"m<sup>2</sup>&nbsp;&nbsp;|&nbsp;&nbsp;"+value.house_floor+"层<span style='margin-left:6%;color:orange;'><span style='font-size:150%;'>￥"+value.price+"</span>元/月</span><br /><img src='__static__/img/p_1.png' style='width:8%;vertical-align:middle;'/>"+value.underground+"..."+"<span style='padding-left: 34%;'>"+value.address+"</span><br  />";
@@ -340,7 +351,9 @@ $('#char_check').click(function(){
                         })
                         ob = ob+ "</div></div></div></li>";
                     })
-                    $('#main_list ul').append(ob);
+                    $('.main_list ul').append(ob);
+                    $('.condition').val(condition_arr);
+                    condition_arr = [];
                     $('#house_type_list').css('left','-100%');
                 },
                 error:function(){
@@ -349,4 +362,45 @@ $('#char_check').click(function(){
             }
         );
     })
+    $('#list_area_detail .area_detail_right').on('click','li',function(){
+        condition_arr['id'] = $(this).data('*');
+        $.ajax({
+            type: "POST",
+            url:"{:url('detail_list/get_house_list')}",
+            data:{'type':$('.t').val(),'id':$(this).data('*')},// 序列化表单值
+            dataType: "json",
+            success: function(data) {
+                $('.main_list ul').empty();
+                var ob = '';
+                $.each(data,function(i,value){
+                    ob = ob+"<li><div class='list_detail'  onclick='gotodetail("+value.id+")'><div class='list_detail_left'><img src='__pic__/uploads/"+value.pic_1+"'  /></div><div class='list_detail_right'><div class='list_detail_title' ><span>"+value.title.substring(0,30)+"..."+"</span></div><div class='list_detail_content'>"+value.acreage+"m<sup>2</sup>&nbsp;&nbsp;|&nbsp;&nbsp;"+value.house_floor+"层<span style='margin-left:6%;color:orange;'><span style='font-size:150%;'>￥"+value.price+"</span>元/月</span><br /><img src='__static__/img/p_1.png' style='width:8%;vertical-align:middle;'/>"+value.underground+"..."+"<span style='padding-left: 34%;'>"+value.address+"</span><br  />";
+                    $.each(value.key_word_list,function(j,val){
+                        ob = ob+ "<div class='key_word'>"+val+"</div>";
+                    })
+                    ob = ob+ "</div></div></div></li>";
+                })
+                $('.main_list ul').append(ob);
+                $('.condition').val(condition_arr);
+                condition_arr = [];
+                $('.list').css('left','-100%');
+            }
+        });
+    })
+    $('#list_area_detail .area_detail_left li').click(function(){
+        $('#list_area_detail .area_detail_left li').removeClass('active');
+        $(this).addClass('active');
+        $.ajax({
+            type: "POST",
+            url:"{:url('detail_list/get_street')}",
+            data:{'id':$(this).val()},// 序列化表单值
+            dataType: "json",
+            success: function(data) {
+                var ob='';
+                $.each(data,function(i,value){
+                    ob = ob + '<li data-*="'+value.l_id+'">'+value.location_name+'</li>';
+                })
+                $('#list_area_detail .area_detail_right').html(ob);
+            }
+        });
+    });
 </script>

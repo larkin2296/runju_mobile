@@ -190,7 +190,6 @@ class BaseDataModel extends Model
                     's_p_id'=>['=',0],
                 ])
                 ->select();
-
             if(!empty($shop)){
                 $get_shopping = DB::name('shopping_set')
                     ->where('s_p_id','=',$shop[0]['s_id'])
@@ -198,6 +197,16 @@ class BaseDataModel extends Model
                 foreach($get_shopping as $val){
                     $where[] = ['exp',"FIND_IN_SET('{$val['s_name']}',shopping_nearby)"];
                 }
+                return $where;
+            }
+            $street = DB::name('location_data')
+                ->where([
+                    'l_id'=>['=',$response],
+                    'parent_id'=>['<>',0],
+                ])
+                ->select();
+            if(!empty($street)){
+                    $where['house_rent_data.street'] = array('=',$street[0]['l_id']);
                 return $where;
             }
             $where['location_data.location_name|house_rent_data.address|house_rent_data.underground'] = array('like','%'.$response.'%');

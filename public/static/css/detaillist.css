@@ -141,10 +141,13 @@ font-size: 13px;
 	width:10%;
 	margin-right:5%;
 }
-#main_list{
+.main_list{
 	width:90%;
 	height:auto;
 	margin:auto;
+}
+.main_list ul li{
+	list-style: none;
 }
 hr{
 	width:90%;
@@ -272,7 +275,7 @@ font-size:80%;
     background: url("../img/select.png") no-repeat scroll right center transparent;
     background-size:10%; 
 }
-#main_list ul{
+.main_list ul{
 	width:100%;
 	height:auto;
 	list-style: none;

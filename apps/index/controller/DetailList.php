@@ -44,9 +44,9 @@ class detaillist extends Controller
 	}
 	public function get_house_list(){
 		$id = $_POST['id'];
-		$type = $_POST['type_1'];
+		$type = $_POST['type'];
 		$data = new BaseDataModel;
-		$house = $data->get_house($id,$type);
+		$house = $data->get_house($type,$id);
 		return $house;			
 	}
 	public function search_price(){
@@ -173,5 +173,8 @@ class detaillist extends Controller
             $data[$key]['key_word_list'] = $key_list;
         }
         return $data;
+    }
+    public function page($p){
+        return $this->fetch();
     }
 }
