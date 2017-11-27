@@ -34,9 +34,11 @@
 				</div>
 
 					<div id='container' class="main_list" >
+                        <ul>
+
 						{foreach name='house' id='house_list'}
-						<div class="item" onclick="gotodetail({$house_list.id})" >
-							<div class='list_detail'  >
+						<li>
+							<div class='list_detail' onclick="gotodetail({$house_list.id})" >
 								<div class='list_detail_left'>
 									<img src='__pic__/uploads/{$house_list.pic_1}'  />
 									<div class="sta h_status_{$house_list.house_status}">{$house_list.house_status_name}</div>
@@ -62,9 +64,9 @@
 									</div>-->
 								</div>
 							</div>
-						</div>
+						</li>
 							{/foreach}
-
+                        </ul>
 				</div>
 			</div>
 			<!--<input type="button" value="加载更多" class="read_more"/>-->
@@ -140,6 +142,7 @@
 <script type="text/javascript" src="__static__/js/jquery.range.js"></script>
 <script type='text/javascript'>
 	var condition_arr = new Array();
+	var k;
     $(function() {
         if($('.t').val() == 3){
             $('#h_price').html('售价');
@@ -172,23 +175,24 @@
         var wScrollY = window.scrollY; // 当前滚动条位置
         var wInnerH = window.innerHeight; // 设备窗口的高度（不会变）
         var bScrollH = document.body.scrollHeight; // 滚动条总高度
-        if (wScrollY + wInnerH >= bScrollH) {
+        if (wScrollY + wInnerH >= bScrollH && k != bScrollH) {
+            k = bScrollH;
             $.ajax({
                     type: "POST",
                     url: "{:url('detail_list/more_list')}",
-                    data: {'a': $('.main_list .item').length, 't': $('.t').val(), 'r': $('.r').val()},// 序列化表单值
+                    data: {'a': $('.main_list li').length, 't': $('.t').val(), 'r': $('.r').val()},// 序列化表单值
                     dataType: "json",
                     success: function (data) {
 
                         var ob = '';
                         $.each(data, function (i, value) {
-                            ob = ob + "<div class='item'  onclick='gotodetail(" + value.id + ")'><div class='list_detail'><div class='list_detail_left'><img src='__pic__/uploads/" + value.pic_1 + "'  /></div><div class='list_detail_right'><div class='list_detail_title' ><span>" + value.title.substring(0, 30) + "..." + "</span></div><div class='list_detail_content'>" + value.acreage + "m<sup>2</sup>&nbsp;&nbsp;|&nbsp;&nbsp;" + value.house_floor + "层<span style='margin-left:6%;color:orange;'><span style='font-size:150%;'>￥" + value.price + "</span>元/月</span><br /><img src='__static__/img/p_1.png' style='width:8%;vertical-align:middle;'/>" + value.underground + "..." + "<span style='padding-left: 34%;'>" + value.address + "</span><br  />";
+                            ob = ob + "<li><div class='list_detail' onclick='gotodetail(" + value.id + ")'><div class='list_detail_left'><img src='__pic__/uploads/" + value.pic_1 + "'  /></div><div class='list_detail_right'><div class='list_detail_title' ><span>" + value.title.substring(0, 30) + "..." + "</span></div><div class='list_detail_content'>" + value.acreage + "m<sup>2</sup>&nbsp;&nbsp;|&nbsp;&nbsp;" + value.house_floor + "层<span style='margin-left:6%;color:orange;'><span style='font-size:150%;'>￥" + value.price + "</span>元/月</span><br /><img src='__static__/img/p_1.png' style='width:8%;vertical-align:middle;'/>" + value.underground + "..." + "<span style='padding-left: 34%;'>" + value.address + "</span><br  />";
                             $.each(value.key_word_list, function (j, val) {
                                 ob = ob + "<div class='key_word'>" + val + "</div>";
                             })
-                            ob = ob + "</div></div></div></div>";
+                            ob = ob + "</div></div></div></li>";
                         })
-                        $('.main_list').append(ob);
+                        $('.main_list ul').append(ob);
                     },
                     error:function(){
                         alert('没有更多了');
