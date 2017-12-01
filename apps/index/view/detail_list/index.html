@@ -80,18 +80,15 @@
 			<br /><input type='button' id='type_check' value='确定' style="margin:0 auto;" />
 		</div>
 		<div id='list_area_detail' class='list meau_list'>
-			<p>选择地区</p>
-			<div class='area_detail_left'>
+			<p><span id="area">地区</span>/<span id="line">地铁</span></p>
+			<!--地区-->
+			<div class='area_detail_left' id="area_left">
 				{foreach name='location' id='loc_list'}
 				<li value='{$loc_list.l_id}'>{$loc_list.location_name}</li>
 				{/foreach}
 			</div>
-			<div class='area_detail_right'>
-				
-			</div>
-		</div>
-		<div id='line_area_detail' class='list'>
-			<div class='area_detail_left'>
+			<!--地铁-->
+			<div class='line_detail_left' id="line_left">
 				{foreach name='line' id='line_list'}
 				<li value='{$line_list.u_id}'>{$line_list.underground_name}</li>
 				{/foreach}
@@ -371,6 +368,23 @@ $('#char_check').click(function(){
                     ob = ob + '<li data-*="'+value.location_name+'">'+value.location_name+'</li>';
                 })
                 $('#list_area_detail .area_detail_right').html(ob);
+            }
+        });
+    });
+    $('.line_detail_left li').click(function(){
+        $('.line_detail_left li').removeClass('active');
+        $(this).addClass('active');
+        $.ajax({
+            type: "POST",
+            url:"{:url('detail_list/get_station')}",
+            data:{'id':$(this).val()},// 序列化表单值
+            dataType: "json",
+            success: function(data) {
+                var ob='';
+                $.each(data,function(i,value){
+                    ob = ob + '<li data-*="'+value.underground_name+'">'+value.underground_name+'</li>';
+                })
+                $('.area_detail_right').html(ob);
             }
         });
     });

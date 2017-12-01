@@ -186,7 +186,7 @@ select{
     background-color:white;
     color:orange;
 }
-.area_detail_left{
+.area_detail_left,.line_detail_left{
 text-align:center;
 line-height: 200%;
 font-size:80%;
@@ -488,5 +488,14 @@ font-size:80%;
 }
 .meau_list p{
 	font-size:140%;
+	color:darkgrey;
+}
+#area_left{
+	display:block;
+}
+#line_left{
+	display:none;
+}
+#area{
 	color:orange;
 }
