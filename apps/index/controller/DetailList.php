@@ -76,7 +76,7 @@ class detaillist extends Controller
     public function more_list(){
         $data = new BaseDataModel;
         $con = Cookie::get('condition');
-        if(empty($con)){
+        if($con == ''){
             if($_POST['r'] == ''){
                 $house_data = $data->get_house($_POST['t'],'',$_POST['a']);
             }else{
