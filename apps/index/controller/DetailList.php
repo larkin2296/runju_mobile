@@ -76,6 +76,7 @@ class detaillist extends Controller
     public function more_list(){
         $data = new BaseDataModel;
         $con = Cookie::get('condition');
+		$con = json_decode($con,true);
         if($con == ''){
             if($_POST['r'] == ''){
                 $house_data = $data->get_house($_POST['t'],'',$_POST['a']);
@@ -105,7 +106,6 @@ class detaillist extends Controller
 	    if($_POST['price'] == ''){
 	        return false;
         }
-        Cookie::set('condition',['price'=>$_POST['price']]);
         if($_POST['type'] == (1 || 2)){
             $table = 'house_rent_data';
         }else{
@@ -119,6 +119,7 @@ class detaillist extends Controller
         if(!empty($_POST['r'])){
             $where = $model->get_house_where($_POST['r'],$_POST['t']);
         }
+		Cookie::set('condition',['price'=>array('between',"$p[0],$p[1]")]);
         $where['price'] = array('between',"$p[0],$p[1]");
         $data = $this->get_result($table,$where);
         return $data;
