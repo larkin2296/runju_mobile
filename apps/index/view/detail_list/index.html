@@ -11,8 +11,7 @@
 	<body>
 		<div id='a'></div>
 		<input type='hidden' class='t' value='{$t}'  />
-		<input type='hidden' class='r' value='{$r}'  />
-		<input type='hidden' class='condition' value=''  />
+		<input type='hidden' class='r' {if condition='empty($r) neq true'}value='{$r}'{/if}  />
 		<div id='mob_index'>
 			{include file='index/top' }
 			<div id='top_pic'><img src='__static__/img/Ban_kxaj.jpg' /></div>
@@ -140,8 +139,8 @@
 <script src='__static__/js/detaillist.js'></script>
 <link rel="stylesheet" href="__static__/css/jquery.range.css" />
 <script type="text/javascript" src="__static__/js/jquery.range.js"></script>
+<script type="text/javascript" src="__static__/js/jquery.cookie.js"></script>
 <script type='text/javascript'>
-	var condition_arr = new Array();
 	var k;
     $(function() {
         if($('.t').val() == 3){
@@ -180,7 +179,7 @@
             $.ajax({
                     type: "POST",
                     url: "{:url('detail_list/more_list')}",
-                    data: {'a': $('.main_list li').length, 't': $('.t').val(), 'r': $('.r').val()},// 序列化表单值
+                    data: {'a': $('.main_list li').length, 't': $('.t').val(), 'r': $('.r').val(),'condition':$('.condition').val()},// 序列化表单值
                     dataType: "json",
                     success: function (data) {
 
@@ -222,18 +221,17 @@ $('.range-slider').jRange({
 		window.location.href="{:url('detail/index')}?id="+id;
 	}
 $('#price_check').click(function(){
-    var data;
+    var da;
     if($('.range-slider').val() !="0,10001"){
-        data = $('.range-slider').val();
+        da = $('.range-slider').val();
     }else{
-        data = $('.check input[type="hidden"]').val();
+        da = $('.check input[type="hidden"]').val();
     }
-    condition_arr['price'] = data;
     $.ajax(
         {
             type: "POST",
             url:"{:url('detail_list/search_price')}",
-            data:{'price':data,'type':$('.t').val()},// 序列化表单值
+            data:{'price':da,'type':$('.t').val(),'t': $('.t').val(), 'r': $('.r').val()},// 序列化表单值
             dataType: "json",
             success: function(data) {
                 //alert('yes');
@@ -247,8 +245,6 @@ $('#price_check').click(function(){
 					ob = ob+ "</div></div></div></li>";
                 })
                 $('.main_list ul').append(ob);
-                $('.condition').val(condition_arr);
-                condition_arr = [];
                 $('#h_price_detail').css('left','-100%');
             },
             error:function(){
@@ -296,13 +292,11 @@ $('#char_check').click(function(){
 	}else if(k == 0){
 	    chao = '';
 	}
-	condition_arr['chao'] = chao;
-	condition_arr['tese'] = tese;
     $.ajax(
         {
             type: "POST",
             url:"{:url('detail_list/search_char')}",
-            data:{'chao':chao,'tese':tese,'type':$('.t').val()},// 序列化表单值
+            data:{'chao':chao,'tese':tese,'type':$('.t').val(),'t': $('.t').val(), 'r': $('.r').val()},// 序列化表单值
             dataType: "json",
             success: function(data) {
                 $('.main_list ul').empty();
@@ -315,8 +309,6 @@ $('#char_check').click(function(){
                     ob = ob+ "</div></div></div></li>";
                 })
                 $('.main_list ul').append(ob);
-                $('.condition').val(condition_arr);
-                condition_arr = [];
                 $('#h_select_detail').css('left','-100%');
             },
             error:function(){
@@ -335,12 +327,11 @@ $('#char_check').click(function(){
 		if(k == 0){
             tp = '';
         }
-        condition_arr['h_tp'] = tp;
         $.ajax(
             {
                 type: "POST",
                 url:"{:url('detail_list/search_type')}",
-                data:{'h_tp':tp,'type':$('.t').val()},// 序列化表单值
+                data:{'h_tp':tp,'type':$('.t').val(),'t': $('.t').val(), 'r': $('.r').val()},// 序列化表单值
                 dataType: "json",
                 success: function(data) {
                     $('.main_list ul').empty();
@@ -353,8 +344,6 @@ $('#char_check').click(function(){
                         ob = ob+ "</div></div></div></li>";
                     })
                     $('.main_list ul').append(ob);
-                    $('.condition').val(condition_arr);
-                    condition_arr = [];
                     $('#house_type_list').css('left','-100%');
                 },
                 error:function(){
@@ -364,28 +353,7 @@ $('#char_check').click(function(){
         );
     })
     $('#list_area_detail .area_detail_right').on('click','li',function(){
-        condition_arr['id'] = $(this).data('*');
-        $.ajax({
-            type: "POST",
-            url:"{:url('detail_list/get_house_list')}",
-            data:{'type':$('.t').val(),'id':$(this).data('*')},// 序列化表单值
-            dataType: "json",
-            success: function(data) {
-                $('.main_list ul').empty();
-                var ob = '';
-                $.each(data,function(i,value){
-                    ob = ob+"<li><div class='list_detail'  onclick='gotodetail("+value.id+")'><div class='list_detail_left'><img src='__pic__/uploads/"+value.pic_1+"'  /></div><div class='list_detail_right'><div class='list_detail_title' ><span>"+value.title.substring(0,30)+"..."+"</span></div><div class='list_detail_content'>"+value.acreage+"m<sup>2</sup>&nbsp;&nbsp;|&nbsp;&nbsp;"+value.house_floor+"层<span style='margin-left:6%;color:orange;'><span style='font-size:150%;'>￥"+value.price+"</span>元/月</span><br /><img src='__static__/img/p_1.png' style='width:8%;vertical-align:middle;'/>"+value.underground+"..."+"<span style='padding-left: 34%;'>"+value.address+"</span><br  />";
-                    $.each(value.key_word_list,function(j,val){
-                        ob = ob+ "<div class='key_word'>"+val+"</div>";
-                    })
-                    ob = ob+ "</div></div></div></li>";
-                })
-                $('.main_list ul').append(ob);
-                $('.condition').val(condition_arr);
-                condition_arr = [];
-                $('.list').css('left','-100%');
-            }
-        });
+            $(location).prop('href',"{:url('index')}?a="+$('.t').val()+"&res="+$(this).data('*'));
     })
     $('#list_area_detail .area_detail_left li').click(function(){
         $('#list_area_detail .area_detail_left li').removeClass('active');
@@ -398,7 +366,7 @@ $('#char_check').click(function(){
             success: function(data) {
                 var ob='';
                 $.each(data,function(i,value){
-                    ob = ob + '<li data-*="'+value.l_id+'">'+value.location_name+'</li>';
+                    ob = ob + '<li data-*="'+value.location_name+'">'+value.location_name+'</li>';
                 })
                 $('#list_area_detail .area_detail_right').html(ob);
             }

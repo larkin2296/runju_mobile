@@ -3,6 +3,7 @@ namespace app\index\controller;
 
 use think\Controller;
 use think\Db;
+use think\Cookie;
 use app\index\model\BaseDataModel;
 
 class detaillist extends Controller
@@ -49,11 +50,58 @@ class detaillist extends Controller
 		$house = $data->get_house($type,$id);
 		return $house;			
 	}
+    public function get_result($table,$where,$a = 0){
+        $model = new BaseDataModel;
+        $data = DB::view($table,'*')
+            ->view('location_data',['location_name'],'location_data.l_id=house_rent_data.street')
+            ->where($where)
+            ->limit($a,5)
+            ->select();
+
+        if(empty($data)){
+            return false;
+        }
+        foreach($data as $key=>$val){
+            $data_1 = DB::name('house_type_data')
+                ->field('house_type_name')
+                ->where('t_id',$val['house_type'])
+                ->select();
+            $data[$key]['house_type_name'] = $data_1[0]['house_type_name'];
+            $data[$key]['keyword'] = explode(',',$val['key_word']);
+            $key_list = $model->get_key_data($val['key_word']);
+            $data[$key]['key_word_list'] = $key_list;
+        }
+        return $data;
+    }
+    public function more_list(){
+        $data = new BaseDataModel;
+        $con = Cookie::get('condition');
+        if(empty($con)){
+            if($_POST['r'] == ''){
+                $house_data = $data->get_house($_POST['t'],'',$_POST['a']);
+            }else{
+                $house_data = $data->get_house($_POST['t'],$_POST['r'],$_POST['a']);
+            }
+        }else{
+            $where = $data->get_house_where($_POST['r'],$_POST['t']);
+            $where_new = array_merge($where,$con);
+            if ($_POST['t'] == '1') {
+                $table = 'house_rent_data';
+            } else if ($_POST['t'] == '0') {
+                $table = 'house_rent_data';
+            } else if ($_POST['t'] == '3') {
+                $table = 'house_sell_data';
+            }
+            $house_data = $this->get_result($table,$where_new,$_POST['a']);
+        }
+        return $house_data;
+    }
 	public function search_price(){
         $model = new BaseDataModel;
 	    if($_POST['price'] == ''){
 	        return false;
         }
+        Cookie::set('condition',['price'=>$_POST['price']]);
         if($_POST['type'] == (1 || 2)){
             $table = 'house_rent_data';
         }else{
@@ -64,35 +112,12 @@ class detaillist extends Controller
         $p[1] = intval($p[1]);
         //dump($p);
         //$condition['price'] = array(array('egt',$p[0]),array('lt',$p[1]));
-	    $data = DB::name($table)
-            ->where('price','between',[$p[0],$p[1]])
-            ->select();
-        if(empty($data)){
-            return false;
+        if(!empty($_POST['r'])){
+            $where = $model->get_house_where($_POST['r'],$_POST['t']);
         }
-	    //print_r($data);
-        //echo  Db::table('house_rent_data')->getLastSql();
-        foreach($data as $key=>$val){
-            $data_1 = DB::name('house_type_data')
-                ->field('house_type_name')
-                ->where('t_id',$val['house_type'])
-                ->select();
-            $data[$key]['house_type_name'] = $data_1[0]['house_type_name'];
-            $data[$key]['keyword'] = explode('，',$val['key_word']);
-            $key_list = $model->get_key_data($val['key_word']);
-            $data[$key]['key_word_list'] = $key_list;
-        }
-
+        $where['price'] = array('between',"$p[0],$p[1]");
+        $data = $this->get_result($table,$where);
         return $data;
-    }
-    public function more_list(){
-        $data = new BaseDataModel;
-        if($_POST['r'] == ''){
-            $house_data = $data->get_house($_POST['t'],'',$_POST['a']);
-        }else{
-            $house_data = $data->get_house($_POST['t'],$_POST['r'],$_POST['a']);
-        }
-        return $house_data;
     }
     public function search_char(){
         $model = new BaseDataModel;
@@ -106,6 +131,13 @@ class detaillist extends Controller
         }
         $chao = $_POST['chao'];
         $tese = $_POST['tese'];
+        if(empty($tese)){
+            Cookie::set('condition',['chao'=>$_POST['chao']]);
+        }else if(empty($chao)){
+            Cookie::set('condition',['tese'=>$_POST['tese']]);
+        }else{
+            Cookie::set('condition',['tese'=>$_POST['tese'],'chao'=>$_POST['chao']]);
+        }
         if(!empty($chao)){
             foreach($chao as $value){
                 $where['orientation'] = array('like','%'.$value.'%');
@@ -122,26 +154,20 @@ class detaillist extends Controller
                 }
             }
         }
-        $data = DB::name($table)
-            ->where($where)
-            ->select();
-        if(empty($data)){
-            return false;
+        if(!empty($_POST['r'])){
+            $whe = $model->get_house_where($_POST['r'],$_POST['t']);
+            $new_where = array_merge($whe,$where);
+        }else{
+            $new_where = $where;
         }
-        foreach($data as $key=>$val){
-            $data_1 = DB::name('house_type_data')
-                ->field('house_type_name')
-                ->where('t_id',$val['house_type'])
-                ->select();
-            $data[$key]['house_type_name'] = $data_1[0]['house_type_name'];
-            $data[$key]['keyword'] = explode(',',$val['key_word']);
-            $key_list = $model->get_key_data($val['key_word']);
-            $data[$key]['key_word_list'] = $key_list;
-        }
+        $data = $this->get_result($table,$new_where);
         return $data;
     }
     public function search_type(){
         $model = new BaseDataModel;
+        if(!empty($_POST['r'])){
+            $where = $model->get_house_where($_POST['r'],$_POST['t']);
+        }
         if($_POST['h_tp'] == ''){
             return false;
         }
@@ -156,22 +182,8 @@ class detaillist extends Controller
                 $where['house_type'] = array('=',$value);
             }
         }
-        $data = DB::name($table)
-            ->where($where)
-            ->select();
-        if(empty($data)){
-            return false;
-        }
-        foreach($data as $key=>$val){
-            $data_1 = DB::name('house_type_data')
-                ->field('house_type_name')
-                ->where('t_id',$val['house_type'])
-                ->select();
-            $data[$key]['house_type_name'] = $data_1[0]['house_type_name'];
-            $data[$key]['keyword'] = explode(',',$val['key_word']);
-            $key_list = $model->get_key_data($val['key_word']);
-            $data[$key]['key_word_list'] = $key_list;
-        }
+        Cookie::set('condition',['house_type'=>$h_tp]);
+        $data = $this->get_result($table,$where);
         return $data;
     }
     public function page($p){

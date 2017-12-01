@@ -47,25 +47,16 @@ class BaseDataModel extends Model
 				->select();
 		return $data;
 	}
-	public function get_house($type = '',$response = '',$a=0){
-		$where = array();
-		$table = '';
-        /*******************************************************************************************/
-        /*方法重写*/
-        if($type =='1'){
+    public function get_house($type = '',$response = '',$a=0){
+        $table = '';
+        if ($type == '1') {
             $table = 'house_rent_data';
-            $where = $this->house_search($table,$response,'1');
-        }else if($type == '0'){
+        } else if ($type == '0') {
             $table = 'house_rent_data';
-            $where = $this->house_search($table,$response,'0');
-        }else if($type == '3'){
+        } else if ($type == '3') {
             $table = 'house_sell_data';
-            if($response == 'tuijian'){
-                $where['house_level'] = array('=','1');
-            }else if($response != ''){
-                $where['location_data.location_name|house_rent_data.address|house_rent_data.underground'] = array('like','%'.$response.'%');
-            }
         }
+        $where = $this->get_house_where($response,$type);
         if($response != ''){
             $result = DB::view($table,'*')
                 ->view('location_data',['location_name'],'location_data.l_id=house_rent_data.street')
@@ -102,6 +93,27 @@ class BaseDataModel extends Model
 		}
 		return $result;
 	}
+    public function get_house_where($response,$type)
+    {
+        $where = array();
+        /*******************************************************************************************/
+        /*方法重写*/
+        if ($type == '1') {
+            $table = 'house_rent_data';
+            $where = $this->house_search($table, $response, '1');
+        } else if ($type == '0') {
+            $table = 'house_rent_data';
+            $where = $this->house_search($table, $response, '0');
+        } else if ($type == '3') {
+            $table = 'house_sell_data';
+            if ($response == 'tuijian') {
+                $where['house_level'] = array('=', '1');
+            } else if ($response != '') {
+                $where['location_data.location_name|house_rent_data.address|house_rent_data.underground'] = array('like', '%' . $response . '%');
+            }
+        }
+        return $where;
+    }
 	public function get_house_detail($id){
 		$data = DB::name('house_rent_data')
 				->where('id',$id)
