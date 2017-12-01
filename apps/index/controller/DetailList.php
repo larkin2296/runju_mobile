@@ -75,9 +75,9 @@ class detaillist extends Controller
     }
     public function more_list(){
         $data = new BaseDataModel;
-        $con = Cookie::get('condition');
-		$con = json_decode($con,true);
-        if($con == ''){
+        $con = $_COOKIE['condition'];
+		$ccc = unserialize($con);
+        if($ccc == ''){
             if($_POST['r'] == ''){
                 $house_data = $data->get_house($_POST['t'],'',$_POST['a']);
             }else{
@@ -93,10 +93,11 @@ class detaillist extends Controller
             }
             if($_POST['r'] != '') {
                 $where = $data->get_house_where($_POST['r'],$_POST['t']);
-                $where_new = array_merge($where,$con);
+                $where_new = array_merge($where,$ccc);
+				print_r($where_new);
                 $house_data = $this->get_result($table, $where_new, $_POST['a']);
             }else{
-                $house_data = $this->get_result($table, $con, $_POST['a']);
+                $house_data = $this->get_result($table, $ccc, $_POST['a']);
             }
         }
         return $house_data;
@@ -119,7 +120,9 @@ class detaillist extends Controller
         if(!empty($_POST['r'])){
             $where = $model->get_house_where($_POST['r'],$_POST['t']);
         }
-		Cookie::set('condition',['price'=>array('between',"$p[0],$p[1]")]);
+		$pri_arr = serialize(array('price'=>array('between',"$p[0],$p[1]")));
+		setcookie('condition',$pri_arr);
+		//Cookie::set('condition',['price'=>array('between',"$p[0],$p[1]")]);
         $where['price'] = array('between',"$p[0],$p[1]");
         $data = $this->get_result($table,$where);
         return $data;
@@ -137,11 +140,17 @@ class detaillist extends Controller
         $chao = $_POST['chao'];
         $tese = $_POST['tese'];
         if(empty($tese)){
-            Cookie::set('condition',['chao'=>$_POST['chao']]);
+			$chao_arr = serialize(array('chao'=>$_POST['chao']));
+			setcookie('condition',$chao_arr);
+            //Cookie::set('condition',['chao'=>$_POST['chao']]);
         }else if(empty($chao)){
-            Cookie::set('condition',['tese'=>$_POST['tese']]);
+			$tese_arr = serialize(array('tese'=>$_POST['tese']));
+			setcookie('condition',$tese_arr);
+            //Cookie::set('condition',['tese'=>$_POST['tese']]);
         }else{
-            Cookie::set('condition',['tese'=>$_POST['tese'],'chao'=>$_POST['chao']]);
+			$ct_arr = serialize(array('tese'=>$_POST['tese'],'chao'=>$_POST['chao']));
+			setcookie('condition',$ct_arr);
+            //Cookie::set('condition',['tese'=>$_POST['tese'],'chao'=>$_POST['chao']]);
         }
         if(!empty($chao)){
             foreach($chao as $value){
@@ -187,7 +196,9 @@ class detaillist extends Controller
                 $where['house_type'] = array('=',$value);
             }
         }
-        Cookie::set('condition',['house_type'=>$h_tp]);
+		$house_arr = serialize($where);
+		setcookie('condition',$house_arr);
+        //Cookie::set('condition',['house_type'=>$h_tp]);
         $data = $this->get_result($table,$where);
         return $data;
     }
