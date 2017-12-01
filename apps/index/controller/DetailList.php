@@ -94,7 +94,6 @@ class detaillist extends Controller
             if($_POST['r'] != '') {
                 $where = $data->get_house_where($_POST['r'],$_POST['t']);
                 $where_new = array_merge($where,$ccc);
-				print_r($where_new);
                 $house_data = $this->get_result($table, $where_new, $_POST['a']);
             }else{
                 $house_data = $this->get_result($table, $ccc, $_POST['a']);
