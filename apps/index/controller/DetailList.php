@@ -138,19 +138,6 @@ class detaillist extends Controller
         }
         $chao = $_POST['chao'];
         $tese = $_POST['tese'];
-        if(empty($tese)){
-			$chao_arr = serialize(array('chao'=>$_POST['chao']));
-			setcookie('condition',$chao_arr);
-            //Cookie::set('condition',['chao'=>$_POST['chao']]);
-        }else if(empty($chao)){
-			$tese_arr = serialize(array('tese'=>$_POST['tese']));
-			setcookie('condition',$tese_arr);
-            //Cookie::set('condition',['tese'=>$_POST['tese']]);
-        }else{
-			$ct_arr = serialize(array('tese'=>$_POST['tese'],'chao'=>$_POST['chao']));
-			setcookie('condition',$ct_arr);
-            //Cookie::set('condition',['tese'=>$_POST['tese'],'chao'=>$_POST['chao']]);
-        }
         if(!empty($chao)){
             foreach($chao as $value){
                 $where['orientation'] = array('like','%'.$value.'%');
@@ -167,6 +154,8 @@ class detaillist extends Controller
                 }
             }
         }
+			$c_arr = serialize($where);
+			setcookie('condition',$c_arr);
         if(!empty($_POST['r'])){
             $whe = $model->get_house_where($_POST['r'],$_POST['t']);
             $new_where = array_merge($whe,$where);
