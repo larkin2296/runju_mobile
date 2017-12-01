@@ -60,6 +60,7 @@
 </html>
 <script type='text/javascript' src='__static__/js/jquery.min.js'></script>
 <script type='text/javascript' src='__static__/js/lunbo.js'></script>
+<script type="text/javascript" src="__static__/js/jquery.cookie.js"></script>
 <script>
 	$('#top_meau').click(function(){
 		$('#a').css('display','block');
@@ -70,6 +71,7 @@
 		$('#a').css('display','none');
 	}
 	$('#get_house').click(function(){
+        $.cookie('condition', '');
         $(location).prop('href','index.php/index/detail_list/index/a/1');
 	})
 	$('#ershou_list').click(function(){
