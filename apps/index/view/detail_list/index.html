@@ -207,7 +207,7 @@ $('.range-slider').jRange({
 		isRange: true
 	});
 	$('#index_sub').click(function(){
-        $.cookie('condition', '');
+        $.cookie('condition', '',-1);
         if($('#index_text').val() == ''){
             $(location).prop('href',"{:url('index')}?a="+$('.t').val());
 		}else{
@@ -351,7 +351,7 @@ $('#char_check').click(function(){
         );
     })
     $('#list_area_detail .area_detail_right').on('click','li',function(){
-        $.cookie('condition', '');
+        $.cookie('condition', '',-1);
             $(location).prop('href',"{:url('index')}?a="+$('.t').val()+"&res="+$(this).data('*'));
     })
     $('#list_area_detail .area_detail_left li').click(function(){

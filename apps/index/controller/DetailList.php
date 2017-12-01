@@ -77,7 +77,7 @@ class detaillist extends Controller
         $data = new BaseDataModel;
         $con = $_COOKIE['condition'];
 		$ccc = unserialize($con);
-        if($ccc == ''){
+        if($ccc == '' || empty($ccc) || !isset($ccc)){
             if($_POST['r'] == ''){
                 $house_data = $data->get_house($_POST['t'],'',$_POST['a']);
             }else{
