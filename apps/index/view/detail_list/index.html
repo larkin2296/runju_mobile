@@ -210,7 +210,8 @@ $('.range-slider').jRange({
 		isRange: true
 	});
 	$('#index_sub').click(function(){
-	    if($('#index_text').val() == ''){
+        $.cookie('condition', null);
+        if($('#index_text').val() == ''){
             $(location).prop('href',"{:url('index')}?a="+$('.t').val());
 		}else{
             $(location).prop('href',"{:url('index')}?a="+$('.t').val()+"&res="+$('#index_text').val());
@@ -353,6 +354,7 @@ $('#char_check').click(function(){
         );
     })
     $('#list_area_detail .area_detail_right').on('click','li',function(){
+        $.cookie('condition', null);
             $(location).prop('href',"{:url('index')}?a="+$('.t').val()+"&res="+$(this).data('*'));
     })
     $('#list_area_detail .area_detail_left li').click(function(){

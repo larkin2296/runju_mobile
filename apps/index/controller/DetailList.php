@@ -83,8 +83,6 @@ class detaillist extends Controller
                 $house_data = $data->get_house($_POST['t'],$_POST['r'],$_POST['a']);
             }
         }else{
-            $where = $data->get_house_where($_POST['r'],$_POST['t']);
-            $where_new = array_merge($where,$con);
             if ($_POST['t'] == '1') {
                 $table = 'house_rent_data';
             } else if ($_POST['t'] == '0') {
@@ -92,7 +90,13 @@ class detaillist extends Controller
             } else if ($_POST['t'] == '3') {
                 $table = 'house_sell_data';
             }
-            $house_data = $this->get_result($table,$where_new,$_POST['a']);
+            if($_POST['r'] != '') {
+                $where = $data->get_house_where($_POST['r'],$_POST['t']);
+                $where_new = array_merge($where,$con);
+                $house_data = $this->get_result($table, $where_new, $_POST['a']);
+            }else{
+                $house_data = $this->get_result($table, $con, $_POST['a']);
+            }
         }
         return $house_data;
     }
