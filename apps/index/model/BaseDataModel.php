@@ -60,12 +60,12 @@ class BaseDataModel extends Model
         if($response != ''){
             $result = DB::view($table,'*')
                 ->view('location_data',['location_name'],'location_data.l_id=house_rent_data.street')
-                ->where($where)
+                ->whereOr($where)
                 ->limit($a,5)
                 ->select();
         }else{
             $result = DB::name($table)
-                ->where($where)
+                ->whereOr($where)
                 ->limit($a,5)
                 ->select();
         }
@@ -194,7 +194,6 @@ class BaseDataModel extends Model
             if(!empty($key)){
                 $key_word = $key[0]['k_id'];
                 $where[] = ['exp',"FIND_IN_SET($key_word,key_word)"];
-                return $where;
             }
             $shop = DB::name('shopping_set')
                 ->where([
@@ -207,9 +206,10 @@ class BaseDataModel extends Model
                     ->where('s_p_id','=',$shop[0]['s_id'])
                     ->select();
                 foreach($get_shopping as $val){
-                    $where[] = ['exp',"FIND_IN_SET('{$val['s_name']}',shopping_nearby)"];
+                    $find_str[] = "(FIND_IN_SET('{$val['s_name']}',shopping_nearby))";
                 }
-                return $where;
+                $find = implode(' or ',$find_str);
+                $where[] = ['exp',$find];
             }
             $street = DB::name('location_data')
                 ->where([
@@ -219,7 +219,6 @@ class BaseDataModel extends Model
                 ->select();
             if(!empty($street)){
                     $where['house_rent_data.street'] = array('=',$street[0]['l_id']);
-                return $where;
             }
             $where['location_data.location_name|house_rent_data.address|house_rent_data.underground'] = array('like','%'.$response.'%');
         }else{
