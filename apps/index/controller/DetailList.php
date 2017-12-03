@@ -10,11 +10,35 @@ class detaillist extends Controller
 { 
 	public function index($a = '',$res = ''){
 		$data = new BaseDataModel;		
-		if($res == ''){
-		$house_data = $data->get_house($a,'');			
-		}else{
-		$house_data = $data->get_house($a,$res);
-		}
+//		if($res == ''){
+//		$house_data = $data->get_house($a,'');
+//		}else{
+//		$house_data = $data->get_house($a,$res);
+//		}
+        $con = $_COOKIE['condition'];
+        $ccc = unserialize($con);
+        if($ccc == '' || empty($ccc) || !isset($ccc)){
+            if($res == ''){
+                $house_data = $data->get_house($a,'');
+            }else{
+                $house_data = $data->get_house($a,$res);
+            }
+        }else{
+            if ($a == '1') {
+                $table = 'house_rent_data';
+            } else if ($a == '0') {
+                $table = 'house_rent_data';
+            } else if ($a == '3') {
+                $table = 'house_sell_data';
+            }
+            if($res != '') {
+                $where = $data->get_house_where($res,$a);
+                $where_new = array_merge($where,$ccc);
+                $house_data = $this->get_result($table, $where_new, $a);
+            }else{
+                $house_data = $this->get_result($table, $ccc, $a);
+            }
+        }
 		$location = $data->get_location_data();
 		$line = $data->get_line_data();
 		$house_type = $data->house_type_data();
@@ -70,6 +94,15 @@ class detaillist extends Controller
             $data[$key]['keyword'] = explode(',',$val['key_word']);
             $key_list = $model->get_key_data($val['key_word']);
             $data[$key]['key_word_list'] = $key_list;
+            if($val['house_status'] == 2){
+                $data[$key]['house_status_name'] = '配置中';
+            }else if($val['house_status'] == 1){
+                $data[$key]['house_status_name'] = '已出售';
+            }else if($val['house_status'] == 3){
+                $data[$key]['house_status_name'] = '未出租';
+            }else{
+                $data[$key]['house_status_name'] = '未出售';
+            }
         }
         return $data;
     }

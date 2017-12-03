@@ -8,7 +8,6 @@ use think\Db;
 class index extends Controller
 { 
 	public function index(){
-	    Cookie::delete('condition');
         return $this->fetch();		
 	}
 	public function left(){

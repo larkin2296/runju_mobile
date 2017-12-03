@@ -1,11 +1,4 @@
-﻿@font-face {
-	font-family: PingFangSC-Light;
-	src: url('font/PingFang Light.ttf');
-}
-@font-face {
-	font-family:  PingFangSC-Regular;
-	src: url('font/PingFang-SC-Regular.otf');
-}
+﻿
 input[type="button"], input[type="submit"], input[type="reset"] {
 	-webkit-appearance: none;
 }
