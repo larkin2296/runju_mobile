@@ -9,12 +9,7 @@ use app\index\model\BaseDataModel;
 class detaillist extends Controller
 { 
 	public function index($a = '',$res = ''){
-		$data = new BaseDataModel;		
-//		if($res == ''){
-//		$house_data = $data->get_house($a,'');
-//		}else{
-//		$house_data = $data->get_house($a,$res);
-//		}
+		$data = new BaseDataModel;
         $con = $_COOKIE['condition'];
         $ccc = unserialize($con);
         if($ccc == '' || empty($ccc) || !isset($ccc)){
@@ -33,10 +28,9 @@ class detaillist extends Controller
             }
             if($res != '') {
                 $where = $data->get_house_where($res,$a);
-                $where_new = array_merge($where,$ccc);
-                $house_data = $this->get_result($table, $where_new, $a);
+                $house_data = $this->get_result($table, $ccc,$where,0);
             }else{
-                $house_data = $this->get_result($table, $ccc, $a);
+                $house_data = $this->get_result($table,$ccc,'',0);
             }
         }
 		$location = $data->get_location_data();
@@ -74,13 +68,23 @@ class detaillist extends Controller
 		$house = $data->get_house($type,$id);
 		return $house;			
 	}
-    public function get_result($table,$where,$a = 0){
+    public function get_result($table,$ccc,$where = '',$a = 0){
         $model = new BaseDataModel;
-        $data = DB::view($table,'*')
-            ->view('location_data',['location_name'],'location_data.l_id=house_rent_data.street')
-            ->where($where)
-            ->limit($a,5)
-            ->select();
+        if($where == ''){
+            $data = DB::view($table,'*')
+                ->view('location_data',['location_name'],'location_data.l_id=house_rent_data.street')
+                ->where($where)
+                ->limit($a,5)
+                ->select();
+        }else{
+            $data = DB::view($table,'*')
+                ->view('location_data',['location_name'],'location_data.l_id=house_rent_data.street')
+                ->whereOr($where)
+                ->where($ccc)
+                ->limit($a,5)
+                ->select();
+        }
+
 
         if(empty($data)){
             return false;
