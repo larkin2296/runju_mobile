@@ -62,11 +62,13 @@ class BaseDataModel extends Model
                 ->view('location_data',['location_name'],'location_data.l_id=house_rent_data.street')
                 ->whereOr($where)
                 ->limit($a,5)
+                ->order('price asc')
                 ->select();
         }else{
             $result = DB::name($table)
                 ->whereOr($where)
                 ->limit($a,5)
+                ->order('price asc')
                 ->select();
         }
         if(empty($result)){

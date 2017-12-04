@@ -75,6 +75,7 @@ class detaillist extends Controller
                 ->view('location_data',['location_name'],'location_data.l_id=house_rent_data.street')
                 ->where($where)
                 ->limit($a,5)
+                ->order('price asc')
                 ->select();
         }else{
             $data = DB::view($table,'*')
@@ -82,6 +83,7 @@ class detaillist extends Controller
                 ->whereOr($where)
                 ->where($ccc)
                 ->limit($a,5)
+                ->order('price asc')
                 ->select();
         }
 
