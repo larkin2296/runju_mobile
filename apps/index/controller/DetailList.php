@@ -70,7 +70,7 @@ class detaillist extends Controller
 	}
     public function get_result($table,$ccc,$where = '',$a = 0){
         $model = new BaseDataModel;
-        if($where == ''){
+        if($ccc == ''){
             $data = DB::view($table,'*')
                 ->view('location_data',['location_name'],'location_data.l_id=house_rent_data.street')
                 ->where($where)
@@ -132,10 +132,9 @@ class detaillist extends Controller
             }
             if($_POST['r'] != '') {
                 $where = $data->get_house_where($_POST['r'],$_POST['t']);
-                $where_new = array_merge($where,$ccc);
-                $house_data = $this->get_result($table, $where_new, $_POST['a']);
+                $house_data = $this->get_result($table, $ccc,$where, $_POST['a']);
             }else{
-                $house_data = $this->get_result($table, $ccc, $_POST['a']);
+                $house_data = $this->get_result($table, $ccc, '',$_POST['a']);
             }
         }
         return $house_data;
