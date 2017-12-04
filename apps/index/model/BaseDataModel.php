@@ -208,8 +208,10 @@ class BaseDataModel extends Model
                 foreach($get_shopping as $val){
                     $find_str[] = "(FIND_IN_SET('{$val['s_name']}',shopping_nearby))";
                 }
-                $find = implode(' or ',$find_str);
-                $where[] = ['exp',$find];
+                if(!empty($find_str)){
+                    $find = implode(' or ',$find_str);
+                    $where[] = ['exp',$find];
+                }
             }
             $street = DB::name('location_data')
                 ->where([
