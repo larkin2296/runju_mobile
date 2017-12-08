@@ -23,4 +23,7 @@ class tuoguan extends Controller
 		$res = $data->save_trust_msg($_POST,1);
 		return $res;
 	}
+	public function show(){
+        return $this->fetch();
+    }
 }
