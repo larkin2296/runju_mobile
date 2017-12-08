@@ -62,14 +62,7 @@
 <script type='text/javascript' src='__static__/js/lunbo.js'></script>
 <script type="text/javascript" src="__static__/js/jquery.cookie.js"></script>
 <script>
-	$('#top_meau').click(function(){
-		$('#a').css('display','block');
-		$('#index_left').animate({"left":"0%"},500);
-	})
-	function meau_back(){
-		$('#index_left').animate({"left":"-70%"},500);
-		$('#a').css('display','none');
-	}
+
 	$('#get_house').click(function(){
         $.cookie('condition', '',-1);
         $(location).prop('href','index.php/index/detail_list/index/a/1');
@@ -78,7 +71,7 @@
 		$(location).prop('href','index.php/index/detail_list/index/a/3');
 	})
 	$('#tuoguan_house').click(function(){
-		$(location).prop('href','index.php/index/tuo_guan/');
+		$(location).prop('href','index.php/index/tuo_guan/show');
 	})
 	$('#map_list').click(function(){
 		$(location).prop('href','index.php/index/map/');

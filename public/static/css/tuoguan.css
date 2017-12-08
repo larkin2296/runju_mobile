@@ -1,9 +1,26 @@
+@font-face {
+	font-family: PingFangSC-Light;
+	src: url('font/PingFang Light.ttf');
+}
+@font-face {
+	font-family:  PingFangSC-Regular;
+	src: url('font/PingFang-SC-Regular.otf');
+}
 body{
 	width:100%;
 	height:100%;
 	margin:0;
 	padding:0;
 	font-size:35px;
+}
+p{
+	display: block;
+	-webkit-margin-before: 0em;
+	-webkit-margin-after: 0em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+	margin-top:10px;
+	margin-bottom: 10px;
 }
 /*div{
 	border:1px solid black;
@@ -178,4 +195,92 @@ margin-top:10%;
 	background-color:orange;
 	color: white;
 	font-size:35px;
+}
+#index_left{
+	width:70%;
+	height:100%;
+	background-color: white;
+	position: absolute;
+	left:-70%;
+	top:0%;
+	z-index: 200;
+}
+#left_top{
+	height:32px;
+	padding-top: 50px;
+	padding-bottom: 10%;
+}
+#left_top input{
+	width:15%;
+	padding-left:25%;
+	vertical-align:middle;
+}
+#left_top img{
+	margin-left: 5%;
+	padding-right: 5%;
+	width:20%;
+	vertical-align:middle;
+}
+#left_top span{
+	color: orange;
+	font-size: 20px;
+	vertical-align:middle;
+}
+#left_main{
+	width:80%;
+	height:512px;
+}
+#left_main ul{
+	width:100%;
+	height:512px;
+}
+#left_main li{
+	color: orange;
+	font-size: 17px;
+	list-style: none;
+	line-height:300%;
+}
+.main_top_pic{
+	width:100%;
+	height:22%;
+	background:url('../img/tuoguan.png') no-repeat;
+	background-size: contain;
+}
+.main_content_list{
+	width:95%;
+	height:16.5%;
+	margin-top:1.5%;
+	font-size:33%;
+	text-align: left;
+	color:darkgrey;
+	background: white;
+	padding-left:5%;
+	font-family: PingFangSC-Light;
+	line-height: 190%;
+}
+.main_content_list p{
+	text-align: left;
+	font-size:120%;
+	color:#000000;
+	font-family: PingFangSC-Regular;
+}
+.main_click{
+	width:100%;
+	height:16%;
+	margin-top:2%;
+	background: white;
+}
+.main_click img{
+	width: 90%;
+	margin-left: 5%;
+}
+.main_click .click_button{
+	width: 31%;
+	height: 32%;
+	border: none;
+	background: orange;
+	color: white;
+	margin-left: 34%;
+	margin-top: 2%;
+	border-radius: 14px;
 }

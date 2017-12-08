@@ -1,0 +1,50 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link type="text/css" href='__static__/css/index.css' rel="stylesheet"></link>
+    <link type="text/css" href='__static__/css/tuoguan.css' rel="stylesheet"></link>
+</head>
+<body>
+<div id='a'></div>
+<div id='mob_index'>
+    {include file='index/top' }
+    <div id='main_index' style="background-color: #EBEBEB;">
+            <div class="main_top_pic"></div>
+            <div class="main_content_list">
+                <p>免费装修 全程无忧</p>
+                与房东签订固定期限的代理合同，合同期限内租 金固定，<br/>
+                对房屋进行免费装修，租约结束后家电 家具全部归房东所有。<br/>
+                合同期限内房屋安全维修
+            </div>
+            <div class="main_content_list">
+                <p>繁琐归我 方便与您</p>
+                房东与租客签订合同后，关于房屋维修，结账等 <br/>
+                繁琐事宜委托我方代理，免去房东后顾之忧!
+            </div>
+            <div class="main_content_list">
+                <p>租赁代理托管</p>
+                与房东签订固定租期的代理合同，“我们”拥有 独家代理经营权，<br/>
+                提供专业托管服务，保证房屋 的最佳状态，获得最大房屋收益！
+            </div>
+            <div class="main_click">
+                <img src="__static__/img/show_1.png" />
+                <input type="button" value="一键托管房屋" class="click_button"/>
+            </div>
+    </div>
+
+</div>
+{include file='index/left' }
+{include file='index/bottom' }
+</body>
+</html>
+<script type='text/javascript' src='__static__/js/jquery.min.js'></script>
+<script type="text/javascript" src="__static__/js/jquery.cookie.js"></script>
+<script>
+    $('.click_button').click(function(){
+        $(location).prop('href','__back__/index.php/index/tuo_guan/');
+    })
+</script>
