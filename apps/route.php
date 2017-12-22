@@ -11,5 +11,5 @@
 
 return [
 
-	'houtai' => "index/backstage/index",
+	'houtai' => "index/backstage/login",
 ];

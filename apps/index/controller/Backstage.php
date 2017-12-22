@@ -9,11 +9,17 @@ use app\index\model\BackstageModel;
 class backstage extends Controller
 { 
 	public function index(){
-        return $this->fetch();		
+        return $this->fetch('index');
 	}
-
+    public function personal(){
+        return view('personal');
+    }
+    public function login(){
+        return $this->fetch();
+    }
 	public function house_list(){
 		$list = DB::name('house_rent_data')
+                    ->order('update_time desc')
 					->paginate(10);
 		$page = $list->render();
         $this->assign('page', $page);
@@ -143,6 +149,11 @@ class backstage extends Controller
 		return $this->fetch();
 	}
 	public function add_facilities(){
+	    if($_COOKIE['usr_level'] != 0 || !isset($_COOKIE['usr_level'])){
+            $this->assign('power',0);
+        }else{
+            $this->assign('power',1);
+        }
 	    $arr = DB::name('furniture_data')->select();
 	    //print_r($arr);
         $this->assign('facil',$arr);
@@ -154,6 +165,11 @@ class backstage extends Controller
 	    return 1;
     }
     public function add_key(){
+        if($_COOKIE['usr_level'] != 0 || !isset($_COOKIE['usr_level'])){
+            $this->assign('power',0);
+        }else{
+            $this->assign('power',1);
+        }
         $arr = DB::name('key_word')->select();
         //print_r($arr);
         $this->assign('facil',$arr);
@@ -175,6 +191,11 @@ class backstage extends Controller
         return 1;
     }
     public function add_house_type(){
+        if($_COOKIE['usr_level'] != 0 || !isset($_COOKIE['usr_level'])){
+            $this->assign('power',0);
+        }else{
+            $this->assign('power',1);
+        }
         $arr = DB::name('house_type_data')->select();
 
         $this->assign('type',$arr);
@@ -209,5 +230,27 @@ class backstage extends Controller
             $res = DB::query("insert into shopping_set(`s_p_id`,`s_name`) values($shop_id,'$name')");
         }
         return $res;
+    }
+    public function check_house_only(){
+        $village= $_POST['village'];
+        $unit = $_POST['unit'];
+        $doorplate = $_POST['doorplate'];
+        $res = DB::query("select count(*) as t from house_rent_data where CONCAT(address,unit,doorplate)='$village$unit$doorplate'");
+        return $res[0]['t'];
+    }
+    public function login_in(){
+        $name = $_POST['name'];
+        $psd = $_POST['psd'];
+        $arr = DB::name('manage_user')
+                ->where('m_name','=',$name)
+                ->where('m_psd','=',$psd)
+                ->select();
+        if(empty($arr)){
+            return -1;
+        }else{
+            setcookie('usr_level',$arr[0]['m_p_level']);
+            setcookie('usr',$arr[0]['m_name']);
+            return 1;
+        }
     }
 }

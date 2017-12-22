@@ -1,13 +1,31 @@
-{include file='backstage/index'}
-<html class="no-js">
+
+<html>
 <head>
-	<link rel="stylesheet" href="../../../public/static/css/animate.min.css " type="text/css">
+    <link rel="stylesheet" href="__static__/css/backstage/amazeui.min.css"/>
+    <link rel="stylesheet" href="__static__/css/backstage/admin.css">
+    <script src="__static__/js/backstage/jquery.min.js"></script>
+    <link rel="stylesheet" href="__static__/css/animate.min.css " type="text/css">
 </head>
-<body>
 
 </head>
 
 <body>
+<div class=" admin-content">
+
+    <div class="daohang">
+        <ul>
+            <li><button type="button" class="am-btn am-btn-default am-radius am-btn-xs"> 首页 </li>
+            <li><button type="button" class="am-btn am-btn-default am-radius am-btn-xs">帮助中心<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close="">×</a></button></li>
+            <li><button type="button" class="am-btn am-btn-default am-radius am-btn-xs">奖金管理<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close="">×</a></button></li>
+            <li><button type="button" class="am-btn am-btn-default am-radius am-btn-xs">产品管理<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close="">×</a></button></li>
+
+
+        </ul>
+
+
+
+
+    </div>
 <div class="admin-biaogelist">
 	
     <div class="listbiaoti am-cf">
@@ -82,7 +100,7 @@
                 <td>{$list.id}</td>
                 <td><a href="house_detail.html?id={$list.id}">{$list.title}</a></td>
                 <td>{$list.rent_type}</td>
-                <td class="am-hide-sm-only">2014年9月4日 7:28:47</td>
+                <td class="am-hide-sm-only">{$list.update_time}</td>
                 <td><div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs">
                       <div class="am-btn am-btn-default am-btn-xs am-text-success am-round" onclick="go_detail({$list.id})"><span class="am-icon-search"></span> </div>

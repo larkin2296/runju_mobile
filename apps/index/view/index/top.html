@@ -6,3 +6,14 @@
         <a href='__back__'><img src='__static__/img/logo.png' /></a>
     </div>
 </div>
+<script type='text/javascript' src='__static__/js/jquery.min.js'></script>
+<script>
+    $('#top_meau').click(function(){
+        $('#a').css('display','block');
+        $('#index_left').animate({"left":"0%"},500);
+    })
+    function meau_back(){
+        $('#index_left').animate({"left":"-70%"},500);
+        $('#a').css('display','none');
+    }
+</script>

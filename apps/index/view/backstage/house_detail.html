@@ -1,7 +1,9 @@
 
-{include file='backstage/index'}
 <head>
 <link rel="stylesheet" href="../../../public/static/css/zyupload-1.0.0.min.css " type="text/css">
+    <link rel="stylesheet" href="__static__/css/backstage/amazeui.min.css"/>
+    <link rel="stylesheet" href="__static__/css/backstage/admin.css">
+    <script src="__static__/js/backstage/jquery.min.js"></script>
     <style>
         #zyupload{
             display: none;
@@ -130,7 +132,8 @@
                 {/foreach}
           	</select>
           	<input type='text' class='am-input-sm' name='village' style='width:10%;float:left;margin-right: 1%;' id='village' value='{$data.address}' />
-          	<input type='text' class='am-input-sm' name='addr' style='width:30%;float:left;' id='addr' value='{$data.addr}' />
+              <input type='text' class='am-input-sm' name='unit' style='width:12%;float:left;margin-right: 1%;' id='unit' value='{$data.unit}' />
+              <input type='text' class='am-input-sm' name='doorplate' style='width:12%;float:left;' id='doorplate' value='{$data.doorplate}' />
           </div>
         </div>
         
@@ -237,7 +240,7 @@
         
         <div class="am-form-group am-cf show">
           <div class="zuo">产品图片：</div>
-          <div class="you" style="height: 50%;">
+          <div class="you" style="height: 69%;">
           	<div id="show_pic" style='float:left;' class="zyupload">
                 {foreach name='pic' id='pic'}
                 <img src="__pic__/uploads/{$pic}" style="width:340px;height:226px;margin-bottom:5%;"/>

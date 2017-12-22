@@ -1,7 +1,9 @@
 
-{include file='backstage/index'}
 <head>
     <link rel="stylesheet" href="../../../public/static/css/zyupload-1.0.0.min.css " type="text/css">
+    <link rel="stylesheet" href="__static__/css/backstage/amazeui.min.css"/>
+    <link rel="stylesheet" href="__static__/css/backstage/admin.css">
+    <script src="__static__/js/backstage/jquery.min.js"></script>
 </head>
 <body>
 <div class=" admin-content">
@@ -42,7 +44,7 @@
                 </tr>
                 {foreach name='facil' id='f'}
                 <tr>
-                    <td style="color:blue">{$f['furniture_name']}<span style='padding-left:50px;color:red;cursor: pointer' onclick='del_delete({$f["t_id"]})'>删除</span></td>
+                    <td style="color:blue">{$f['furniture_name']}{if condition='$power eq 1'}<span style='padding-left:50px;color:red;cursor: pointer' onclick='del_delete({$f["t_id"]})'>删除</span>{/if}</td>
                 </tr>
                 {/foreach}
         </table>

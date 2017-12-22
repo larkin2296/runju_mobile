@@ -2,7 +2,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
-		<link type="text/css" href='../../../public/static/css/map.css' rel="stylesheet"></link>
+		<link type="text/css" href='__static__/css/map.css' rel="stylesheet"></link>
 		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=cPMTIrV5Q6gkmpt0ZYsuGhCvHdn2vNFv"></script>
 		<title></title>
 	</head>
@@ -11,9 +11,9 @@
 			{include file='index/top' }
 		</div>
 		<div id='search'>
-		<input type='text'  id='index_text' placeholder="输入地铁,商圈,小区名字等..."/><input type='image' src='../../../public/static/img/magnifying42.png' id='index_sub' />						
+		<input type='text'  id='index_text' placeholder="输入地铁,商圈,小区名字等..."/><input type='image' src='__static__/img/magnifying42.png' id='index_sub' />
 		</div>
-		<div class='title'>今日推荐<img src='../../../public/static/img/f102.png' /></div>
+		<div class='title'>今日推荐<img src='__static__/img/f102.png' /></div>
 		<div class='tuijian'>			
 			<div id='main_list'>
 					<ul>
@@ -21,7 +21,7 @@
 						<li>
 							<div class='list_detail'  onclick='gotodetail({$house_list.id})'>
 								<div class='list_detail_left'>
-									<img src='../../../public/uploads/{$house_list.pic_1}'  />
+									<img src='__pic__/uploads/{$house_list.pic_1}'  />
 								</div>
 								<div class='list_detail_right'>
 									<div class='list_detail_title' >
@@ -29,7 +29,7 @@
 									</div>
 									<div class='list_detail_content'>
 										{$house_list.acreage}m<sup>2</sup>&nbsp;&nbsp;|&nbsp;&nbsp;{$house_list.house_floor}层<span style='margin-left:13%;color:orange;'><span style='font-size:150%;'>￥{$house_list.price}</span>元/月</span><br />
-										<img src='../../../../../public/static/img/p_1.png' style='width:8%;	vertical-align:middle;'/>{$house_list.remark|truncate_cn=30,'...',0}<br  />
+										<img src='__static__/img/p_1.png' style='width:8%;	vertical-align:middle;'/>{$house_list.remark|truncate_cn=30,'...',0}<br  />
 										<?php 
 										foreach($house_list['keyword'] as $val){ ?>
 											<div class='key_word'><?php echo $val;?></div>
@@ -50,7 +50,7 @@
 		{include file='index/bottom' }
 	</body>
 </html>
-<script src='../../../public/static/js/jquery.min.js'></script>
+<script src='__static__/js/jquery.min.js'></script>
 <script type='text/javascript'>
 	
 // 百度地图API功能
@@ -70,7 +70,7 @@
 		map.clearOverlays(); 
 		$.ajax({  
                 type: "POST",  
-                url:"../../../index.php/index/map/get_data",
+                url:"__back__/index.php/index/map/get_data",
                 data:{'response':$('#index_text').val()},
                 dataType: "json", 
                 success: function(data) {
@@ -80,13 +80,13 @@
 						map.addOverlay(marker);              // 将标注添加到地图中
 						map.panTo(new_point);
 						var opts = {
-								  width : 200,     // 信息窗口宽度
-								  height: 100,     // 信息窗口高度
-								  title : value.title, // 信息窗口标题
+								  width : 100,     // 信息窗口宽度
+								  height: 30,     // 信息窗口高度
+//								  title : value.title, // 信息窗口标题
 								  enableMessage:true,//设置允许信息窗发送短息
 								  message:""
 								}
-								var infoWindow = new BMap.InfoWindow("<a href='../../index/detail/index/id/"+value.id+"'>"+value.addr+"</a>", opts);
+								var infoWindow = new BMap.InfoWindow("<a href='../../index/detail/index/id/"+value.id+"' style='text-underline:none;color:orange;'>"+value.address+value.addr+"</a>", opts);
 									marker.addEventListener("click", function(){          
 								map.openInfoWindow(infoWindow,new_point); //开启信息窗口
 						});
@@ -119,6 +119,6 @@
 			$('.title').removeClass('title');
 		})
 	function gotodetail(id){
-		window.location.href="../../index/detail/index/id/"+id;	
+		window.location.href="__back__/index.php/index/detail/index/id/"+id;
 	}
 </script>

@@ -157,7 +157,12 @@ class detaillist extends Controller
         if(!empty($_POST['r'])){
             $where = $model->get_house_where($_POST['r'],$_POST['t']);
         }
-		$pri_arr = serialize(array('price'=>array('between',"$p[0],$p[1]")));
+        if($p[0] == '10000'){
+            $pri_arr = serialize(array('price'=>array('>',"$p[0]")));
+        }else{
+            $pri_arr = serialize(array('price'=>array('between',"$p[0],$p[1]")));
+        }
+
 		setcookie('condition',$pri_arr);
 		//Cookie::set('condition',['price'=>array('between',"$p[0],$p[1]")]);
         $where['price'] = array('between',"$p[0],$p[1]");

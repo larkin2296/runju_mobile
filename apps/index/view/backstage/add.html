@@ -1,7 +1,8 @@
-
-{include file='backstage/index'}
 <head>
-<link rel="stylesheet" href="../../../public/static/css/zyupload-1.0.0.min.css " type="text/css">
+<link rel="stylesheet" href="__static__/css/zyupload-1.0.0.min.css " type="text/css">
+    <link rel="stylesheet" href="__static__/css/backstage/amazeui.min.css"/>
+    <link rel="stylesheet" href="__static__/css/backstage/admin.css">
+    <script src="__static__/js/backstage/jquery.min.js"></script>
 </head>
 <body>
 
@@ -44,7 +45,7 @@
         <div class="am-form-group am-cf">
           <div class="zuo">标题：</div>
           <div class="you">
-            <input type="text" class="am-input-sm" name='house_title' id="house_title" placeholder="请输入标题">
+            <input type="text" class="am-input-sm mustadd" name='house_title' id="house_title" placeholder="请输入标题">
           </div>
         </div>
         <div class="am-form-group am-cf">
@@ -95,22 +96,22 @@
           </div>
           <div class="zuo" >租房近况：</div>
           <div class="you" style='width:10%'>
-          	<input type='text' name='house_state_remark' class='am-input-sm'  id='house_state_remark' placeholder="请输入最近房屋动向" />
+          	<input type='text' name='house_state_remark' class='am-input-sm mustadd'  id='house_state_remark' placeholder="请输入最近房屋动向" />
           </div>
         </div>
         
         <div class="am-form-group am-cf">
           <div class="zuo">价格：</div>
           <div class="you" style='width:10%'>
-          	<input type='text' name='price' class='am-input-sm'  id='price' placeholder="请输入价格" />
+          	<input type='text' name='price' class='am-input-sm mustadd'  id='price' placeholder="请输入价格" />
           </div>
           <div class="zuo" >折扣：</div>
           <div class="you" style='width:5%'>
-          	<input type='text' name='discount' class='am-input-sm'  id='discount' value='1' />
+          	<input type='text' name='discount' class='am-input-sm mustadd'  id='discount' value='1' />
           </div>
           <div class="zuo" >付款类型：</div>
           <div class="you" style='width:10%'>
-          	<input type='text' name='pay_type' class='am-input-sm'  id='pay_type' placeholder="请输入付款类型" />
+          	<input type='text' name='pay_type' class='am-input-sm mustadd'  id='pay_type' placeholder="请输入付款类型" />
           </div>
         </div>
         
@@ -122,11 +123,13 @@
           		<option value='{$loc.l_id}'>{$loc.location_name}</option>
           		{/foreach}
           	</select>
-          	<select class='am-input-sm' name='street' style='width:15%;float:left;margin-left:1%;margin-right: 1%;' id='street' >
+          	<select class='am-input-sm mustadd' name='street' style='width:15%;float:left;margin-left:1%;margin-right: 1%;' id='street' >
           		<option value=''>不限</option>
           	</select>
-          	<input type='text' class='am-input-sm' name='village' style='width:10%;float:left;margin-right: 1%;' id='village' placeholder="小区名字" />
-          	<input type='text' class='am-input-sm' name='addr' style='width:30%;float:left;' id='addr' placeholder="输入详细地址" />
+          	<input type='text' class='am-input-sm mustadd' name='village' style='width:10%;float:left;margin-right: 1%;' id='village' placeholder="小区名字" />
+          	<input type='text' class='am-input-sm mustadd' name='unit' style='width:12%;float:left;margin-right: 1%;' id='unit' placeholder="输入单元号" />
+            <input type='text' class='am-input-sm mustadd' name='doorplate' style='width:12%;float:left;margin-right: 1%;' id='doorplate' placeholder="输入门牌号" />
+              <input type="button" class='am-btn am-btn-success am-check' value="check"/>
           </div>
         </div>
         
@@ -158,18 +161,18 @@
         <div class="am-form-group am-cf">
           <div class="zuo">面积：</div>
           <div class="you" style='width:10%'>
-          <input type='text' class='am-input-sm' name='acreage'  id='acreage' placeholder="请输入面积" />
+          <input type='text' class='am-input-sm mustadd' name='acreage'  id='acreage' placeholder="请输入面积" />
           </div>
           <div class="zuo">朝向：</div>
           <div class="you" style='width:10%'>
-          <input type='text' class='am-input-sm' name='orientation'  id='orientation' placeholder="请输入朝向" />
+          <input type='text' class='am-input-sm mustadd' name='orientation'  id='orientation' placeholder="请输入朝向" />
           </div>
         </div>
         
         <div class="am-form-group am-cf">
           <div class="zuo">层高：</div>
           <div class="you">
-          <input type='text' class='am-input-sm' name='floor' style='width:10%' id='floor' placeholder="请输入层高" />
+          <input type='text' class='am-input-sm mustadd' name='floor' style='width:10%' id='floor' placeholder="请输入层高" />
           </div>
         </div>
         
@@ -189,36 +192,36 @@
         <div class="am-form-group am-cf">
           <div class="zuo">经度：</div>
           <div class="you">
-          <input type='text' name='longitude' class='am-input-sm' style='width:10%' id='longitude' placeholder="输入经度" />
+          <input type='text' name='longitude' class='am-input-sm mustadd' style='width:10%' id='longitude' placeholder="输入经度" />
           </div>
         </div>
         
         <div class="am-form-group am-cf">
           <div class="zuo">纬度：</div>
           <div class="you">
-          <input type='text' name='latitude' class='am-input-sm' style='width:10%' id='latitude' placeholder="输入纬度" />
+          <input type='text' name='latitude' class='am-input-sm mustadd' style='width:10%' id='latitude' placeholder="输入纬度" />
           </div>
         </div>
         
         <div class="am-form-group am-cf">
           <div class="zuo">附近购物：</div>
           <div class="you" style='width:15%'>
-          <input type='text' name='shopping_nearby' class='am-input-sm' id='shopping_nearby' placeholder="输入购物商城名" />
+          <input type='text' name='shopping_nearby' class='am-input-sm mustadd' id='shopping_nearby' placeholder="输入购物商城名" />
           </div>
           <div class="zuo">附近休闲：</div>
           <div class="you" style='width:15%'>
-          <input type='text' name='rest_nearby' class='am-input-sm' id='rest_nearby' placeholder="输入休闲场所名" />
+          <input type='text' name='rest_nearby' class='am-input-sm mustadd' id='rest_nearby' placeholder="输入休闲场所名" />
           </div>
           <div class="zuo">附近医院：</div>
           <div class="you" style='width:15%'>
-          <input type='text' name='hospital_nearby' class='am-input-sm' id='hospital_nearby' placeholder="输入医院名" />
+          <input type='text' name='hospital_nearby' class='am-input-sm mustadd' id='hospital_nearby' placeholder="输入医院名" />
           </div>
         </div>
         
         <div class="am-form-group am-cf">
           <div class="zuo">附近交通：</div>
           <div class="you" style='width:15%'>
-          <input type='text' name='translate_nearby' class='am-input-sm' id='translate_nearby' placeholder="输入附近地铁或车站名" />
+          <input type='text' name='translate_nearby' class='am-input-sm mustadd' id='translate_nearby' placeholder="输入附近地铁或车站名" />
           </div>
         </div>
         
@@ -238,15 +241,15 @@
         </div>
         
         <div class="am-form-group am-cf">
-        <div class="zuo">房东：</div>
+        <div class="zuo">联系人：</div>
         <div class="you" style="margin-top: 5px;">
-     		<input type='text' name='landlord' class='am-input-sm' style='width:15%' id='landlord' placeholder="输入房东姓名" />
-            <input type='text' name='landlord_tel' class='am-input-sm' style='width:15%' id='landlord_tel' placeholder="输入房东电话" />
+     		<input type='text' name='landlord' class='am-input-sm mustadd' style='width:15%' id='landlord' placeholder="输入联系人姓名" value="值班人员"/>
+            <input type='text' name='landlord_tel' class='am-input-sm mustadd' style='width:15%' id='landlord_tel' placeholder="输入联系人电话" value="4008213449"/>
         </div>
         </div>
         <div class="am-form-group am-cf">
           <div class="you" style="margin-left: 11%;">
-              <button type='submit' id='house_sub' class="am-btn am-btn-success am-radius">发布房屋信息</button>
+              <button type='submit' id='house_sub' class="am-btn am-btn-success am-radius" disabled="disabled">发布房屋信息</button>
           </div>
         </div>
       </form>
@@ -348,4 +351,29 @@
 //              }  
 //         }); 
 //	})
+    $('.am-check').click(function(){
+        if($('#village').val() == '' || $('#unit').val() == '' || $('#doorplate').val() == ''){
+            alert('填写完整');
+        }
+        $.ajax({
+            type: "POST",
+            url:"../../../index.php/index/backstage/check_house_only",
+            data:{'village':$('#village').val(),'unit':$('#unit').val(),'doorplate':$('#doorplate').val()},
+            dataType: "json",
+            success: function(data) {
+                if(data == 0){
+                    $('.am-check').css('background-color','#4aaa4a');
+                    $('.am-check').val('正确');
+                    $("#house_sub").removeAttr("disabled")
+                }else{
+                    $('.am-check').css('background-color','red');
+                    $('.am-check').val('存在，请重试');
+                    $("#house_sub").attr({"disabled":"disabled"});
+                }
+            },
+            error:function(data){
+                alert(data);
+            }
+        });
+    })
 </script>
