@@ -354,6 +354,7 @@
     $('.am-check').click(function(){
         if($('#village').val() == '' || $('#unit').val() == '' || $('#doorplate').val() == ''){
             alert('填写完整');
+            return;
         }
         $.ajax({
             type: "POST",
