@@ -94,12 +94,12 @@
               </tr>
             </thead>
             <tbody>
-            	{foreach name='lists' id='list'}
+            	{volist name='lists' id='list'}
               <tr>
 <!--                <td><input type="checkbox" /></td>-->
                 <td>{$list.id}</td>
                 <td><a href="house_detail.html?id={$list.id}">{$list.title}</a></td>
-                <td>{$list.rent_type}</td>
+                <td>{$list.rent_type_name}</td>
                 <td class="am-hide-sm-only">{$list.update_time}</td>
                 <td><div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs">
@@ -109,7 +109,7 @@
                     </div>
                   </div></td>
               </tr>
-              {/foreach}
+              {/volist}
               
             </tbody>
             {$page}

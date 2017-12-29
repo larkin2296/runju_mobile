@@ -20,7 +20,17 @@ class backstage extends Controller
 	public function house_list(){
 		$list = DB::name('house_rent_data')
                     ->order('update_time desc')
-					->paginate(10);
+					->paginate(10)
+                    ->each(function($item,$key){
+                        if($item['rent_type'] == 1){
+                            $item['rent_type_name'] = '长租';
+                        }else if($item['rent_type'] == 0){
+                            $item['rent_type_name'] = '短租';
+                        }else if($item['rent_type'] == 3){
+                            $item['rent_type_name'] = '二手房';
+                        }
+                        return $item;
+                    });
 		$page = $list->render();
         $this->assign('page', $page);
       	$this->assign('lists', $list);
