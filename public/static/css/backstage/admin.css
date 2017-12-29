@@ -110,7 +110,7 @@ gallery.html css
 .admin-biaoge .xinxitj{font-size: 16px;line-height: 35px;border-bottom: solid 1px #c9cdd7;margin-bottom: 10px}
 .admin-biaoge .am-table>thead>tr>th{text-align: center}
 .admin-biaoge .am-table{background-color: #FFF;padding: 3px;border-radius: 3px;text-align: center}
-.admin-biaogelist{background-color: #f1f2f7;position:fixed;right:0;bottom:0;top:4%;left:0px; overflow-y:auto; overflow-x: hidden; }
+.admin-biaogelist{background-color: #f1f2f7;position:fixed;right:0;bottom:0;top:8%;left:0px; overflow-y:auto; overflow-x: hidden; }
 
 
 
@@ -219,7 +219,7 @@ gallery.html css
 .am-kg .am-form-field:focus{ border: solid 1px #8eb95e;}
 
 
-.daohang{position:fixed;right:0;bottom:0;top:0px;left:0px; overflow:auto;width: 100%; height: 35px; background-color: #35404d;}
+.daohang{position:fixed;right:0;bottom:0;top:2.5%;left:0px; overflow:auto;width: 100%; height: 35px; background-color: #35404d;}
 
 .daohang ul{ padding: 0px; margin: 2px 0 0 5px;list-style-type: none; }
 .daohang li{ float: left; margin-right: 5px;list-style: none;}
