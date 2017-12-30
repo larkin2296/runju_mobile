@@ -74,7 +74,9 @@
             	长租</label>
           <label class="am-checkbox-inline">
             <input type="radio" name='rent_type' value="0" {if condition='$data.rent_type eq 0'}checked{/if}>
-            	短租 </label>
+              短租 </label>
+              <input type="radio" name='rent_type' value="2" {if condition='$data.rent_type eq 2'}checked{/if}>
+              短租 </label>
           </div>
         </div>
         <div class="am-form-group am-cf">
@@ -240,7 +242,7 @@
         
         <div class="am-form-group am-cf show">
           <div class="zuo">产品图片：</div>
-          <div class="you" style="height: 69%;">
+          <div class="you" style="height: auto;">
           	<div id="show_pic" style='float:left;' class="zyupload">
                 {foreach name='pic' id='pic'}
                 <img src="__pic__/uploads/{$pic}" style="width:340px;height:226px;margin-bottom:5%;"/>

@@ -4,16 +4,37 @@
     <link rel="stylesheet" href="__static__/css/backstage/amazeui.min.css"/>
     <link rel="stylesheet" href="__static__/css/backstage/admin.css">
     <script src="__static__/js/backstage/jquery.min.js"></script>
+    <style>
+        .add_content{
+            display: none;
+            background-color: white;width:19%;height:10%;position: absolute;left:40%;top:52%;z-index:200;
+        }
+        .add_content input[type='text']{
+            width: 60%;
+            margin-left: 20%;
+            background-color: #FFFACD;
+        }
+        .add_content_button{
+            width:30%;
+            margin:2% auto;
+
+        }
+        .add_content_button input[type='button']{
+            width:100%;
+            border:none;
+            background-color: orange;
+            color: #ffffff;
+        }
+    </style>
 </head>
 <body>
+<div class="a"></div>
 <div class=" admin-content">
 
     <div class="daohang">
         <ul>
-            <li><button type="button" class="am-btn am-btn-default am-radius am-btn-xs"> 首页 </li>
-            <li><button type="button" class="am-btn am-btn-default am-radius am-btn-xs">帮助中心<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close="">×</a></button></li>
-            <li><button type="button" class="am-btn am-btn-default am-radius am-btn-xs">奖金管理<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close="">×</a></button></li>
-            <li><button type="button" class="am-btn am-btn-default am-radius am-btn-xs">产品管理<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close="">×</a></button></li>
+            <li><button type="button" class="am-btn am-btn-default am-radius am-btn-xs"> 设施管理 </li>
+
 
 
         </ul>
@@ -44,7 +65,7 @@
                 </tr>
                 {foreach name='facil' id='f'}
                 <tr>
-                    <td style="color:blue">{$f['furniture_name']}{if condition='$power eq 1'}<span style='padding-left:50px;color:red;cursor: pointer' onclick='del_delete({$f["t_id"]})'>删除</span>{/if}</td>
+                    <td style="color:blue">{$f['furniture_name']}{if condition='$power eq 1'}<span style='padding-left:50px;color:red;cursor: pointer' onclick='del_update({$f["t_id"]})'>修改</span>{/if}</td>
                 </tr>
                 {/foreach}
         </table>
@@ -54,6 +75,11 @@
         </form>
         </div>
     </div>
+</div>
+<div class='add_content' style="">
+    <input type="text" class="up" value="" />
+    <div class="add_content_button"><input type="button" class="checkcheck" value="完成"/>
+    <input type="hidden" class="hidden_check"/></div>
 </div>
 </body>
 <script>
@@ -69,16 +95,23 @@
             }
         });
     })
-    function del_delete(id){
+    function del_update(id){
+        $('.a').css('display','block');
+        $('.hidden_check').val(id);
+        $('.add_content').css('display','block');
+
+    }
+    $('.checkcheck').click(function(){
         $.ajax({
             type: "POST",
-            url:"{:url('backstage/del_facil')}",
-            data:{'facil':id},
+            url:"{:url('backstage/up_facil')}",
+            data:{'facil':$('.hidden_check').val(),'data':$('.up').val()},
             dataType: "json",
             success: function(data) {
-                alert('删除成功');
+                $('.a').css('display','none');
+                $('.add_content').css('display','none');
                 window.location.reload();
             }
         });
-    }
+    })
 </script>

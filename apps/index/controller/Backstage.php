@@ -190,14 +190,18 @@ class backstage extends Controller
         $res = DB::execute("insert into key_word (`key_word_name`) values('{$a}')");
         return 1;
     }
-    public function del_facil(){
+    public function up_facil(){
         $f = $_POST['facil'];
-        $res = DB::execute("delete from furniture_data where t_id=$f");
+        $d = $_POST['data'];
+        //$res = DB::execute("delete from furniture_data where t_id=$f");
+        $res = DB::execute("update furniture_data set furniture_name='$d' where t_id=$f");
         return 1;
     }
-    public function del_key(){
-        $f = $_POST['key'];
-        $res = DB::execute("delete from key_word where k_id=$f");
+    public function up_key(){
+        $f = $_POST['facil'];
+        $d = $_POST['data'];
+        //$res = DB::execute("delete from furniture_data where t_id=$f");
+        $res = DB::execute("update key_word set key_word_name='$d' where k_id=$f");
         return 1;
     }
     public function add_house_type(){
@@ -216,9 +220,11 @@ class backstage extends Controller
         $res = DB::execute("insert into house_type_data (`house_type_name`) values('{$a}')");
         return 1;
     }
-    public function del_house_type(){
-        $f = $_POST['type'];
-        $res = DB::execute("delete from house_type_data where t_id=$f");
+    public function up_house_type(){
+        $f = $_POST['facil'];
+        $d = $_POST['data'];
+        //$res = DB::execute("delete from furniture_data where t_id=$f");
+        $res = DB::execute("update house_type_data set house_type_name='$d' where t_id=$f");
         return 1;
     }
     public function shop_set(){
