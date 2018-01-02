@@ -6,7 +6,7 @@
 	font-family:  PingFangSC-Regular;
 	src: url('font/PingFang-SC-Regular.otf');
 }
-body{
+body,html{
 	width:100%;
 	height:100%;
 	margin:0;
@@ -157,17 +157,17 @@ margin-top:10%;
 .detail_form_sell{
 	position: absolute;
 	width:90%;
-	height:48%;
+	height:320px;
 	left:5%;
-	top:45%;
+	top:280px;
 	display: none;
 }
 .detail_form_rent{
 	position: absolute;
 	width:90%;
-	height:48%;
+	height:320px;
 	left:5%;
-	top:45%;
+	top:280px;
 	display: none;
 }
 .active{
