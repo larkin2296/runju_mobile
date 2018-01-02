@@ -10,7 +10,7 @@ class BackstageModel extends Model
 	public function get_form_data($response){
 		$pic = array();
 		$pic = explode(',', $response['pic_addr']);
-		$pic = array_pad($pic,6,"0");
+		$pic = array_pad($pic,10,"0");
 		$furniture = implode(',', $response['furniture']);
 		$key_word = implode(',',$response['key_word']);
 		$station = 	DB::name('underground_data')
