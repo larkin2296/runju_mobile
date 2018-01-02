@@ -120,6 +120,10 @@ class backstage extends Controller
         $pic[3] = $house_data[0]['pic_4'];
         $pic[4] = $house_data[0]['pic_5'];
         $pic[5] = $house_data[0]['pic_6'];
+        $pic[6] = $house_data[0]['pic_7'];
+        $pic[7] = $house_data[0]['pic_8'];
+        $pic[8] = $house_data[0]['pic_9'];
+        $pic[9] = $house_data[0]['pic_10'];
         $this->assign('key_word',$key_word);
 		$this->assign('data',$house_data[0]);
 		//print_r($house_data[0]);
