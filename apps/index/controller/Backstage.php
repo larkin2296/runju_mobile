@@ -26,7 +26,7 @@ class backstage extends Controller
                             $item['rent_type_name'] = '长租';
                         }else if($item['rent_type'] == 0){
                             $item['rent_type_name'] = '短租';
-                        }else if($item['rent_type'] == 3){
+                        }else if($item['rent_type'] == 2){
                             $item['rent_type_name'] = '二手房';
                         }
                         return $item;
