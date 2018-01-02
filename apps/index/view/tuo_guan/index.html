@@ -81,6 +81,18 @@
 		$('.detail_form_rent').addClass('active');
 	})
 	$('#sell_sub').click(function(){
+        var $kong = $("#sell_form");
+        flag = false;
+        $kong.each(function(i){
+            if($(this).val() == ""){
+				flag = true;
+                return false;
+            }
+        });
+        if(flag){
+            alert('请填写完整');
+            return false;
+        }
 		$.ajax({  
                 type: "POST",  
                 url:"../../../index.php/index/tuo_guan/save_sell",  
@@ -92,6 +104,19 @@
            });
 	})
 	$('#rent_sub').click(function(){
+        var $kong = $("#rent_form");
+        flag = false;
+        $kong.each(function(i){
+            if($(this).val() == ""){
+                flag = true;
+                return false;
+            }
+        });
+
+        if(flag){
+            alert('请填写完整');
+            return false;
+        }
 		$.ajax({  
                 type: "POST",  
                 url:"../../../index.php/index/tuo_guan/save_rent",  
