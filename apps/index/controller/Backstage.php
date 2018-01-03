@@ -142,6 +142,8 @@ class backstage extends Controller
 	public function modify_from_data($id){
 		$data = new BackstageModel;
 		$result = $data->modify_form_data($_POST,$id);
+        $this->assign('id',$id);
+        $this->assign('result',$result);
         return $this->fetch();
 	}
 	public function delete_house($a){
