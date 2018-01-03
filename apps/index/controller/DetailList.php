@@ -22,6 +22,7 @@ class detaillist extends Controller
             $table = 'house_rent_data';
             if($res != '') {
                 $where = $data->get_house_where($res,$a);
+                $ccc['rent_type'] = array('=',$a);
             }else{
                 $where['rent_type'] = array('=',$a);
 
@@ -101,6 +102,8 @@ class detaillist extends Controller
                 $data[$key]['house_status_name'] = '已出售';
             }else if($val['house_status'] == 3){
                 $data[$key]['house_status_name'] = '未出租';
+            }else if($val['house_status'] == 4){
+                $data[$key]['house_status_name'] = '已出租';
             }else{
                 $data[$key]['house_status_name'] = '未出售';
             }

@@ -48,20 +48,24 @@ class BaseDataModel extends Model
 		return $data;
 	}
     public function get_house($type = '',$response = '',$a=0){
+//	    print_r($response);
         $table = '';
             $table = 'house_rent_data';
 
         $where = $this->get_house_where($response,$type);
+        $ccc['rent_type'] = array('=',$type);
         if($response != ''){
             $result = DB::view($table,'*')
                 ->view('location_data',['location_name'],'location_data.l_id=house_rent_data.street')
                 ->whereOr($where)
+                ->where($ccc)
                 ->limit($a,5)
                 ->order('price asc')
                 ->select();
         }else{
             $result = DB::name($table)
                 ->whereOr($where)
+                ->where($ccc)
                 ->limit($a,5)
                 ->order('price asc')
                 ->select();
@@ -107,12 +111,8 @@ class BaseDataModel extends Model
             $table = 'house_rent_data';
             if ($response == 'tuijian') {
                 $where['house_level'] = array('=', '1');
-                $where['rent_type'] = array('=','2');
             } else if ($response != '') {
-                $where['rent_type'] = array('=','2');
                 $where['location_data.location_name|house_rent_data.address|house_rent_data.underground'] = array('like', '%' . $response . '%');
-            }else{
-                $where['rent_type'] = array('=','2');
             }
         }
         return $where;
@@ -188,10 +188,8 @@ class BaseDataModel extends Model
     private function house_search($table,$response,$type){
         $where = array();
         if($response == 'tuijian'){
-            $where['house_level'] = array('=','1');
             $where['rent_type'] = array('=',$type);
         }else if($response != ''){
-            $where['rent_type'] = array('=',$type);
             $key = DB::name('key_word')
                     ->where('key_word_name','=',$response)
                     ->select();
@@ -228,7 +226,7 @@ class BaseDataModel extends Model
             }
             $where['location_data.location_name|house_rent_data.address|house_rent_data.underground'] = array('like','%'.$response.'%');
         }else{
-            $where['rent_type'] = array('=',$type);
+
         }
         return $where;
     }
