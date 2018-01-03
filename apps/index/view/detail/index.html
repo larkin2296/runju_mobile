@@ -81,8 +81,8 @@
 					<div>押一付一</div>-->
 					<table class='detail_title_list'>
 						<tr>
-							<td>租金：{$house.price}元/月</td>
-							<td class='title_list_right'>会员价：<span class='price_bow'>{$house.price*$house.discount/10}</span>元/月起</td>
+							<td>租金：{$house.price}{if condition='$house.rent_type neq 2'}元/月{else}万元{/if}</td>
+							<td class='title_list_right'>会员价：<span class='price_bow'>{$house.price*$house.discount/10}</span>{if condition='$house.rent_type neq 2'}元/月{else}万元{/if}</td>
 						</tr>
 						<tr >
 							<td><?php foreach($house['key_word_list'] as $val){ ?>
