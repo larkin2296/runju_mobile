@@ -114,7 +114,7 @@
           </div>
         <div class="zuo" >折扣：</div>
         <div class="you" style='width:5%'>
-            <input type='text' name='discount' class='am-input-sm'  id='discount' value='1' />
+            <input type='text' name='discount' class='am-input-sm'  id='discount' value='{$data.discount}' placeholder="输入几折即可"/>
         </div>
         <div class="zuo" >付款类型：</div>
         <div class="you" style='width:10%'>
@@ -192,7 +192,7 @@
           <div class="you">
           	{foreach name='furniture' id='furniture_list' key='key'}
           	<label class="am-checkbox-inline">
-            <input type="checkbox" name='furniture[]' value="{$furniture_list.t_id}" {if condition='(empty($data.fur_list[$key]) neq true) and ($data.fur_list[$key]-1 eq $furniture_list.t_id)'}checked{/if}>
+            <input type="checkbox" name='furniture[]' value="{$furniture_list.t_id}" {if condition='(empty($data.fur_list[$key]) neq true) and ($data.fur_list[$key] eq $furniture_list.t_id)'}checked{/if}>
             	{$furniture_list.furniture_name}
           	</label>
           	{/foreach}
