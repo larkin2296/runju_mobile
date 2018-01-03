@@ -13,7 +13,7 @@ class detail extends Controller
 		$area = $data->get_area_name($house['district']);
 		$type = $data->get_type_name($house['house_type']);
 		$furniture = $data->get_furniture_name($house['furniture']);
-		for($i=1;$i<7;$i++){
+		for($i=1;$i<11;$i++){
 			$pic[$i] = $house['pic_'.$i];
 		}
 		$key_word = explode('，',$house['key_word']);
