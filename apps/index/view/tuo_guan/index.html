@@ -81,7 +81,7 @@
 		$('.detail_form_rent').addClass('active');
 	})
 	$('#sell_sub').click(function(){
-        var $kong = $("#sell_form");
+        var $kong = $("#sell_form input[type='text']");
         flag = false;
         $kong.each(function(i){
             if($(this).val() == ""){
@@ -89,7 +89,7 @@
                 return false;
             }
         });
-        if(flag){
+        if(flag == true){
             alert('请填写完整');
             return false;
         }
@@ -104,7 +104,7 @@
            });
 	})
 	$('#rent_sub').click(function(){
-        var $kong = $("#rent_form");
+        var $kong = $("#rent_form input[type='text']");
         flag = false;
         $kong.each(function(i){
             if($(this).val() == ""){

@@ -165,7 +165,8 @@ class BaseDataModel extends Model
 			$sell_village = $arr['sell_village'];
 			$sell_addr = $arr['sell_addr'];
 			$sell_price = $arr['sell_price'];
-			$sub = DB::execute("insert into trusteeship(`name`,`tel`,`village`,`address`,`price`,`trust_type`) values('$sell_name','$sell_tel','$sell_village','$sell_addr','$sell_price',$type)");
+			$time = date('Y-m-d H:i:s',time());
+			$sub = DB::execute("insert into trusteeship(`name`,`tel`,`village`,`address`,`price`,`trust_type`,`create_time`) values('$sell_name','$sell_tel','$sell_village','$sell_addr','$sell_price',$type,'$time')");
 			return $sub;
 	}
 	public function get_key_word(){
