@@ -19,19 +19,14 @@ class detaillist extends Controller
                 $house_data = $data->get_house($a,$res);
             }
         }else{
-            if ($a == '1') {
-                $table = 'house_rent_data';
-            } else if ($a == '0') {
-                $table = 'house_rent_data';
-            } else if ($a == '3') {
-                $table = 'house_sell_data';
-            }
+            $table = 'house_rent_data';
             if($res != '') {
                 $where = $data->get_house_where($res,$a);
-                $house_data = $this->get_result($table, $ccc,$where,0);
             }else{
-                $house_data = $this->get_result($table,$ccc,'',0);
+                $where['rent_type'] = array('=',$a);
+
             }
+            $house_data = $this->get_result($table, $ccc,$where,0);
         }
 		$location = $data->get_location_data();
 		$line = $data->get_line_data();

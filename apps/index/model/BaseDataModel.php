@@ -49,13 +49,8 @@ class BaseDataModel extends Model
 	}
     public function get_house($type = '',$response = '',$a=0){
         $table = '';
-        if ($type == '1') {
             $table = 'house_rent_data';
-        } else if ($type == '0') {
-            $table = 'house_rent_data';
-        } else if ($type == '3') {
-            $table = 'house_sell_data';
-        }
+
         $where = $this->get_house_where($response,$type);
         if($response != ''){
             $result = DB::view($table,'*')
@@ -89,6 +84,8 @@ class BaseDataModel extends Model
                 $result[$key]['house_status_name'] = '已出售';
             }else if($val['house_status'] == 3){
                 $result[$key]['house_status_name'] = '未出租';
+            }else if($val['house_status'] == 4){
+                $result[$key]['house_status_name'] = '已出租';
             }else{
                 $result[$key]['house_status_name'] = '未出售';
             }
@@ -106,12 +103,16 @@ class BaseDataModel extends Model
         } else if ($type == '0') {
             $table = 'house_rent_data';
             $where = $this->house_search($table, $response, '0');
-        } else if ($type == '3') {
-            $table = 'house_sell_data';
+        } else if ($type == '2') {
+            $table = 'house_rent_data';
             if ($response == 'tuijian') {
                 $where['house_level'] = array('=', '1');
+                $where['rent_type'] = array('=','2');
             } else if ($response != '') {
+                $where['rent_type'] = array('=','2');
                 $where['location_data.location_name|house_rent_data.address|house_rent_data.underground'] = array('like', '%' . $response . '%');
+            }else{
+                $where['rent_type'] = array('=','2');
             }
         }
         return $where;
