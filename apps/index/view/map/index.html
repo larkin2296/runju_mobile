@@ -81,12 +81,12 @@
 						map.panTo(new_point);
 						var opts = {
 								  width : 100,     // 信息窗口宽度
-								  height: 30,     // 信息窗口高度
+								  height: 100,     // 信息窗口高度
 //								  title : value.title, // 信息窗口标题
 								  enableMessage:true,//设置允许信息窗发送短息
 								  message:""
 								}
-								var infoWindow = new BMap.InfoWindow("<a href='../../index/detail/index/id/"+value.id+"' style='text-underline:none;color:orange;'>"+value.address+value.addr+"</a>", opts);
+								var infoWindow = new BMap.InfoWindow("<a href='../../index/detail/index/id/"+value.id+"' style='text-underline:none;color:orange;'><img src='__pic__/uploads/"+value.pic_1+"' style='width:100px;height:100px;float:left;'/></a><span>"+value.address+value.unit+"单元"+value.doorplate+"室"+"</span>", opts);
 									marker.addEventListener("click", function(){          
 								map.openInfoWindow(infoWindow,new_point); //开启信息窗口
 						});

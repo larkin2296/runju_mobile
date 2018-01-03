@@ -152,7 +152,7 @@ class BaseDataModel extends Model
 		return $name;
 	}
 	public function get_map($response){
-			$sql_main = 'select r1.longitude,r1.latitude,r1.title,r1.id,r1.addr from house_rent_data r1 ';
+			$sql_main = 'select r1.longitude,r1.latitude,r1.title,r1.id,r1.address,r1.pic_1,r1.unit,r1.doorplate from house_rent_data r1 ';
 			$sql_join = ' inner join location_data r2 on r1.street=r2.l_id ';
 			$where = " where r2.location_name like '%$response%' or r1.address like '%$response%' or r1.underground like '%$response%' ";
 			$sql = $sql_main.$sql_join.$where;
