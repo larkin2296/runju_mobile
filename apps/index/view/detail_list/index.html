@@ -117,7 +117,7 @@
 				{/if}
 			</ul>
 			<div class="demo">
-				<input class="range-slider" type="hidden" value="0,10001" />
+				<input class="range-slider" type="hidden" {if condition='$t neq 2'}value="0,10001"{else}value="0,1001"{/if} />
 			</div>
 			<input type='button' id='price_reset' value='重置'  /><input type='button' id='price_check' value='确定'  />
 			<div style='padding-bottom:10%'></div>
@@ -149,12 +149,29 @@
 <script type='text/javascript'>
 	$('#top_logo a').click(function(){
         $.cookie('condition', '',-1);
-	})
+	});
 	var k;
+	var money = new Array();
+	var top_money = '';
     $(function() {
-        if($('.t').val() == 3){
+        if($('.t').val() == 2){
             $('#h_price').html('售价');
-        }
+            money = [0,200,400,600,800,'不限'];
+            top_money = 1000;
+        }else{
+            money = [0,2000,4000,6000,8000,'不限'];
+            top_money = 10000;
+		}
+        $('.range-slider').jRange({
+            from: 0,
+            to: top_money,
+            step: 1,
+            scale: money,
+            format: '%s',
+            width: 300,
+            showLabels: true,
+            isRange: true
+        });
         var mybody = document.getElementsByTagName('body')[0];
 
 
@@ -179,6 +196,7 @@
             }
         });
     })
+
     $(document).on('scroll', function () {
         var wScrollY = window.scrollY; // 当前滚动条位置
         var wInnerH = window.innerHeight; // 设备窗口的高度（不会变）
@@ -208,16 +226,7 @@
                 });
         }
     });
-$('.range-slider').jRange({
-		from: 0,
-		to: 10000,
-		step: 1,
-		scale: [0,2000,4000,6000,8000,'不限'],
-		format: '%s',
-		width: 300,
-		showLabels: true,
-		isRange: true
-	});
+
 	$('#index_sub').click(function(){
         $.cookie('condition', '',-1);
         if($('#index_text').val() == ''){
@@ -232,7 +241,9 @@ $('.range-slider').jRange({
 	}
 $('#price_check').click(function(){
     var da;
-    if($('.range-slider').val() !="0,10001"){
+    if($('.range-slider').val() !="0,10001" && $('.t').val() != '2'){
+        da = $('.range-slider').val();
+    }if($('.range-slider').val() !="0,1001" && $('.t').val() == '2'){
         da = $('.range-slider').val();
     }else{
         da = $('.check input[type="hidden"]').val();

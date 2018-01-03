@@ -110,7 +110,8 @@
         <div class="am-form-group am-cf">
           <div class="zuo">价格：</div>
           <div class="you" style="width:10%">
-          	<input type='text' name='price' class='am-input-sm' id='price' value="{$data.price}" />
+          	<input type='text' name='price' class='am-input-sm' id='price' style="width:60%;float:left;" value="{$data.price}" />
+              <div style='float:left;width:30%;' class="mon_label you"></div>
           </div>
         <div class="zuo" >折扣：</div>
         <div class="you" style='width:5%'>
@@ -282,6 +283,11 @@
 <script type='text/javascript'>
     var pic_arr = new Array();
     $(function(){
+        if($('.rent_type').eq(2).is(':checked') == true){
+            $('.mon_label').html('万元');
+        }else{
+            $('.mon_label').html('');
+        }
         $('#pic_addr').val('');
         // 初始化插件
         $("#zyupload").zyUpload({

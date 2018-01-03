@@ -64,13 +64,13 @@
           <div class="zuo">出租类型：</div>
           <div class="you">
           	<label class="am-checkbox-inline">
-            <input type="radio" name='rent_type' value="1" checked="checked">
+            <input type="radio" name='rent_type' class="rent_type" value="1" checked="checked">
             	长租</label>
           <label class="am-checkbox-inline">
-            <input type="radio" name='rent_type' value="0">
+            <input type="radio" name='rent_type' class="rent_type" value="0">
             	短租 </label>
               <label class="am-checkbox-inline">
-                  <input type="radio" name='rent_type' value="2">
+                  <input type="radio" name='rent_type' class="rent_type" value="2">
                   二手房 </label>
           </div>
         </div>
@@ -107,7 +107,8 @@
         <div class="am-form-group am-cf">
           <div class="zuo">价格：</div>
           <div class="you" style='width:10%'>
-          	<input type='text' name='price' class='am-input-sm mustadd'  id='price' placeholder="请输入价格" />
+          	<input type='text' name='price' class='am-input-sm mustadd' style="width:60%;float:left;" id='price' placeholder="请输入价格" />
+              <div style='float:left;width:30%;' class="mon_label you"></div>
           </div>
           <div class="zuo" >折扣：</div>
           <div class="you" style='width:5%'>
@@ -268,6 +269,13 @@
 </html>
 <script type='text/javascript'>
 	var pic_arr = new Array();
+	$('.rent_type').change(function(){
+	    if($('.rent_type').eq(2).is(':checked') == true){
+	        $('.mon_label').html('万元');
+        }else{
+            $('.mon_label').html('');
+        }
+    })
 	$(function(){
 				$('#pic_addr').val('');
 				// 初始化插件
