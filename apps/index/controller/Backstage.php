@@ -152,15 +152,19 @@ class backstage extends Controller
 	}
 	public function tuoguan_list(){
 		$tuguan = DB::name('trusteeship')
-				->select();
-		foreach($tuguan as &$value){
-			if($value['trust_type'] == 0){
-				$value['type'] = '出售';
-			}else{
-				$value['type'] = '出租';
-			}
-		}
+                ->order('create_time desc')
+                ->paginate(10)
+                ->each(function($item,$key){
+                    if($item['trust_type'] == 0){
+                        $item['type'] = '出售';
+                    }else{
+                        $item['type'] = '出租';
+                    }
+                    return $item;
+                });
 //		$tuguan = $tuguan::paginate(10);
+        $page = $tuguan->render();
+        $this->assign('page', $page);
 		$this->assign('tuguan',$tuguan);
 		return $this->fetch();
 	}
