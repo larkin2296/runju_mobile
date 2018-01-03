@@ -190,6 +190,7 @@ class BaseDataModel extends Model
             $where['house_level'] = array('=','1');
             $where['rent_type'] = array('=',$type);
         }else if($response != ''){
+            $where['rent_type'] = array('=',$type);
             $key = DB::name('key_word')
                     ->where('key_word_name','=',$response)
                     ->select();
@@ -226,7 +227,7 @@ class BaseDataModel extends Model
             }
             $where['location_data.location_name|house_rent_data.address|house_rent_data.underground'] = array('like','%'.$response.'%');
         }else{
-            $where['rent_type'] = array('=','1');
+            $where['rent_type'] = array('=',$type);
         }
         return $where;
     }
