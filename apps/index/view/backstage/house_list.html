@@ -5,6 +5,11 @@
     <link rel="stylesheet" href="__static__/css/backstage/admin.css">
     <script src="__static__/js/backstage/jquery.min.js"></script>
     <link rel="stylesheet" href="__static__/css/animate.min.css " type="text/css">
+    <style>
+        .img_label{
+            width:40px;
+        }
+    </style>
 </head>
 
 </head>
@@ -91,7 +96,7 @@
               <tr>
 <!--                <td><input type="checkbox" /></td>-->
                 <td>{$key}</td>
-                <td><a href="house_detail.html?id={$list.id}">{$list.title}</a></td>
+                <td><a href="house_detail.html?id={$list.id}">{$list.title}{if condition='$list.house_status eq 2'}<img src="__static__/img/yishou.png" class="img_label"/>{/if}{if condition='$list.house_status eq 4'}<img src="__static__/img/zuchu.png" class="img_label" />{/if}</a></td>
                 <td>{$list.rent_type_name}</td>
                 <td class="am-hide-sm-only">{$list.update_time}</td>
                 <td><div class="am-btn-toolbar">
