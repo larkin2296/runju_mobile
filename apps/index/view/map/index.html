@@ -86,7 +86,7 @@
 								  enableMessage:true,//设置允许信息窗发送短息
 								  message:""
 								}
-								var infoWindow = new BMap.InfoWindow("<a href='../../index/detail/index/id/"+value.id+"' style='text-underline:none;color:orange;'><img src='__pic__/uploads/"+value.pic_1+"' style='width:100px;height:100px;float:left;'/></a><span>"+value.address+value.unit+"单元"+value.doorplate+"室"+"</span>", opts);
+								var infoWindow = new BMap.InfoWindow("<a href='../../index/detail/index/id/"+value.id+"' style='text-underline:none;color:orange;'><img src='__pic__/uploads/"+value.pic_1+"' style='width:100px;height:100px;float:left;'/></a><span>"+value.address+value.unit+"单元"+"</span>", opts);
 									marker.addEventListener("click", function(){          
 								map.openInfoWindow(infoWindow,new_point); //开启信息窗口
 						});
