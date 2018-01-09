@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../../public/static/css/zyupload-1.0.0.min.css " type="text/css">
+    <link rel="stylesheet" href="__static__/css/backstage/amazeui.min.css"/>
+    <link rel="stylesheet" href="__static__/css/backstage/admin.css">
+    <script src="__static__/js/backstage/jquery.min.js"></script>
+    <style>
+        table{
+            width:80%;
+            border:1px solid black;
+            margin:0 auto;
+        }
+        .parent_area{
+            width:30%;
+        }
+        td{
+            text-align: center;
+            height:4em;
+            border:1px solid black;
+        }
+        .child_area{
+            float:left;
+            list-style: none;
+            line-height:2em;
+            margin-left:10px;
+        }
+        .check{
+            width:20%;
+            height: 3em;
+            margin:0 auto;
+        }
+        .check input[type='button']{
+            width:100%;
+            height:100%;
+            border:none;
+            background-color: orange;
+            color:white;
+            font-size:150%;
+        }
+    </style>
+</head>
+<body>
+<div class="a"></div>
+<div class=" admin-content">
+
+    <div class="daohang">
+        <ul>
+            <li><button type="button" class="am-btn am-btn-default am-radius am-btn-xs"> 设施管理 </li>
+
+
+
+        </ul>
+
+
+
+
+    </div>
+
+
+
+
+    <div class="admin-biaogelist">
+
+        <div class="listbiaoti am-cf">
+            <ul class="am-icon-flag on"> 管理地区</ul>
+
+            <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="#">管理地区</a></dl>
+
+
+
+        </div>
+
+        <div class="fbneirong">
+        <table>
+            <tr>
+                <td class="parent_area">区</td>
+                <td>地方</td>
+            </tr>
+
+            {foreach name='area' id='area' }
+            <tr>
+                <td class="parent_area"><input type="checkbox" {if condition='$area.show_label eq 1'}checked="checked"{/if} value="{$area.l_id}"/>{$area.location_name}</td>
+                <td>
+                    {foreach name='area.child_data' id='child'}
+                    <li class="child_area">
+                        <input type="checkbox" {if condition='$child.show_label eq 1'}checked="checked"{/if} value="{$child.l_id}"/>{$child.location_name}
+                    </li>
+                    {/foreach}
+                </td>
+            </tr>
+            {/foreach}
+        </table>
+        <div class="check">
+            <input type="button" class='sub' value="保存" />
+        </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type='text/javascript'>
+    $('.sub').click(function(){
+        var res = new Array();
+        var no_res = new Array();
+        $('input[type="checkbox"]:checked').each(function(){
+            res.push($(this).val());
+        });
+        $('input[type="checkbox"]').not('input:checked').each(function(){
+            no_res.push($(this).val());
+        });
+        $.ajax({
+            type: "POST",
+            url:"../../../index.php/index/backstage/area_save",
+            data:{'data':res,'no_data':no_res},
+            dataType: "json",
+            success: function(data) {
+                alert('保存成功');
+                window.location.reload();
+            }
+        });
+    })
+</script>

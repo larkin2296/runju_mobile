@@ -11,6 +11,7 @@ class BaseDataModel extends Model
 	public function get_location_data(){
 		$data = DB::name('location_data')
 				->where('parent_id',1)
+                ->where('show_label',1)
 				->select();
 		return $data;
 	}
@@ -18,6 +19,7 @@ class BaseDataModel extends Model
 	public function get_street($id){
 		$data = DB::name('location_data')
 				->where('parent_id',$id)
+                ->where('show_label',1)
 				->select();
 		return $data;
 	}

@@ -5,6 +5,7 @@ use think\Controller;
 use think\Db;
 use app\index\model\BaseDataModel;
 use app\index\model\BackstageModel;
+use app\index\model\Location;
 
 class backstage extends Controller
 { 
@@ -278,5 +279,34 @@ class backstage extends Controller
             setcookie('usr',$arr[0]['m_name']);
             return 1;
         }
+    }
+    public function control_area(){
+        $response = DB::name('location_data')
+                    ->where('parent_id','=',1)
+                    ->select();
+        foreach($response as &$val){
+            $arr = DB::name('location_data')
+                ->where('parent_id','=',$val['l_id'])
+                ->where('parent_id','<>',1)
+                ->select();
+            $val['child_data'] = $arr;
+        }
+        $this->assign('area',$response);
+        return $this->fetch();
+    }
+    public function area_save(){
+        $res = $_POST['data'];
+        foreach($res as $val){
+            $user  = Location::get($val);
+            $user->show_label    = 1;
+            $user->save();
+        }
+        $no_res = $_POST['no_data'];
+        foreach($no_res as $value){
+            $user  = Location::get($value);
+            $user->show_label    = 0;
+            $user->save();
+        }
+        return 1;
     }
 }
