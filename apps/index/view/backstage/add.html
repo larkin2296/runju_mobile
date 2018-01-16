@@ -82,7 +82,7 @@
                     <input type="radio" name='house_level' value="1">
                     今日推荐</label>
                 <label class="am-checkbox-inline">
-                    <input type="radio" name='house_level' value="0">
+                    <input type="radio" name='house_level' value="0" checked="checked">
                     取消推荐</label>
             </div>
         </div>
@@ -276,8 +276,30 @@
             $('.mon_label').html('');
         }
     })
+    function jiankong(){
+        var $kong = $(".am-form input[type='text']");
+        flag = false;
+        $kong.each(function(i){
+            if($(this).val() == ""){
+                flag = true;
+                return false;
+            }
+        });
+        if(flag == true){
+            $("#house_sub").attr({"disabled":"disabled"});
+            return false;
+        }
+        if(flag == false){
+            if($('.am-check').val() == '正确' ){
+                $("#house_sub").removeAttr("disabled");
+            }
+
+        }
+    }
 	$(function(){
 				$('#pic_addr').val('');
+
+                setInterval(jiankong,100);
 				// 初始化插件
 				$("#zyupload").zyUpload({
 					width            :   "100%",                 // 宽度
@@ -377,7 +399,7 @@
                 if(data == 0){
                     $('.am-check').css('background-color','#4aaa4a');
                     $('.am-check').val('正确');
-                    $("#house_sub").removeAttr("disabled")
+
                 }else{
                     $('.am-check').css('background-color','red');
                     $('.am-check').val('存在，请重试');

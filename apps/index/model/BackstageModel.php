@@ -11,14 +11,23 @@ class BackstageModel extends Model
 		$pic = array();
 		$pic = explode(',', $response['pic_addr']);
 		$pic = array_pad($pic,10,"0");
+        if(isset($response['key_word'])){
+            $key_word = implode(',',$response['key_word']);
+        }else{
+            return array('result'=>'失败','response'=>'请选择关键字');
+        }
+
+        if(isset($response['furniture'])){
+            $furniture = implode(',', $response['furniture']);
+        }else{
+            return array('result'=>'失败','response'=>'请选择房屋设施');
+        }
 		$furniture = implode(',', $response['furniture']);
 		$key_word = implode(',',$response['key_word']);
 		$station = 	DB::name('underground_data')
 					->where('u_id','=',$response['station'])
 					->select();
-		if(empty($response['key_word']) ){
-            $response['key_word'] == '0';
-        }
+
         $time = date('Y-m-d H:i:s',time());
 		$result = Db::execute("INSERT INTO `house_rent_data` (`title`, `key_word`, `price`, `rent_type`, `house_type`, `house_floor`, `underground`, `acreage`, `furniture`, `remark`, `longitude`, `latitude`, `pic_1`, `pic_2`, `pic_3`, `pic_4`, `pic_5`, `pic_6`,`pic_7`,`pic_8`,`pic_9`,`pic_10`, `house_level`, `district`, `street`, `addr`, `address`, `landlord`,`discount`,`orientation`,`pay_type`,`house_state_remark`,`shopping_nearby`,`rest_nearby`,`hospital_nearby`,`translate_nearby`,`house_status`,`landlord_tel`,`line`,`under_station`,`unit`,`doorplate`,`create_time`,`update_time`) VALUES ('{$response['house_title']}','{$key_word}',{$response['price']},{$response['rent_type']},'{$response['house_type']}','{$response['floor']}','{$station[0]['underground_name']}','{$response['acreage']}','{$furniture}','{$response['remarks']}','{$response['longitude']}','{$response['latitude']}','$pic[0]','$pic[1]','$pic[2]','$pic[3]','$pic[4]','$pic[5]','$pic[6]','$pic[7]','$pic[8]','$pic[9]',{$response['house_level']},'{$response['area']}','{$response['street']}','','{$response['village']}','{$response['landlord']}','{$response['discount']}','{$response['orientation']}','{$response['pay_type']}','{$response['house_state_remark']}','{$response['shopping_nearby']}','{$response['rest_nearby']}','{$response['hospital_nearby']}','{$response['translate_nearby']}','{$response['house_status']}','{$response['landlord_tel']}','{$response['underground']}','{$response['station']}','{$response['unit']}','{$response['doorplate']}','{$time}','{$time}');");
 	}

@@ -89,6 +89,7 @@ class backstage extends Controller
 	public function get_form_data(){
 		$data = new BackstageModel;
 		$result = $data->get_form_data($_POST);
+        $this->assign('result',$result);
         return $this->fetch();
 	}
 	public function house_detail($id){
