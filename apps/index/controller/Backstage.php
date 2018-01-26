@@ -6,6 +6,7 @@ use think\Db;
 use app\index\model\BaseDataModel;
 use app\index\model\BackstageModel;
 use app\index\model\Location;
+use app\index\model\Underground;
 
 class backstage extends Controller
 { 
@@ -305,6 +306,35 @@ class backstage extends Controller
         $no_res = $_POST['no_data'];
         foreach($no_res as $value){
             $user  = Location::get($value);
+            $user->show_label    = 0;
+            $user->save();
+        }
+        return 1;
+    }
+    public function control_line(){
+        $response = DB::name('underground_data')
+            ->where('parent_id','=',1)
+            ->select();
+        foreach($response as &$val){
+            $arr = DB::name('underground_data')
+                ->where('parent_id','=',$val['u_id'])
+                ->where('parent_id','<>',1)
+                ->select();
+            $val['child_data'] = $arr;
+        }
+        $this->assign('area',$response);
+        return $this->fetch();
+    }
+    public function line_save(){
+        $res = $_POST['data'];
+        foreach($res as $val){
+            $user  = Underground::get($val);
+            $user->show_label    = 1;
+            $user->save();
+        }
+        $no_res = $_POST['no_data'];
+        foreach($no_res as $value){
+            $user  = Underground::get($value);
             $user->show_label    = 0;
             $user->save();
         }
